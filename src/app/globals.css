@@ -2,12 +2,18 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #f5f5f5;
+  --footerground: #333;
+  --primary-color: #0ea5e9;
+  --hover-color: #0284c7;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-footerground: var(--footerground);
+  --color-primary: var(--primary-color);
+  --color-hover: var(--hover-color);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -18,9 +24,53 @@
     --foreground: #ededed;
   }
 }
+.banner{@apply bg-cover bg-center min-h-[200px] xl:min-h-[300px] py-12 2xl:py-20 text-white text-center relative;}
+.banner::before{@apply content-[''] absolute inset-0 bg-black/50 z-0;}
+.banner > *{@apply relative z-10;}
+.pro-banner{@apply bg-no-repeat bg-cover bg-bottom-right;}
+.heading-main {@apply text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold leading-8 lg:leading-12 xl:leading-14 2xl:leading-20 ;	}
+.heading-sub {@apply text-sm lg:text-base leading-6 xl:leading-8;} 
+.heading-main2 {@apply text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-bold leading-6 lg:leading-10 xl:leading-12 2xl:leading-14 ;}
+.heading-main3 {@apply text-lg lg:text-lg xl:text-xl 2xl:text-2xl font-bold;}
+.text{@apply text-sm lg:text-base xl:text-lg leading-6 xl:leading-8;}
+.section-1 {@apply px-5 md:px-10 xl:px-24 py-12 md:py-20 xl:py-26 2xl:py-40 space-y-8 lg:space-y-10 xl:space-y-20;}
+.section-2 {@apply px-5 md:px-10 xl:px-24 py-12 md:py-12 xl:py-14 2xl:py-16;}
+.heading-line {@apply w-32 h-0.5 bg-primary self-center;}
+.gap30 {@apply gap-5 xl:gap-6 2xl:gap-8;}
+.gap80 {@apply gap-8 xl:gap-12 2xl:gap-20;}
+.pt20 {@apply pt-3 xl:pt-4 2xl:pt-5;}
+.mt20 {@apply mt-3 xl:mt-4 2xl:mt-5;}
+.pt30 {@apply pt-4 xl:pt-6 2xl:pt-8;}
+.mt30 {@apply mt-4 xl:mt-6 2xl:mt-8;}
+.pt40 {@apply pt-6 xl:pt-8 2xl:pt-12;}
+.mt40 {@apply mt-6 xl:mt-8 2xl:mt-12;}
+.pt50 {@apply pt-8 xl:pt-12 2xl:pt-16;}
+.mt50 {@apply mt-8 xl:mt-12 2xl:mt-16;}
+.btn-primary {@apply py-2 px-6 xl:py-2 xl:px-6 bg-primary text-white font-bold rounded-md hover:bg-hover transition-colors duration-300 text-sm xl:text-base;}
+.btn-primary2 {@apply py-2 px-6 xl:py-2 xl:px-6 bg-white text-primary font-bold rounded-md hover:bg-white hover:text-primary transition-colors duration-300 text-sm xl:text-base;}
+.btn-secondary {@apply py-3 px-6 bg-gray-500 text-white font-bold rounded-md hover:bg-gray-600 transition-colors duration-300 text-base md:text-base lg:text-base;}  
+.btn-outline {@apply py-3 px-6 border-2 border-green-500 text-green-500 font-bold rounded-md hover:bg-green-500 hover:text-white transition-colors duration-300 text-base md:text-base lg:text-base;} 
+.btn-small {@apply py-2 px-4 text-sm md:text-sm lg:text-sm;}
+.btn-large {@apply py-4 px-8 text-lg md:text-lg lg:text-lg;}
+.footer-title{@apply text-base lg:text-base xl:text-lg leading-6 xl:leading-8 font-semibold;}
+.footer-text{@apply text-sm lg:text-base leading-4 xl:leading-6 ;}
+.footer-text li{@apply transition-colors hover:text-foreground;}
+
+
 
 body {
   background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: #333;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.6;
+}
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: auto;
+}
+input{background:var(--background);}
+img {
+  max-width: 100%;
+  height: auto;
 }
