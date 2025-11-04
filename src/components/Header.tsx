@@ -9,12 +9,12 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [aboutSubmenuOpen, setAboutSubmenuOpen] = useState(false);
   return (
-    <header suppressHydrationWarning className="bg-background sticky top-0 z-50 px-5 md:px-10 xl:px-24">
+    <header suppressHydrationWarning className="bg-foreground sticky top-0 z-50 px-5 md:px-10 xl:px-24">
 
       {/* 主导航 */}
       <div className="container mx-auto">
-        <div className="flex h-16 items-center justify-between">
-          <a href="/" className="text-lg font-semibold text-foreground"><Image src="https://packoi.com/wp-content/uploads/2021/12/cropped-cropped-Packoi.webp" alt="Keyo Customize" width={120} height={40} /></a>
+        <div className="flex items-center h-[100px] justify-between">
+          <a href="/" className="text-lg font-semibold text-foreground"><Image src="/images/LOGO1.png" alt="Keyo Customize" width={120} height={40} /></a>
 
           <nav className="hidden items-center gap-6 md:flex">
             <a href="/" >Home</a>

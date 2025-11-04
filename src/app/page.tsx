@@ -1,37 +1,56 @@
 "use client";
 import { QuoteButtonPrimary} from '@/components/QuoteButton';
 import Image from "next/image";
-import { Scroll,CalendarCheck,Factory,Handshake } from 'phosphor-react';
+import { Scroll,CalendarCheck,Factory,Handshake,Aperture,Bell } from 'phosphor-react';
 import FooterContact from '@/components/FooterContact';
 export default function Home() {
   return (
     <div className="min-h-screen">
       <main className="section-1 bg-foreground">
-        <div className="container flex-col md:flex-row flex items-center gap80">
-          <div className="sm:w-1/2">
-            <h1 className="heading-main">Your Trusted Custom Packaging Manufacturer in China</h1>
-            <p className="heading-sub mt20">
-              Delivering high-quality, eco-friendly custom packaging with flexible designs and reliable manufacturing to help your brand stand out with confidence and sustainability.
+        <div className="container flex-col md:flex-row flex items-center gap160">
+          <div className="sm:w-[570px] md:w-1/2">
+            <h1 className="heading-main">Your Trusted OEM & ODM BBQ Grill Manufacturer in China</h1>
+            <div className="heading-sub mt30 text-hub">
+              <p>
+              KEYO Barbecue specializes in designing and manufacturing high-quality BBQ grills for global brands, importers, and distributors.
             </p>
-            <QuoteButtonPrimary className='mt40'>Get A Instant Quote Now</QuoteButtonPrimary>
+            <p>
+              We provide full customization service—from product design to packaging—helping you build your own BBQ brand with confidence.
+            </p>
+            </div>
+            
+            <div className="flex flex-col lg:flex-row  gap-4 mt40">
+              <QuoteButtonPrimary>
+                <span className="flex items-center gap-2">
+                  <Bell size={20}/>
+                  Get a Free Quote
+                </span>
+              </QuoteButtonPrimary>
+              <button className="btn-secondary">
+                <span className="flex items-center gap-2">
+                  <Aperture size={20} />
+                  Explore Customization
+                </span>
+              </button>
+            </div>
+            
           </div>
-          <div className="sm:w-1/2">
-            <Image src="https://packoi.com/wp-content/uploads/2022/08/Packaging-and-Printing.avif" alt="Keyo Customize" width={800} height={600} />
+          <div className="sm:w-1/2 flex justify-end">
+            <Image src="/images/index_banner3.jpg" alt="Keyo Customize" width={600} height={400} className="rounded-lg xl:rounded-tl-[100px]"
+            />
           </div>
         </div>
       </main>
 
       <section className="section-1">
-        <h2 className='heading-main2 text-center'>Custom Printed Packaging for Small and Growing Business</h2>
+        <div className='w-2/3 mx-auto'>
+          <h2 className='heading-main2 text-center'>Custom Your BBQ Grill</h2>
+          <p className="heading-sub mt30 text-hub text-center">
+            Delivering high-quality, eco-friendly custom packaging with flexible designs and reliable manufacturing to help your brand stand out with confidence and sustainability.
+          </p>
+        </div>
         <div className="container flex-col md:flex-row flex items-center gap80">
-          <div className="sm:w-1/2">
-            <Image src="https://packoi.com/wp-content/uploads/2022/08/custom-candy-box.avif" alt="Keyo Customize" width={800} height={600} />
-          </div>
-          <div className="sm:w-1/2 space-y-5 xl:space-y-8">
-            <h3 className="heading-sub"><b>Fully Customize:</b> Whether you are just launching your brand or want to expand your business, having customized packages and marketing materials helps greatly. We ensure that your packages are fully customized to align with your brand.</h3>
-            <h3 className="heading-sub"><b>Fast Turnaround:</b> We have well-equipped facilities and reliable partners in China, guaranteeing quick turnaround. When you order from us, we promise timely delivery.</h3>
-            <h3 className="heading-sub"><b>Low MOQ:</b> We understand that business size and requirements vary. So, we give low MOQ standards to ensure we serve all clients effectively. We are here to meet all your needs.</h3>
-          </div>
+          
         </div>
       </section>
 

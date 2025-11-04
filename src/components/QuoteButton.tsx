@@ -18,8 +18,8 @@ export default function QuoteButton({
   const baseStyles = 'transition-colors duration-200 cursor-pointer';
   
   const variantStyles = {
-    primary: 'bg-primary hover:bg-hover text-white font-semibold py-3 px-6 rounded-md text-xs xl:text-sm',
-    secondary: 'border border-gray-300 hover:bg-gray-50 text-gray-700 font-semibold py-3 px-6 rounded-lg',
+    primary: 'bg-primary hover:bg-hover text-white py-3 px-6 rounded-md',
+    secondary: 'border border-gray-300 hover:bg-gray-50 text-gray-700 py-3 px-6 rounded-lg',
     link: 'text-blue-500 hover:text-blue-600 underline'
   };
 
