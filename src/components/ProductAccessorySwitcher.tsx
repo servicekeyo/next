@@ -63,7 +63,6 @@ export default function ProductAccessorySwitcher() {
         <div className="lg:w-2/3">
           <img
             src={activeOption.img}
-            alt={activeOption.label}
             className="w-full h-auto max-h-[700px] object-contain rounded-xl transition-all duration-500"
           />
         </div>
@@ -85,7 +84,7 @@ export default function ProductAccessorySwitcher() {
                       ${activeOption.id === opt.id ? 'border-blue-900 shadow-lg' : 'border-gray-200 hover:shadow-md'}
                     `}
                   >
-                    <img src={opt.class_img} alt={opt.label} className="w-full h-24 object-cover" />
+                    <img src={opt.class_img} className="w-full h-24 object-cover" />
                   </button>
                 ))}
               </div>
