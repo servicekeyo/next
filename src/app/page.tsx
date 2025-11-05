@@ -1,26 +1,26 @@
 "use client";
 import { QuoteButtonPrimary} from '@/components/QuoteButton';
 import Image from "next/image";
-import { Scroll,CalendarCheck,Factory,Handshake,Aperture,Bell } from 'phosphor-react';
+import { Scroll,CalendarCheck,Factory,Handshake,Aperture,Bell,Lightbulb,Ruler,Cube,Flask,Package } from 'phosphor-react';
 import FooterContact from '@/components/FooterContact';
 import GrillTabs from '@/components/GrillTabs';
+import ProductAccessorySwitcher from '@/components/ProductAccessorySwitcher';
+
 export default function Home() {
+  
   return (
     <div className="min-h-screen">
       <main className="section-1 bg-foreground">
         <div className="container flex-col md:flex-row flex items-center gap160">
           <div className="sm:w-[570px] md:w-1/2">
-            <h1 className="heading-main">Your Trusted OEM & ODM BBQ Grill Manufacturer in China</h1>
+            <h1 className="heading-main">Your Trusted Custom BBQ Grill Manufacturer in China</h1>
             <div className="heading-sub mt30 text-hub">
               <p>
-              KEYO Barbecue specializes in designing and manufacturing high-quality BBQ grills for global brands, importers, and distributors.
-            </p>
-            <p>
-              We provide full customization service—from product design to packaging—helping you build your own BBQ brand with confidence.
+              Leading OEM & ODM BBQ grill manufacturer in China, providing custom charcoal, gas, and electric grills tailored for your brand and market.
             </p>
             </div>
             
-            <div className="flex flex-col lg:flex-row  gap-4 mt40">
+            <div className="flex flex-col lg:flex-row  gap-5 mt40">
               <QuoteButtonPrimary>
                 <span className="flex items-center gap-2">
                   <Bell size={20}/>
@@ -44,6 +44,55 @@ export default function Home() {
       </main>
 
       <section className="section-1">
+        <div className='w-2/3 mx-auto text-center '>
+          <h2 className="heading-main2">Our Customization Process</h2>
+          <p className="heading-sub mt20 text-hub">
+            Tell us your ideas or provide any drawings, and we will help you meet your requirements.
+          </p>
+        </div>
+
+          <div className="container grid md:grid-cols-2 lg:grid-cols-4 gap50">
+            {/* Step 1 */}
+            <div className="step-item text-center space-y-3">
+              <Ruler size={64} weight="duotone" className="mx-auto" />
+              <h3 className="heading-main3">2D Drawing</h3>
+              <p className="heading-sub">
+                Based on your ideas, we create detailed 2D drawings to clearly define dimensions, structure, and layout for easy confirmation.
+              </p>
+            </div>
+
+            {/* Step 3 */}
+            <div className="step-item text-center space-y-3">
+              <Cube size={64} weight="duotone" className="mx-auto" />
+              <h3 className="heading-main3">3D Design</h3>
+              <p className="heading-sub">
+                Transform the approved 2D drawings into realistic 3D models, showing appearance, materials, and functional details.
+              </p>
+            </div>
+
+            {/* Step 4 */}
+            <div className="step-item text-center space-y-3">
+              <Flask size={64} weight="duotone" className="mx-auto" />
+              <h3 className="heading-main3">Modeling & Production</h3>
+              <p className="heading-sub">
+                Build production-ready models and molds, preparing for efficient and precise manufacturing.
+              </p>
+            </div>
+
+            {/* Step 5 */}
+            <div className="step-item text-center space-y-3">
+              <Factory size={64} weight="duotone" className="mx-auto" />
+              <h3 className="heading-main3">Sample Approval</h3>
+              <p className="heading-sub">
+                Produce the final sample for your inspection, ensuring every detail meets your specifications before full-scale production.
+              </p>
+            </div>
+          </div>
+      </section>
+
+      
+
+      <section className="section-1 bg-foreground">
         <div className='w-2/3 mx-auto'>
           <h2 className='heading-main2 text-center'>Custom Your BBQ Grill</h2>
           <p className="heading-sub mt30 text-hub text-center">
@@ -54,36 +103,9 @@ export default function Home() {
           <GrillTabs limit={6} />
         </div>
       </section>
-
-      <section className="section-1 bg-foreground">
-        <div>
-          <h2 className='heading-main2 text-center'>Hassle-Free Custom Packaging Ordering</h2>
-          <p className="heading-sub mt20 text-center">Only four simple steps. Fast response. Reliable delivery. Get the custom packaging you need for your brand, without the headaches.</p>
-        </div>
-        <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap80">
-          <div className='space-y-5 text-center'>
-            <Scroll size={80} weight="duotone" className="mx-auto" />
-            <h3 className="heading-main3">Get Instant Quote</h3>
-            <p>Send us your packaging needs. We’ll get back quickly with a clear, no-obligation quote.</p>
-          </div>
-          <div className='space-y-5 text-center'>
-            <CalendarCheck size={80} weight="duotone" className="mx-auto" />
-            <h3 className="heading-main3">Confirm Specs</h3>
-            <p>Review materials, size, and design. We’ll finalize every detail before production begins.</p>
-          </div>
-          <div className='space-y-5 text-center'>
-            <Factory size={80} weight="duotone" className="mx-auto" />
-            <h3 className="heading-main3">Track Your Order</h3>
-            <p>Once your order is processed, we’ll send you a tracking number to keep you updated on the delivery status.</p>
-          </div>
-          <div className='space-y-5 text-center'>
-            <Handshake size={80} weight="duotone" className="mx-auto" />
-            <h3 className="heading-main3">Receive Your Custom Packaging</h3>
-            <p>Once your order is processed, we’ll send you a tracking number to keep you updated on the delivery status.</p>
-          </div>
-        </div>
-      </section>
       
+      <ProductAccessorySwitcher />
+
       <section className="section-1">
         <div>
           <h2 className='heading-main2 text-center'>Types of Packaging and Print We Offer</h2>

@@ -8,6 +8,10 @@ export interface Product {
   price?: string;
   slug: string;
   category: string;
+  frontImage?: string;
+  backImage?: string;
+  frontAlt?: string | null;
+  backAlt?: string | null;
 }
 
 export interface ProductCategory {
@@ -20,6 +24,163 @@ export interface ProductCategory {
 // WordPress REST API configuration
 // Note: Default to admin.keyfirebbq.com REST API; can be overridden via env
 const WORDPRESS_API_URL = process.env.WORDPRESS_API_URL || 'https://admin.keyfirebbq.com/wp-json/wp/v2';
+const WORDPRESS_ORIGIN = (() => {
+  try {
+    const u = new URL(WORDPRESS_API_URL);
+    return `${u.protocol}//${u.host}`;
+  } catch {
+    return 'https://admin.keyfirebbq.com';
+  }
+})();
+
+// In-memory cache (10 minutes TTL)
+const CACHE_TTL_MS = 10 * 60 * 1000;
+let categoriesCache: { data: ProductCategory[]; ts: number } | null = null;
+const productsCache = new Map<string, { data: Product[]; ts: number }>();
+const mediaResolveCache = new Map<number, { url: string; alt: string | null }>();
+const mediaByUrlAltCache = new Map<string, string | null>();
+
+function normalizeMediaUrl(raw: any): string | null {
+  if (typeof raw !== 'string') return null;
+  let s = raw.trim();
+  // Remove leading/trailing quotes/backticks
+  s = s.replace(/^\s*["'`]+/, '').replace(/["'`]+\s*$/, '');
+  // Final trim
+  s = s.trim();
+  if (!s) return null;
+  return s;
+}
+
+function normalizeAltText(raw: any): string | null {
+  if (typeof raw !== 'string') return null;
+  let s = raw.trim();
+  s = s.replace(/^\s*["'`]+/, '').replace(/["'`]+\s*$/, '');
+  s = s.trim();
+  return s || null;
+}
+
+// Precise ACF grill group keys (adaptable in one place)
+const ACF_GRILL_KEYS = {
+  frontImage: 'front_image',
+  backImage: 'back_image',
+  // Optional separate alt fields if present
+  frontAlt: ['front_alt'],
+  backAlt: ['back_alt'],
+} as const;
+
+function isFresh(ts: number, ttl: number = CACHE_TTL_MS) {
+  return Date.now() - ts < ttl;
+}
+
+async function resolveMedia(input: any): Promise<{ url: string | null; alt: string | null }> {
+  try {
+    if (!input) return null;
+    if (typeof input === 'string') {
+      // If already URL
+      const normalized = normalizeMediaUrl(input);
+      if (normalized && /^https?:\/\//.test(normalized)) {
+        const cachedAlt = mediaByUrlAltCache.get(normalized);
+        if (cachedAlt !== undefined) return { url: normalized, alt: cachedAlt };
+        const alt = await resolveAltViaREST(normalized);
+        mediaByUrlAltCache.set(input, alt ?? null);
+        return { url: normalized, alt: alt ?? null };
+      }
+      // Handle relative paths like "/wp-content/..." or "wp-content/..."
+      const trimmed = (normalized ?? '').trim();
+      if (trimmed.startsWith('/')) {
+        const abs = `${WORDPRESS_ORIGIN}${trimmed}`;
+        const cachedAlt = mediaByUrlAltCache.get(abs);
+        if (cachedAlt !== undefined) return { url: abs, alt: cachedAlt };
+        const alt = await resolveAltViaREST(abs);
+        mediaByUrlAltCache.set(abs, alt ?? null);
+        return { url: abs, alt: alt ?? null };
+      }
+      if (trimmed.startsWith('wp-content') || trimmed.startsWith('uploads')) {
+        const abs = `${WORDPRESS_ORIGIN}/${trimmed}`;
+        const cachedAlt = mediaByUrlAltCache.get(abs);
+        if (cachedAlt !== undefined) return { url: abs, alt: cachedAlt };
+        const alt = await resolveAltViaREST(abs);
+        mediaByUrlAltCache.set(abs, alt ?? null);
+        return { url: abs, alt: alt ?? null };
+      }
+      return { url: null, alt: null };
+    }
+    if (typeof input === 'number') {
+      // Numeric media ID
+      if (mediaResolveCache.has(input)) return mediaResolveCache.get(input)!;
+      const url = `${WORDPRESS_API_URL}/media/${input}`;
+      const res = await fetch(url);
+      if (!res.ok) return { url: null, alt: null };
+      const data = await res.json();
+      const src = data?.source_url || data?.guid?.rendered || null;
+      const alt = data?.alt_text || null;
+      const payload = { url: src, alt };
+      if (src) mediaResolveCache.set(input, payload);
+      return payload;
+    }
+    if (typeof input === 'object') {
+      // ACF image object or WP media object
+      let directRaw = input?.url || input?.source_url || input?.sourceUrl || input?.mediaItemUrl || input?.guid?.rendered || null;
+      let direct = typeof directRaw === 'string' ? normalizeMediaUrl(directRaw) : null;
+      if (typeof direct === 'string' && !/^https?:\/\//.test(direct)) {
+        const d = direct.trim();
+        direct = d.startsWith('/') ? `${WORDPRESS_ORIGIN}${d}` : `${WORDPRESS_ORIGIN}/${d}`;
+      }
+      let alt = normalizeAltText(input?.alt || input?.alt_text || input?.altText || input?.title || null);
+      if (direct) {
+        if (!alt) {
+          const cachedAlt = mediaByUrlAltCache.get(direct);
+          if (cachedAlt !== undefined) alt = cachedAlt;
+          else {
+            const fetchedAlt = await resolveAltViaREST(direct);
+            mediaByUrlAltCache.set(direct, fetchedAlt ?? null);
+            alt = fetchedAlt ?? null;
+          }
+        }
+        return { url: direct, alt: alt ?? null };
+      }
+      if (typeof input?.id === 'number') {
+        return await resolveMedia(input.id);
+      }
+      if (typeof input?.ID === 'number') {
+        return await resolveMedia(input.ID);
+      }
+      return { url: null, alt: null };
+    }
+    return { url: null, alt: null };
+  } catch {
+    return { url: null, alt: null };
+  }
+}
+// Resolve alt text for a media URL via WordPress REST API
+async function resolveAltViaREST(url: string): Promise<string | null> {
+  try {
+    const basename = (() => {
+      try {
+        const u = new URL(url);
+        const parts = u.pathname.split('/');
+        return parts[parts.length - 1];
+      } catch {
+        const parts = url.split('?')[0].split('/');
+        return parts[parts.length - 1];
+      }
+    })();
+    // Search media by filename (best-effort)
+    const api = `${WORDPRESS_API_URL}/media?search=${encodeURIComponent(basename)}&per_page=5`;
+    const res = await fetch(api);
+    if (!res.ok) return null;
+    const items = await res.json();
+    if (Array.isArray(items)) {
+      // Prefer exact source_url match, otherwise first candidate
+      const exact = items.find((m: any) => m?.source_url === url);
+      const pick = exact || items[0];
+      return pick?.alt_text || null;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
 
 // GraphQL query to fetch posts by category (treating posts as products)
 const GET_PRODUCTS_BY_CATEGORY = `
@@ -130,6 +291,165 @@ async function executeGraphQLQuery(query: string, variables: any = {}) {
   return result.data;
 }
 
+// Try fetching products via WPGraphQL to read ACF grill group images
+async function fetchProductsByCategoryGraphQL(categorySlug: string, limit: number = 12): Promise<Product[] | null> {
+  // Query variant 1: ACF group with snake_case fields
+  const QUERY_SNAKE = `
+    query GetGrillByCategory($categorySlug: String!, $first: Int!) {
+      posts(where: {categoryName: $categorySlug}, first: $first) {
+        nodes {
+          id
+          databaseId
+          title
+          slug
+          excerpt
+          content
+          featuredImage { node { sourceUrl altText } }
+          acf {
+            grill {
+              front_image { ... on MediaItem { sourceUrl altText mediaItemUrl } }
+              back_image { ... on MediaItem { sourceUrl altText mediaItemUrl } }
+            }
+          }
+          categories { nodes { slug name } }
+        }
+      }
+    }
+  `;
+  // Query variant 2: ACF group with camelCase fields
+  const QUERY_CAMEL = `
+    query GetGrillByCategoryCamel($categorySlug: String!, $first: Int!) {
+      posts(where: {categoryName: $categorySlug}, first: $first) {
+        nodes {
+          id
+          databaseId
+          title
+          slug
+          excerpt
+          content
+          featuredImage { node { sourceUrl altText } }
+          acf {
+            grill {
+              frontImage { ... on MediaItem { sourceUrl altText mediaItemUrl } }
+              backImage { ... on MediaItem { sourceUrl altText mediaItemUrl } }
+            }
+          }
+          categories { nodes { slug name } }
+        }
+      }
+    }
+  `;
+
+  const variables = { categorySlug, first: limit };
+  try {
+    // Try snake_case first
+    const snakeResult = await executeGraphQLQuery(QUERY_SNAKE, variables);
+    const nodes1 = snakeResult?.posts?.nodes || [];
+    if (Array.isArray(nodes1) && nodes1.length > 0) {
+      const mapped: Product[] = await Promise.all(nodes1.map(async (node: any) => {
+        const featured = node?.featuredImage?.node?.sourceUrl || '/placeholder-product.jpg';
+        const frontRaw = node?.acf?.grill?.front_image || null;
+        const backRaw = node?.acf?.grill?.back_image || null;
+        const frontResolved = await resolveMedia(frontRaw);
+        const backResolved = await resolveMedia(backRaw);
+        return {
+          id: node?.databaseId || node?.id || 0,
+          name: node?.title || 'Untitled Product',
+          description: node?.excerpt || node?.content || '',
+          image: featured,
+          slug: node?.slug || '',
+          category: categorySlug,
+          frontImage: frontResolved.url || featured,
+          backImage: backResolved.url || frontResolved.url || featured,
+          frontAlt: frontResolved.alt ?? null,
+          backAlt: backResolved.alt ?? null,
+        } as Product;
+      }));
+      return mapped;
+    }
+  } catch (e1) {
+    // fallthrough to camelCase variant
+  }
+  try {
+    const camelResult = await executeGraphQLQuery(QUERY_CAMEL, variables);
+    const nodes2 = camelResult?.posts?.nodes || [];
+    if (Array.isArray(nodes2) && nodes2.length > 0) {
+      const mapped: Product[] = await Promise.all(nodes2.map(async (node: any) => {
+        const featured = node?.featuredImage?.node?.sourceUrl || '/placeholder-product.jpg';
+        const frontRaw = node?.acf?.grill?.frontImage || null;
+        const backRaw = node?.acf?.grill?.backImage || null;
+        const frontResolved = await resolveMedia(frontRaw);
+        const backResolved = await resolveMedia(backRaw);
+        return {
+          id: node?.databaseId || node?.id || 0,
+          name: node?.title || 'Untitled Product',
+          description: node?.excerpt || node?.content || '',
+          image: featured,
+          slug: node?.slug || '',
+          category: categorySlug,
+          frontImage: frontResolved.url || featured,
+          backImage: backResolved.url || frontResolved.url || featured,
+          frontAlt: frontResolved.alt ?? null,
+          backAlt: backResolved.alt ?? null,
+        } as Product;
+      }));
+      return mapped;
+    }
+  } catch (e2) {
+    // ignore and fallback
+  }
+  // Query variant 3: Custom Post Type grills with search
+  const QUERY_GRILLS_SEARCH = `
+    query GetGrillsBySearch($term: String!, $first: Int!) {
+      grills(where: { search: $term }, first: $first) {
+        nodes {
+          id
+          databaseId
+          title
+          slug
+          excerpt
+          content
+          featuredImage { node { sourceUrl altText } }
+          acf {
+            grill {
+              front_image { ... on MediaItem { sourceUrl altText mediaItemUrl } }
+              back_image { ... on MediaItem { sourceUrl altText mediaItemUrl } }
+            }
+          }
+        }
+      }
+    }
+  `;
+  try {
+    const data = await executeGraphQLQuery(QUERY_GRILLS_SEARCH, { term: categorySlug, first: limit });
+    const nodes3 = data?.grills?.nodes || [];
+    if (Array.isArray(nodes3) && nodes3.length > 0) {
+      const mapped: Product[] = await Promise.all(nodes3.map(async (node: any) => {
+        const featured = node?.featuredImage?.node?.sourceUrl || '/placeholder-product.jpg';
+        const frontRaw = node?.acf?.grill?.front_image || null;
+        const backRaw = node?.acf?.grill?.back_image || null;
+        const frontResolved = await resolveMedia(frontRaw);
+        const backResolved = await resolveMedia(backRaw);
+        return {
+          id: node?.databaseId || node?.id || 0,
+          name: node?.title || 'Untitled Product',
+          description: node?.excerpt || node?.content || '',
+          image: featured,
+          slug: node?.slug || '',
+          category: categorySlug,
+          frontImage: frontResolved.url || featured,
+          backImage: backResolved.url || frontResolved.url || featured,
+          frontAlt: frontResolved.alt ?? null,
+          backAlt: backResolved.alt ?? null,
+        } as Product;
+      }));
+      return mapped;
+    }
+  } catch (e3) {
+    // ignore and fallback to REST
+  }
+  return null;
+}
 /**
  * Fetch Grill posts from WordPress REST API using local proxy to avoid CORS issues
  */
@@ -199,6 +519,13 @@ async function fetchPostsByCategory(categorySlug: string, limit: number = 12): P
  */
 export async function fetchProductsByCategory(categorySlug: string, limit: number = 12): Promise<Product[]> {
   try {
+    // Cache lookup
+    const cacheKey = `${categorySlug}|${limit}`;
+    const cached = productsCache.get(cacheKey);
+    if (cached && isFresh(cached.ts)) {
+      return cached.data;
+    }
+    // 仅使用 REST（ACF to REST 已安装）
     // 对于静态导出，直接调用WordPress API
     const taxonomyUrl = `https://admin.keyfirebbq.com/wp-json/wp/v2/grill_category?slug=${categorySlug}`;
     const taxonomyResponse = await fetch(taxonomyUrl);
@@ -225,15 +552,57 @@ export async function fetchProductsByCategory(categorySlug: string, limit: numbe
     const posts = await postsResponse.json();
     
     if (posts && Array.isArray(posts)) {
-      return posts.map((post: any) => ({
-        id: post.id || 0,
-        name: post.title?.rendered || 'Untitled Product',
-        description: post.excerpt?.rendered || post.content?.rendered || '',
-        image: post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '/placeholder-product.jpg',
-        price: post.acf?.price || '',
-        slug: post.slug || '',
-        category: categorySlug
+      const mapped: Product[] = await Promise.all(posts.map(async (post: any) => {
+        const acf = post.acf || {};
+        const grill = acf?.grill || {};
+        const featured = post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '/placeholder-product.jpg';
+        // 兼容读取：优先 grill 分组，其次 acf 顶层
+        const frontSrcRaw = grill?.[ACF_GRILL_KEYS.frontImage] ?? acf?.[ACF_GRILL_KEYS.frontImage] ?? featured;
+        const backSrcRaw = grill?.[ACF_GRILL_KEYS.backImage] ?? acf?.[ACF_GRILL_KEYS.backImage] ?? frontSrcRaw;
+        // 画廊用于智能回退：优先 grill.gallery，其次 acf.gallery
+        const galleryRaw = grill?.gallery ?? acf?.gallery ?? null;
+        // 可选：独立 alt 字段（兼容分组与顶层）
+        const frontAltRaw = ACF_GRILL_KEYS.frontAlt
+          .map((k) => grill?.[k] ?? acf?.[k])
+          .find((v) => typeof v === 'string');
+        const backAltRaw = ACF_GRILL_KEYS.backAlt
+          .map((k) => grill?.[k] ?? acf?.[k])
+          .find((v) => typeof v === 'string');
+        
+        const frontResolved = await resolveMedia(frontSrcRaw);
+        let backResolved = await resolveMedia(backSrcRaw);
+        // 如果后图缺失或与前图相同，尝试使用 gallery 的第二张/不同于前图的下一张
+        if ((!backResolved?.url) || (frontResolved?.url && backResolved?.url === frontResolved.url)) {
+          if (Array.isArray(galleryRaw)) {
+            for (let i = 0; i < galleryRaw.length; i++) {
+              const candidate = await resolveMedia(galleryRaw[i]);
+              if (candidate?.url && candidate.url !== frontResolved.url) {
+                backResolved = candidate;
+                break;
+              }
+            }
+          }
+        }
+        const front = frontResolved.url || featured;
+        const back = backResolved.url || front;
+        const frontAlt = (frontAltRaw as string | undefined) ?? frontResolved.alt ?? null;
+        const backAlt = (backAltRaw as string | undefined) ?? backResolved.alt ?? null;
+        return {
+          id: post.id || 0,
+          name: post.title?.rendered || 'Untitled Product',
+          description: post.excerpt?.rendered || post.content?.rendered || '',
+          image: featured,
+          price: acf?.price || '',
+          slug: post.slug || '',
+          category: categorySlug,
+          frontImage: front,
+          backImage: back,
+          frontAlt,
+          backAlt,
+        } as Product;
       }));
+      productsCache.set(cacheKey, { data: mapped, ts: Date.now() });
+      return mapped;
     }
     
     return [];
@@ -241,7 +610,16 @@ export async function fetchProductsByCategory(categorySlug: string, limit: numbe
     console.error('Error fetching products:', error);
     
     // 如果API调用失败，返回fallback数据
-    return getFallbackProducts(categorySlug);
+    const fallback = getFallbackProducts(categorySlug).map(p => ({
+      ...p,
+      frontImage: p.frontImage || p.image,
+      backImage: p.backImage || p.image,
+      frontAlt: p.frontAlt ?? p.name ?? null,
+      backAlt: p.backAlt ?? p.name ?? null,
+    }));
+    const cacheKey = `${categorySlug}|${limit}`;
+    productsCache.set(cacheKey, { data: fallback, ts: Date.now() });
+    return fallback;
   }
 }
 
@@ -250,6 +628,9 @@ export async function fetchProductsByCategory(categorySlug: string, limit: numbe
  */
 export async function fetchGrillCategories(): Promise<ProductCategory[]> {
   try {
+    if (categoriesCache && isFresh(categoriesCache.ts)) {
+      return categoriesCache.data;
+    }
     const url = `${WORDPRESS_API_URL}/grill_category?per_page=100&_fields=id,name,slug,description`;
     const res = await fetch(url);
     if (!res.ok) {
@@ -257,28 +638,34 @@ export async function fetchGrillCategories(): Promise<ProductCategory[]> {
     }
     const data = await res.json();
     if (Array.isArray(data) && data.length > 0) {
-      return data.map((cat: any) => ({
+      const mapped = data.map((cat: any) => ({
         id: cat.id,
         name: cat.name,
         slug: cat.slug,
         description: cat.description,
       }));
+      categoriesCache = { data: mapped, ts: Date.now() };
+      return mapped;
     }
     // Fallback to common categories if API returns empty
-    return [
+    const fallbackCats = [
       { id: 1, name: 'Charcoal Grill', slug: 'charcoal-grill' },
       { id: 2, name: 'Gas Grill', slug: 'gas-grill' },
       { id: 3, name: 'Kettle Grill', slug: 'kettle-grill' },
       { id: 4, name: 'Electrical Grill', slug: 'electrical-grill' },
     ];
+    categoriesCache = { data: fallbackCats, ts: Date.now() };
+    return fallbackCats;
   } catch (error) {
     console.error('Error fetching grill categories:', error);
-    return [
+    const fallbackCats = [
       { id: 1, name: 'Charcoal Grill', slug: 'charcoal-grill' },
       { id: 2, name: 'Gas Grill', slug: 'gas-grill' },
       { id: 3, name: 'Kettle Grill', slug: 'kettle-grill' },
       { id: 4, name: 'Electrical Grill', slug: 'electrical-grill' },
     ];
+    categoriesCache = { data: fallbackCats, ts: Date.now() };
+    return fallbackCats;
   }
 }
 
@@ -412,7 +799,8 @@ function getFallbackProducts(categorySlug: string): Product[] {
     }
   ];
 
-  return categorySlug === 'charcoal-grill' ? charcoalGrillProducts : gasGrillProducts;
+  const list = categorySlug === 'charcoal-grill' ? charcoalGrillProducts : gasGrillProducts;
+  return list.map(p => ({ ...p, frontImage: p.image, backImage: p.image }));
 }
 
 /**

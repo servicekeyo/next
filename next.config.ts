@@ -17,6 +17,12 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/wp-content/uploads/**",
       },
+      {
+        protocol: "https",
+        hostname: "admin.keyfirebbq.com",
+        port: "",
+        pathname: "/wp-content/uploads/**",
+      },
     ],
   },
 };

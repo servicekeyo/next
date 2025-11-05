@@ -20,7 +20,7 @@ export default function Header() {
             <a href="/" >Home</a>
             <div className="relative group">
               <button className="flex items-center gap-1 hover:text-foreground/80 transition-colors py-2">
-                Wholesale
+                Prodcuts
                 <svg className="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
@@ -45,6 +45,7 @@ export default function Header() {
                 </div>
               </div>
             </div>
+            <a href="/contact">ODM/OEM</a>
             <div className="relative group">
               <button className="flex items-center gap-1 hover:text-foreground/80 transition-colors py-2">
                 About
@@ -59,6 +60,9 @@ export default function Header() {
                   </a>
                   <a href="/faq" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
                     FAQ
+                  </a>
+                  <a href="/faq" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
+                    Blog
                   </a>
                 </div>
               </div>
