@@ -3,6 +3,7 @@ import { QuoteButtonPrimary} from '@/components/QuoteButton';
 import Image from "next/image";
 import { Scroll,CalendarCheck,Factory,Handshake,Aperture,Bell } from 'phosphor-react';
 import FooterContact from '@/components/FooterContact';
+import GrillTabs from '@/components/GrillTabs';
 export default function Home() {
   return (
     <div className="min-h-screen">
@@ -50,7 +51,7 @@ export default function Home() {
           </p>
         </div>
         <div className="container flex-col md:flex-row flex items-center gap80">
-          
+          <GrillTabs limit={6} />
         </div>
       </section>
 

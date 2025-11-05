@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 export const revalidate = 600; // cache 10 minutes for stability
 
-const BASE_URL = 'https://keyobarbecue.com/wp-json/wp/v2';
+const BASE_URL = 'https://admin.keyfirebbq.com/wp-json/wp/v2';
 const ALLOWED_ENDPOINTS = new Set(['posts']);
 const ALLOWED_PARAMS = new Set(['per_page', 'page', '_embed', 'search', 'categories', 'slug']);
 

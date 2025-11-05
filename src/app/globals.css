@@ -22,7 +22,7 @@
   --color-primary2: var(--primary2-color);
   --color-hover2: var(--hover2-color);
   --color-text: var(--text-color);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-poppins);
   --font-mono: var(--font-geist-mono);
   --color-hub: var(--hub-color);
 }
@@ -71,7 +71,7 @@
 body {
   background: var(--background);
   color: var(--text-color);
-  font-family: "Open Sans", sans-serif;
+  font-family: var(--font-sans), "Poppins", sans-serif;
   line-height: 1.6;
 }
 .container {

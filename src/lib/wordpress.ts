@@ -18,8 +18,8 @@ export interface ProductCategory {
 }
 
 // WordPress REST API configuration
-// Note: Since keyobarbecue.com GraphQL endpoint is not available, we'll use REST API
-const WORDPRESS_API_URL = process.env.WORDPRESS_API_URL || 'https://keyobarbecue.com/wp-json/wp/v2';
+// Note: Default to admin.keyfirebbq.com REST API; can be overridden via env
+const WORDPRESS_API_URL = process.env.WORDPRESS_API_URL || 'https://admin.keyfirebbq.com/wp-json/wp/v2';
 
 // GraphQL query to fetch posts by category (treating posts as products)
 const GET_PRODUCTS_BY_CATEGORY = `
@@ -200,7 +200,7 @@ async function fetchPostsByCategory(categorySlug: string, limit: number = 12): P
 export async function fetchProductsByCategory(categorySlug: string, limit: number = 12): Promise<Product[]> {
   try {
     // 对于静态导出，直接调用WordPress API
-    const taxonomyUrl = `https://keyobarbecue.com/wp-json/wp/v2/grill_category?slug=${categorySlug}`;
+    const taxonomyUrl = `https://admin.keyfirebbq.com/wp-json/wp/v2/grill_category?slug=${categorySlug}`;
     const taxonomyResponse = await fetch(taxonomyUrl);
     
     if (!taxonomyResponse.ok) {
@@ -214,7 +214,7 @@ export async function fetchProductsByCategory(categorySlug: string, limit: numbe
     }
     
     const categoryId = taxonomyData[0].id;
-    const postsUrl = `https://keyobarbecue.com/wp-json/wp/v2/grill?grill_category=${categoryId}&per_page=${limit}&_embed`;
+    const postsUrl = `https://admin.keyfirebbq.com/wp-json/wp/v2/grill?grill_category=${categoryId}&per_page=${limit}&_embed`;
     
     const postsResponse = await fetch(postsUrl);
     
@@ -242,6 +242,43 @@ export async function fetchProductsByCategory(categorySlug: string, limit: numbe
     
     // 如果API调用失败，返回fallback数据
     return getFallbackProducts(categorySlug);
+  }
+}
+
+/**
+ * Fetch grill categories (custom taxonomy: grill_category) via WordPress REST API
+ */
+export async function fetchGrillCategories(): Promise<ProductCategory[]> {
+  try {
+    const url = `${WORDPRESS_API_URL}/grill_category?per_page=100&_fields=id,name,slug,description`;
+    const res = await fetch(url);
+    if (!res.ok) {
+      throw new Error(`Grill categories fetch failed: ${res.status}`);
+    }
+    const data = await res.json();
+    if (Array.isArray(data) && data.length > 0) {
+      return data.map((cat: any) => ({
+        id: cat.id,
+        name: cat.name,
+        slug: cat.slug,
+        description: cat.description,
+      }));
+    }
+    // Fallback to common categories if API returns empty
+    return [
+      { id: 1, name: 'Charcoal Grill', slug: 'charcoal-grill' },
+      { id: 2, name: 'Gas Grill', slug: 'gas-grill' },
+      { id: 3, name: 'Kettle Grill', slug: 'kettle-grill' },
+      { id: 4, name: 'Electrical Grill', slug: 'electrical-grill' },
+    ];
+  } catch (error) {
+    console.error('Error fetching grill categories:', error);
+    return [
+      { id: 1, name: 'Charcoal Grill', slug: 'charcoal-grill' },
+      { id: 2, name: 'Gas Grill', slug: 'gas-grill' },
+      { id: 3, name: 'Kettle Grill', slug: 'kettle-grill' },
+      { id: 4, name: 'Electrical Grill', slug: 'electrical-grill' },
+    ];
   }
 }
 
