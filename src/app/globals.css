@@ -48,7 +48,7 @@
 .gap30 {@apply gap-5 xl:gap-6 2xl:gap-8;}
 .gap50 {@apply gap-5 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12;}
 .gap80 {@apply gap-8 md:gap-12 lg:gap-16 xl:gap-18 2xl:gap-20;}
-.gap160 {@apply gap-8 md:gap-14 lg:gap-20 xl:gap-32 2xl:gap-52;}
+.gap160 {@apply gap-8 md:gap-12 lg:gap-16 xl:gap-24 2xl:gap-40;}
 .pt20 {@apply pt-3 xl:pt-4 xl:pt-3 2xl:pt-3;}
 .mt20 {@apply mt-3 xl:mt-4 xl:mt-3 2xl:mt-3;}
 .pt30 {@apply pt-4 lg:pt-6 xl:pt-8 2xl:pt-8;}

@@ -12,7 +12,7 @@ export default function Footer() {
         
         <div className="grid container gap-15 md:gap-y-0 xl:gap-20 2xl:gap-40 sm:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-5 lg:space-y-10 xl:space-y-20">
-            <a href="/" className="text-lg font-semibold text-foreground"><Image src="https://packoi.com/wp-content/uploads/2021/12/cropped-cropped-Packoi.webp" alt="Keyo Customize" width={265} height={76} /></a>
+            <a href="/" className="text-lg font-semibold text-foreground"><Image src="/images/LOGO1.png" alt="Keyo Customize" width={120} height={40} /></a>
             <p className="text-sm leading-7 mt20">KEYO has been committed to producing high-quality BBQ grills, fireplaces, and accessories, offering one-stop OEM and ODM solutions from R&D and customization to manufacturing, quality control, packaging, and logistics.</p>
           </div>
           <div className="md:pt-10">
