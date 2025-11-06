@@ -74,7 +74,7 @@ function isFresh(ts: number, ttl: number = CACHE_TTL_MS) {
 
 async function resolveMedia(input: any): Promise<{ url: string | null; alt: string | null }> {
   try {
-    if (!input) return null;
+    if (!input) return { url: null, alt: null };
     if (typeof input === 'string') {
       // If already URL
       const normalized = normalizeMediaUrl(input);
