@@ -21,12 +21,12 @@ const accessoryCategories: AccessoryCategory[] = [
     label: 'Side Table',
     options: [
       
-      { id: 'side_table2',col:1, img: '/images/acc/sidetable2.png' ,class_img:'/images/acc/sidetableclass2.png'},
-      { id: 'side_table1',col:1, img: '/images/acc/sidetable1.png' ,class_img:'/images/acc/sidetableclass1.png'},
-      { id: 'side_table4',col:1, img: '/images/acc/sidetable4.png' ,class_img:'/images/acc/sidetableclass4.png'},
-      { id: 'side_table3',col:1, img: '/images/acc/sidetable3.png' ,class_img:'/images/acc/sidetableclass3.png'},
-      { id: 'side_table5',col:2, img: '/images/acc/sidetable5.png' ,class_img:'/images/acc/sidetableclass5.png'},
-      { id: 'side_table6',col:2, img: '/images/acc/sidtable6.png' ,class_img:'/images/acc/sidetableclass6.png'},
+      { id: 'side_table2',col:1, img: '/images/acc/sidetable2.png' ,class_img:'/images/acc/SideTableclass2.png'},
+      { id: 'side_table1',col:1, img: '/images/acc/sidetable1.png' ,class_img:'/images/acc/SideTableclass1.png'},
+      { id: 'side_table4',col:1, img: '/images/acc/sidetable4.png' ,class_img:'/images/acc/SideTableclass4.png'},
+      { id: 'side_table3',col:1, img: '/images/acc/sidetable3.png' ,class_img:'/images/acc/SideTableclass3.png'},
+      { id: 'side_table5',col:2, img: '/images/acc/sidetable5.png' ,class_img:'/images/acc/SideTableclass5.png'},
+      { id: 'side_table6',col:2, img: '/images/acc/sidetable6.png' ,class_img:'/images/acc/SideTableclass6.png'},
     ],
   },
   {
@@ -55,7 +55,7 @@ export default function ProductAccessorySwitcher() {
     <section className="section-1 bg-foreground">
       <div className='w-2/3 mx-auto'>
         <h2 className='heading-main2 text-center'>Customize every detail</h2>
-        <p className="heading-sub mt30 text-hub text-center">
+        <p className="heading-sub mt20 text-hub text-center">
           Swap lids, side tables, legs, or finishes — create your own perfect match.
         </p>
       </div>

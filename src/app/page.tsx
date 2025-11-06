@@ -37,7 +37,7 @@ export default function Home() {
             
           </div>
           <div className="sm:w-1/2 flex justify-end">
-            <Image src="/images/index_banner3.jpg" alt="Keyo Customize" width={600} height={400} className="rounded-lg xl:rounded-tl-[100px]"
+            <Image src="/images/home/index_banner3.jpg" alt="Keyo Customize" width={600} height={400} className="rounded-lg xl:rounded-tl-[100px]"
             />
           </div>
         </div>
@@ -123,7 +123,7 @@ export default function Home() {
           <div className="flex flex-col gap80">
             <div className="max-w-4xl">
               <h2 className="heading-main2">Professional Team</h2>
-              <p className="text mt30 text-hub">
+              <p className="heading-sub mt20 text-hub">
                   20+ Years Of Manufacturing experience
 KEYO has over 20 years of experience serving 2,000+ customers across 100+ countries, delivering reliable, high-quality production solution
                 </p>
