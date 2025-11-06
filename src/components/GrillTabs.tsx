@@ -105,9 +105,16 @@ export default function GrillTabs({ limit = 6 }: GrillTabsProps) {
   }, [categories, limit]);
 
   return (
-    <div className="w-full">
+    <section className="section-1 bg-foreground">
+      <div className='w-2/3 mx-auto'>
+        <h2 className='heading-main2 text-center'>Custom Your BBQ Grill</h2>
+        <p className="heading-sub mt30 text-hub text-center">
+          Delivering high-quality, eco-friendly custom packaging with flexible designs and reliable manufacturing to help your brand stand out with confidence and sustainability.
+        </p>
+      </div>
+      
       {/* Tabs */}
-      <div className="flex flex-wrap justify-center gap-3 md:gap-5 py-2">
+      <div className="container flex-col md:flex-row flex items-center gap80">
         {loadingCategories ? (
           Array.from({ length: 4 }).map((_, i) => (
             <div key={i} className="h-10 w-24 bg-gray-200 rounded animate-pulse" />
@@ -238,6 +245,6 @@ export default function GrillTabs({ limit = 6 }: GrillTabsProps) {
           </div>
         </>
       )}
-    </div>
+    </section>
   );
 }

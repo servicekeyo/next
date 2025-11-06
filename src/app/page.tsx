@@ -45,9 +45,9 @@ export default function Home() {
 
       <section className="section-1">
         <div className='w-2/3 mx-auto text-center '>
-          <h2 className="heading-main2">Our Customization Process</h2>
+          <h2 className="heading-main2">Share your idea, we’ll make it real</h2>
           <p className="heading-sub mt20 text-hub">
-            Tell us your ideas or provide any drawings, and we will help you meet your requirements.
+            From concept to production, we turn your ideas into visual designs, structural plans, and manufacturing solutions. Each stage is clear, adjustable, and transparent — ensuring the final product perfectly matches your expectations.
           </p>
         </div>
 
@@ -89,94 +89,76 @@ export default function Home() {
             </div>
           </div>
       </section>
-
-      
-
-      <section className="section-1 bg-foreground">
-        <div className='w-2/3 mx-auto'>
-          <h2 className='heading-main2 text-center'>Custom Your BBQ Grill</h2>
-          <p className="heading-sub mt30 text-hub text-center">
-            Delivering high-quality, eco-friendly custom packaging with flexible designs and reliable manufacturing to help your brand stand out with confidence and sustainability.
-          </p>
-        </div>
-        <div className="container flex-col md:flex-row flex items-center gap80">
-          <GrillTabs limit={6} />
-        </div>
-      </section>
       
       <ProductAccessorySwitcher />
 
-      <section className="section-1">
-        <div>
-          <h2 className='heading-main2 text-center'>Types of Packaging and Print We Offer</h2>
-          <p className="heading-sub mt20 text-center">We provide businesses with a range of packaging and printing solutions. Packoi is a certified one-stop shop for custom boxes, custom bags, and marketing materials.</p>
-        </div>
-        <div className='flex flex-col gap80'>
-          <div className="container flex-col md:flex-row flex items-center gap80">
-            <div className="sm:w-1/2">
-              <Image src="https://packoi.com/wp-content/uploads/2022/08/Custom-Boxes.avif" alt="Keyo Customize" width={800} height={600} />
+      <div className="section-1">
+        <div className="container flex flex-col gap80">
+          <div className="max-w-4xl">
+            <p className="text-base/7 font-semibold text-primary">About us</p>
+            <h2 className="heading-main2">On a mission to empower remote teams</h2>
+            <p className="heading-sub mt20 text-hub">
+              Aliquet nec orci mattis amet quisque ullamcorper neque, nibh sem. At arcu, sit dui mi, nibh dui, diam eget
+              aliquam. Quisque id at vitae feugiat egestas.
+            </p>
+          </div>
+          <div className='flex flex-row gap80'>
+            <div className='w-1/2 flex flex-col gap80'>
+              <div>
+                <h2 className="heading-main3">What we offer</h2>
+                <p className="mt-6 text-base/7 text-gray-600 dark:text-gray-400">
+                  At KEYO, we deliver One-Stop OEM & ODM solution—from R&D and customization to manufacturing, quality control, packaging, and logistics. Our expert team ensures a smooth journey, enabling businesses to turn their BBQ grill concepts into market-ready products successfully.
+                </p>
+              </div>
+              <div>
+                <p className="text-base/7 font-semibold text-gray-500 dark:text-gray-400">The numbers</p>
+                <hr className="mt-6 border-t border-gray-200 dark:border-gray-700" />
+                <dl className="mt-6 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
+                  <div className="flex flex-col gap-y-2 border-b border-dotted border-gray-200 pb-4 dark:border-gray-700">
+                    <dt className="text-sm/6 text-gray-600 dark:text-gray-400">Raised</dt>
+                    <dd className="order-first text-6xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                      $<span>150</span>M
+                    </dd>
+                  </div>
+                  <div className="flex flex-col gap-y-2 border-b border-dotted border-gray-200 pb-4 dark:border-gray-700">
+                    <dt className="text-sm/6 text-gray-600 dark:text-gray-400">Companies</dt>
+                    <dd className="order-first text-6xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                      <span>30</span>K
+                    </dd>
+                  </div>
+                  <div className="flex flex-col gap-y-2 max-sm:border-b max-sm:border-dotted max-sm:border-gray-200 max-sm:pb-4 dark:max-sm:border-gray-700">
+                    <dt className="text-sm/6 text-gray-600 dark:text-gray-400">Deals Closed</dt>
+                    <dd className="order-first text-6xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                      <span>1.5</span>M
+                    </dd>
+                  </div>
+                  <div className="flex flex-col gap-y-2">
+                    <dt className="text-sm/6 text-gray-600 dark:text-gray-400">Leads Generated</dt>
+                    <dd className="order-first text-6xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                      <span>200</span>M
+                    </dd>
+                  </div>
+                </dl>
+              </div>
             </div>
-            <div className="sm:w-1/2 space-y-5 xl:space-y-8">
-              <h3 className="heading-main3">Custom Printed Boxes</h3>
-              <p className="text">We print and design custom boxes for mailing, shipping, and displaying products. Our solutions target all types of businesses, ensuring your needs and expectations are addressed. No matter where you are located, you can always rely on us.</p>
-              <QuoteButtonPrimary className='mt20'>Get A Instant Quote Now</QuoteButtonPrimary>
+          
+            <div className="w-1/2">
+            
+            <div className="pt-16 lg:row-span-2 lg:-mr-16 xl:mr-auto">
+              <div className="-mx-8 grid grid-cols-2 gap-4 sm:-mx-16 sm:grid-cols-4 lg:mx-0 lg:grid-cols-2 xl:gap-8">
+                  <img alt="" src="/images/indx_one4.jpg" className="rounded-xl shadow-xl" />
+                  <img alt="" src="/images/a10.jpg" className="-mt-20 rounded-xl shadow-xl" />
+                  <img alt="" src="/images/a10.jpg" className="rounded-xl shadow-xl" />
+                  <img alt="" src="/images/a10.jpg" className="-mt-20 rounded-xl shadow-xl" />
+                  <img alt="" src="/images/a10.jpg" className="rounded-xl shadow-xl" />
+                  <img alt="" src="/images/a10.jpg" className="-mt-20 rounded-xl shadow-xl" />
+              </div>
+            </div>
+            
             </div>
           </div>
-          <div className="container flex-col-reverse md:flex-row flex items-center gap80">
-            <div className="sm:w-1/2 space-y-5 xl:space-y-8">
-              <h3 className="heading-main3">Custom Printed Bags</h3>
-              <p className="text">Custom bags are multipurpose. They can be used for packaging gifts and shopping, among other uses. Bags are made from sturdy materials to guarantee the safety of your goods. You can always rely on us for the best experience.</p>
-              <QuoteButtonPrimary className='mt20'>Get A Instant Quote Now</QuoteButtonPrimary>
-            </div>
-            <div className="sm:w-1/2">
-              <Image src="https://packoi.com/wp-content/uploads/2022/08/Custom-Bags.avif" alt="Keyo Customize" width={800} height={600} />
-            </div>
-          </div>
-          <div className="container flex-col md:flex-row flex items-center gap80">
-            <div className="sm:w-1/2">
-              <Image src="https://packoi.com/wp-content/uploads/2022/08/Custom-Printed-Marketing-Materials.avif" alt="Keyo Customize" width={800} height={600} />
-            </div>
-            <div className="sm:w-1/2 space-y-5 xl:space-y-8">
-              <h3 className="heading-main3">Custom Printed Marketing Materials</h3>
-              <p className="text">If you want to promote your brand, we have the right materials to help you implement your marketing strategy effectively. We print brochures, catalogs, and booklets that capture brand information effectively. We design and print with your brand at heart.</p>
-              <QuoteButtonPrimary className='mt20'>Get A Instant Quote Now</QuoteButtonPrimary>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-1">
-        <div>
-          <h2 className='heading-main2 text-center'>Frequently Asked Questions</h2>
-          <p className="heading-sub mt20 text-center">Below you can find some frequently asked questions regarding custom packaging and print. Please feel free to contact us if you have any other questions.</p>
-        </div>
-        <div className="container grid grid-cols-1 md:grid-cols-2  gap80">
-          <div className='flex flex-col gap30'>
-            <h3 className="heading-main3">Can I get samples before ordering?</h3>
-            <p>Yes, we offer samples for all custom box orders. This allows you to verify the dimensions, structure, and print quality before proceeding with full production. To request a sample, don’t hesitate to get in touch with our team. We’ll be happy to assist you.</p>
-          </div>
-          <div className='flex flex-col gap30'>
-            <h3 className="heading-main3">What format should I send my artwork in?</h3>
-            <p>Please send us your artwork in a dieline file (PDF or AI format) that is editable in Adobe Illustrator. Make sure the dieline is placed on a separate layer in your AI file, and follow our dieline design guidelines to ensure your file is ready for production.</p>
-          </div>
-          <div className='flex flex-col gap30'>
-            <h3 className="heading-main3">Can I customize the size, material, and design of the packaging?</h3>
-            <p>Yes, every aspect of your packaging can be tailored to your brand’s needs. From structure, dimensions, and materials to finishes, coatings, and full-color printing, we work closely with you to bring your vision to life. Send us your packaging idea now.</p>
-          </div>
-          <div className='flex flex-col gap30'>
-            <h3 className="heading-main3">What is the minimum number of packages I can order?</h3>
-            <p>Our MOQs are flexible and designed to support both startups and growing brands. For most packaging types, the MOQ starts at just 500 units. Regardless of the quantity you need, we’ll do our best to support you. Contact us to discuss your project and get a quote now.</p>
-          </div>
-          <div className='flex flex-col gap30'>
-            <h3 className="heading-main3">What’s the typical lead time for custom packaging?</h3>
-            <p>Once your artwork is confirmed, standard production takes 10–15 business days. Shipping times vary by region, but we’ll always provide a clear timeline upfront. Urgent deadline? Let us know — we often accommodate rush orders.</p>
-          </div>
-          <div className='flex flex-col gap30'>
-            <h3 className="heading-main3">Do you offer eco-friendly or recyclable packaging options?</h3>
-            <p>Absolutely. We offer sustainable materials, including recycled paperboard, FSC-certified kraft, soy-based inks, and biodegradable coatings. Whether you’re a clean beauty or DTC brand, we help align your packaging with your sustainability goals.</p>
-          </div>
-        </div>
-      </section>
+      </div>
+      </div>
 
       <section className="section-1 banner bg-fixed  bg-[url('https://packoi.com/wp-content/uploads/2022/03/custom-printed-boxes.jpg')]">
         <div>
@@ -244,6 +226,41 @@ export default function Home() {
 
         </div>
       </section>
+
+      <section className="section-1">
+        <div>
+          <h2 className='heading-main2 text-center'>Frequently Asked Questions</h2>
+          <p className="heading-sub mt20 text-center">Below you can find some frequently asked questions regarding custom packaging and print. Please feel free to contact us if you have any other questions.</p>
+        </div>
+        <div className="container grid grid-cols-1 md:grid-cols-2  gap80">
+          <div className='flex flex-col gap30'>
+            <h3 className="heading-main3">Can I get samples before ordering?</h3>
+            <p>Yes, we offer samples for all custom box orders. This allows you to verify the dimensions, structure, and print quality before proceeding with full production. To request a sample, don’t hesitate to get in touch with our team. We’ll be happy to assist you.</p>
+          </div>
+          <div className='flex flex-col gap30'>
+            <h3 className="heading-main3">What format should I send my artwork in?</h3>
+            <p>Please send us your artwork in a dieline file (PDF or AI format) that is editable in Adobe Illustrator. Make sure the dieline is placed on a separate layer in your AI file, and follow our dieline design guidelines to ensure your file is ready for production.</p>
+          </div>
+          <div className='flex flex-col gap30'>
+            <h3 className="heading-main3">Can I customize the size, material, and design of the packaging?</h3>
+            <p>Yes, every aspect of your packaging can be tailored to your brand’s needs. From structure, dimensions, and materials to finishes, coatings, and full-color printing, we work closely with you to bring your vision to life. Send us your packaging idea now.</p>
+          </div>
+          <div className='flex flex-col gap30'>
+            <h3 className="heading-main3">What is the minimum number of packages I can order?</h3>
+            <p>Our MOQs are flexible and designed to support both startups and growing brands. For most packaging types, the MOQ starts at just 500 units. Regardless of the quantity you need, we’ll do our best to support you. Contact us to discuss your project and get a quote now.</p>
+          </div>
+          <div className='flex flex-col gap30'>
+            <h3 className="heading-main3">What’s the typical lead time for custom packaging?</h3>
+            <p>Once your artwork is confirmed, standard production takes 10–15 business days. Shipping times vary by region, but we’ll always provide a clear timeline upfront. Urgent deadline? Let us know — we often accommodate rush orders.</p>
+          </div>
+          <div className='flex flex-col gap30'>
+            <h3 className="heading-main3">Do you offer eco-friendly or recyclable packaging options?</h3>
+            <p>Absolutely. We offer sustainable materials, including recycled paperboard, FSC-certified kraft, soy-based inks, and biodegradable coatings. Whether you’re a clean beauty or DTC brand, we help align your packaging with your sustainability goals.</p>
+          </div>
+        </div>
+      </section>
+
+      
 
        <FooterContact />
 
