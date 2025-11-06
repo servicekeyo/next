@@ -92,80 +92,9 @@ export default function Home() {
       
       <ProductAccessorySwitcher />
 
-      <div className="section-1">
-        <div className='container flex flex-col gap160'>
-          <div className='container flex flex-row gap160'>
-            <div className="w-1/2">
-              <img alt="" src="/images/home/indx_one4.jpg" className="rounded-xl shadow-md" />
-            </div>
-            <div className='w-1/2 flex flex-col gap30 justify-center'>
-                <h2 className="heading-main2">Why Choose Us</h2>
-                <p className='text text-hub'>
-                    At KEYO, we deliver One-Stop OEM & ODM solution—from R&D and customization to manufacturing, quality control, packaging, and logistics. Our expert team ensures a smooth journey, enabling businesses to turn their BBQ grill concepts into market-ready products successfully.
-                </p>
-                <dl className="grid grid-cols-2 gap-8 sm:grid-cols-2 md:grid-cols-3 mt50">
-                  <div className="flex flex-col gap-y-3 border-l border-gray-900/10 pl-6 dark:border-white/10">
-                    <dt className="text-sm/6 text-gray-600 dark:text-gray-400">Units Annually</dt>
-                      <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">2.4 Million</dd>
-                  </div>
-                  <div className="flex flex-col gap-y-3 border-l border-gray-900/10 pl-6 dark:border-white/10">
-                    <dt className="text-sm/6 text-gray-600 dark:text-gray-400">Manufacturing Facility</dt>
-                      <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">40,000㎡</dd>
-                  </div>
-                  <div className="flex flex-col gap-y-3 border-l border-gray-900/10 pl-6 dark:border-white/10">
-                    <dt className="text-sm/6 text-gray-600 dark:text-gray-400">Warehouse</dt>
-                      <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">20,000㎡</dd>
-                  </div>
-                </dl>
-            </div>
-          </div>
+      <GrillTabs />
 
-          <div className="flex flex-col gap80">
-            <div className="max-w-4xl">
-              <h2 className="heading-main2">Professional Team</h2>
-              <p className="heading-sub mt20 text-hub">
-                  20+ Years Of Manufacturing experience
-KEYO has over 20 years of experience serving 2,000+ customers across 100+ countries, delivering reliable, high-quality production solution
-                </p>
-            </div>
-            
-            <div className='grid grid-cols-1 lg:grid-cols-2 gap80'>
-              <div className="text flex flex-col gap30">
-                <p><strong>400 Skilled Workers</strong> – Ensuring stable, high-volume production capacity.</p>
-                <p><strong>20 Account Managers</strong> – Dedicated support for seamless global communication.</p>
-                <p><strong>10 Professional R&D</strong> – Creative solutions for product and packaging customization.</p>
-                <p><strong>12 Quality Control Specialists</strong> – Strict inspections guaranteeing reliable performance.</p>
-                <p>
-                  we offer marketing support with catalogs and manuals.Our design team ensures your brand stands out with professional visuals that help grow your presence in the market.
-                </p>
-              </div>
-              <div className="pt-16 lg:row-span-2 lg:-mr-16 xl:mr-auto">
-                <div className="-mx-8 grid grid-cols-2 gap-4 sm:-mx-16 sm:grid-cols-4 lg:mx-0 lg:grid-cols-2 xl:gap-8">
-                  <div className="">
-                    <img  alt="" src="images/home/a7.jpg" className="block size-full object-cover rounded-md"/>
-                  </div>
-                  <div className="-mt-24 ">
-                    <img  alt="" src="images/home/a2.jpg" className="block size-full object-cover rounded-md"/>
-                  </div>
-                  <div className="">
-                    <img  alt="" src="images/home/a1.jpg" className="block size-full object-cover rounded-md"/>
-                  </div>
-                  <div className="-mt-24 ">
-                    <img  alt="" src="images/home/a8.jpg" className="block size-full object-cover rounded-md"/>
-                  </div>
-                  <div className="">
-                    
-                  </div>
-                  <div className="-mt-24 ">
-                    <img  alt="" src="images/home/a10.jpg" className="block size-full object-cover rounded-md"/>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
-      </div>
 
       <section className="section-1 banner bg-fixed  bg-[url('https://packoi.com/wp-content/uploads/2022/03/custom-printed-boxes.jpg')]">
         <div>
