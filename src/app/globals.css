@@ -5,7 +5,8 @@
   --foreground: #fafafa;
   --footerground: #181c31;
   --text-color: oklch(21% 0.034 264.665);
-  --primary-color:oklch(62.3% 0.214 259.815);
+  /*--primary-color:oklch(62.3% 0.214 259.815);*/
+  --primary-color: #008FDC;
   --hover-color: oklch(72% 0.214 259.815); /* 比主色暗一点 */
   --primary2-color: oklch(21% 0.034 264.665);
   --hover2-color: oklch(31% 0.034 264.665); /* 比主色暗一点 */
@@ -86,4 +87,35 @@ input{background:var(--background);}
 img {
   max-width: 100%;
   height: auto;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Custom Animations                                                         */
+/* -------------------------------------------------------------------------- */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-in forwards;
+  }
+
+  .animate-fade-out {
+    animation: fade-out 0.5s ease-out forwards;
+  }
 }
