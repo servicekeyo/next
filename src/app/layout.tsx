@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import { QuoteProvider } from "@/components/QuoteProvider";
+import AosProvider from "@/components/AosProvider";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -35,6 +36,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning className={`${poppins.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}>
         <QuoteProvider>
+          <AosProvider />
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
