@@ -1,165 +1,73 @@
-"use client";
-import Head from 'next/head';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
-
-interface BlogPost {
-  id: number;
-  title: string;
-  excerpt: string;
-  image: string;
-  link: string;
-  slug?: string;
-}
-
-export default function BlogPage() {
-  const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const res = await fetch('/api/wordpress?endpoint=posts&per_page=9&_embed=1');
-        if (!res.ok) throw new Error(`Status ${res.status}`);
-        const result = await res.json();
-        
-        if (!result.success || !result.data) {
-          throw new Error('API response invalid');
-        }
-        
-        const mapped: BlogPost[] = result.data.map((post: any) => ({
-          id: post.id,
-          title: post.title?.rendered?.replace(/<[^>]*>/g, '') || 'Untitled',
-          excerpt: (post.excerpt?.rendered || post.content?.rendered || '')
-            .replace(/<[^>]*>/g, '')
-            .trim()
-            .substring(0, 180) + '...',
-          image:
-            post._embedded?.['wp:featuredmedia']?.[0]?.source_url ||
-            post.jetpack_featured_media_url ||
-            post.featured_media_url ||
-            'https://keyobarbecue.com/wp-content/uploads/2025/09/ch_banner3-2.webp',
-          slug: post.slug,
-          link: post.slug ? `/blog/${post.slug}` : (post.link || `https://keyobarbecue.com/blog/`)
-        }));
-        setPosts(mapped);
-      } catch (e: any) {
-        setError(e?.message || 'Failed to fetch');
-        // Fallback static posts with proper slugs
-        setPosts([
-          {
-            id: 1,
-            title: 'How Packaging Drives Retail Impact',
-            excerpt:
-              "Walk down any supermarket aisle and you'll see it instantly: some products pull the eye, others blend...",
-            image: 'https://keyobarbecue.com/wp-content/uploads/2025/09/ch_banner3-2.webp',
-            slug: 'a-complete-design-guide-to-shelf-ready-packaging-formats-features-use-cases',
-            link: '/blog/a-complete-design-guide-to-shelf-ready-packaging-formats-features-use-cases'
-          },
-          {
-            id: 2,
-            title: 'Jute: The Golden Fiber in Modern Packaging',
-            excerpt:
-              'Jute has been called the "golden fiber" for good reason. Strong, breathable, and fully biodegradable,...',
-            image: 'https://keyobarbecue.com/wp-content/uploads/2025/09/ch_banner3-2.webp',
-            slug: 'jute-golden-fiber-modern-packaging',
-            link: '/blog/jute-golden-fiber-modern-packaging'
-          },
-          {
-            id: 3,
-            title: 'First Impressions: B2B Packaging That Converts',
-            excerpt:
-              'In packaging, first impressions shape how a product and the brand behind it is remembered. For B2B companies,...',
-            image: 'https://keyobarbecue.com/wp-content/uploads/2025/09/ch_banner3-2.webp',
-            slug: 'first-impressions-b2b-packaging-converts',
-            link: '/blog/first-impressions-b2b-packaging-converts'
-          }
-        ]);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchPosts();
-  }, []);
-
+import { getbloglist } from '@/lib/wordpress'
+import Link from 'next/link'
+export const revalidate = 3600 // ISR
+export default async function Blog() {
+  const posts = await getbloglist()
   return (
-    <>
-      <Head>
-        <title>KEYO Blog | Insights on BBQ, Manufacturing & Packaging</title>
-        <meta
-          name="description"
-          content="Read KEYO's latest insights on BBQ grills, outdoor cooking, OEM/ODM manufacturing, and packaging best practices."
-        />
-        <meta name="robots" content="index, follow" />
-        <meta name="author" content="KEYO Barbecue" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta property="og:title" content="KEYO Blog | Insights on BBQ, Manufacturing & Packaging" />
-        <meta property="og:description" content="Thoughts and updates from KEYO on grills and manufacturing." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://keyobarbecue.com/blog" />
-        <meta property="og:image" content="https://keyobarbecue.com/wp-content/uploads/2025/09/ch_banner3-2.webp" />
-        <link rel="canonical" href="https://keyobarbecue.com/blog" />
-      </Head>
+    <div className="min-h-screen">
+      <section className="section-1 relative isolate -z-10">
+          <svg
+            aria-hidden="true"
+            className="absolute inset-x-0 top-0 -z-10 h-60 xl:h-110 w-full mask-[radial-gradient(70rem_70rem_at_center,white,transparent)] stroke-gray-200"
+          >
+            <defs>
+              <pattern
+                x="50%"
+                y={-1}
+                id="1f932ae7-37de-4c0a-a8b0-a6e3b4d44b84"
+                width={200}
+                height={200}
+                patternUnits="userSpaceOnUse"
+              >
+                <path d="M.5 200V.5H200" fill="none" />
+              </pattern>
+            </defs>
+            <svg x="50%" y={-1} className="overflow-visible fill-gray-50">
+              <path
+                d="M-200 0h201v201h-201Z M600 0h201v201h-201Z M-400 600h201v201h-201Z M200 800h201v201h-201Z"
+                strokeWidth={0}
+              />
+            </svg>
+            <svg x="100%" y={0} className="overflow-visible fill-gray-50">
+              <path
+                d="M-200 0h201v201h-201Z M600 0h201v201h-201Z M-400 600h201v201h-201Z M200 800h201v201h-201Z"
+                strokeWidth={0}
+              />
+            </svg>
+            <rect fill="url(#1f932ae7-37de-4c0a-a8b0-a6e3b4d44b84)" width="100%" height="100%" strokeWidth={0} />
+          </svg>
+        <div className='w-4/5 xl:w-3/5 mx-auto text-center'  data-aos="fade-in">
+          <h1 className="heading-main">Custom BBQ Solutions</h1>
+          <p className="heading-sub mt30 text-hub">From material selection to full-scale manufacturing, we share knowledge that helps you choose the right BBQ supplier and achieve high-quality custom grill production for your market.</p>
+        </div>
+      </section>
 
-      <div className="min-h-screen">
-        <main className="section-1 relative pro-banner bg-[url('https://keyobarbecue.com/wp-content/uploads/2025/09/ch_banner3-2.webp')] min-h-[220px] ">
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-black/100 from-40% to-transparent to-100% z-10"></div>
-          <div className="container flex-col md:flex-row flex items-center gap80 z-20 relative">
-            <div className="md:w-5/7 lg:w-4/7 2xl:w-3/7 text-white">
-              <h1 className="heading-main2">KEYO Blog</h1>
-              <p className="text mt20">Updates, tips, and insights from our team.</p>
-            </div>
-          </div>
-        </main>
-
-        <section className="section-1">
-          <div className="container">
-
-            {loading && (
-              <p className="heading-sub">Loading posts...</p>
-            )}
-
-            {!loading && posts.length === 0 && (
-              <p className="heading-sub">No posts available at the moment.</p>
-            )}
-
-            {!loading && posts.length > 0 && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {posts.map((post) => (
-                  <article key={post.id} className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden">
-                    <Link href={post.link}>
-                      <Image
-                        src={post.image}
-                        alt={post.title}
-                        width={600}
-                        height={360}
-                        className="w-full h-[200px] object-cover"
-                      />
-                    </Link>
-                    <div className="p-5">
-                      <Link href={post.link}>
-                        <h3 className="text-base md:text-lg font-semibold hover:text-primary transition-colors duration-200">{post.title}</h3>
-                      </Link>
-                      <p className="heading-sub mt20">{post.excerpt}</p>
-                      <div className="mt-4">
-                        <Link href={post.link} className="text-primary hover:underline">
-                          Read more →
-                        </Link>
-                      </div>
-                    </div>
-                  </article>
-                ))}
+      <div className="mt-16 grid gap-8 lg:grid-cols-3">
+          {posts.map((post: any) => (
+            <article
+              key={post.id}
+              className="flex flex-col items-start justify-between rounded-2xl bg-gray-50 p-6 shadow-sm transition hover:shadow-md"
+            >
+              <div className="flex items-center gap-x-4 text-xs text-gray-500">
+                <time dateTime={post.date}>
+                  {new Date(post.date).toLocaleDateString()}
+                </time>
               </div>
-            )}
+              <div className="group relative">
+                <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-indigo-600">
+                  <Link href={`/blog/${post.slug}`}>
+                    <span className="absolute inset-0" />
+                    {post.title.rendered.replace(/<[^>]+>/g, '')}
+                  </Link>
+                </h3>
+                <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">
+                  {post.excerpt.rendered.replace(/<[^>]+>/g, '')}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
 
-            {error && (
-              <p className="text-red-600 mt-4">Note: Failed to fetch live posts, showing fallback content.</p>
-            )}
-          </div>
-        </section>
-      </div>
-    </>
+    </div>
   );
 }

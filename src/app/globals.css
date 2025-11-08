@@ -38,9 +38,9 @@
 .banner::before{@apply content-[''] absolute inset-0 bg-black/50 z-0;}
 .banner > *{@apply relative z-10;}
 .pro-banner{@apply bg-no-repeat bg-cover bg-bottom-right;}
-.heading-main {@apply text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold leading-8 lg:leading-10 xl:leading-12 2xl:leading-16 ;	}
+.heading-main {@apply text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold leading-8 lg:leading-10 xl:leading-12 2xl:leading-16 capitalize;	}
 .heading-sub {@apply text-sm lg:text-base leading-6 xl:leading-7;} 
-.heading-main2 {@apply text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-bold leading-6 lg:leading-10 xl:leading-12 2xl:leading-14 ;}
+.heading-main2 {@apply text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-bold leading-6 lg:leading-10 xl:leading-12 2xl:leading-14 capitalize;}
 .heading-main3 {@apply text-lg lg:text-lg xl:text-xl 2xl:text-2xl font-bold;}
 .text{@apply text-sm lg:text-base xl:text-lg leading-6 xl:leading-8;}
 .section-1 {@apply px-5 md:px-10 xl:px-24 py-12 md:py-20 xl:py-26 2xl:py-32 space-y-8 lg:space-y-10 xl:space-y-20;}

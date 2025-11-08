@@ -61,7 +61,7 @@ export default function Header() {
                   <a href="/faq" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
                     FAQ
                   </a>
-                  <a href="/faq" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
+                  <a href="/blog" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
                     Blog
                   </a>
                 </div>
@@ -133,7 +133,7 @@ export default function Header() {
                 
                 {/* Wholesale 菜单 */}
                 <div className="space-y-3">
-                  <div className="text-lg font-medium text-gray-900">Wholesale</div>
+                  <div className="text-lg font-medium text-gray-900">Products</div>
                   <div className="pl-4 space-y-3">
                     <a 
                       href="/wholesale/charcoal-grill" 
@@ -168,7 +168,9 @@ export default function Header() {
                     </a>
                   </div>
                 </div>
-                
+                <a href="/odmoem"  className="text-lg font-medium text-gray-900 hover:text-primary transition-colors" onClick={() => setOpen(false)}>
+                  ODM/OEM
+                </a>
                 {/* About 下拉菜单 */}
                 <div className="space-y-3">
                   <button 

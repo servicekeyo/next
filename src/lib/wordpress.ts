@@ -24,6 +24,24 @@ export interface ProductCategory {
 // WordPress REST API configuration
 // Note: Default to admin.keyfirebbq.com REST API; can be overridden via env
 const WORDPRESS_API_URL = process.env.WORDPRESS_API_URL || 'https://admin.keyfirebbq.com/wp-json/wp/v2';
+export async function getbloglist() {
+  try {
+    const res = await fetch(`${WORDPRESS_API_URL}/posts?per_page=100&_fields=id,slug,title,excerpt,date`)
+    if (!res.ok) throw new Error(`HTTP ${res.status}`)
+    return res.json()
+  } catch (err) {
+    console.error('❌ Failed to fetch WordPress posts:', err)
+    return []
+  }
+}
+export async function getPostBySlug(slug: string) {
+  const res = await fetch(`${WORDPRESS_API_URL}/posts?slug=${slug}`)
+  const posts = await res.json()
+  return posts.length > 0 ? posts[0] : null
+}
+
+
+
 const WORDPRESS_ORIGIN = (() => {
   try {
     const u = new URL(WORDPRESS_API_URL);

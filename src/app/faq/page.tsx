@@ -95,29 +95,57 @@ export default function FAQ() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="section-2 bg-[url('https://packoi.com/wp-content/uploads/2022/03/custom-printed-boxes.jpg')] banner">
-        <h1 className="heading-main">Frequently Asked Questions</h1>
-        <p className="heading-sub mt20">Find answers to common questions about our BBQ grills, customization services, and ordering process.</p>
+      <section className="section-1 relative isolate -z-10">
+          <svg
+            aria-hidden="true"
+            className="absolute inset-x-0 top-0 -z-10 h-60 xl:h-110 w-full mask-[radial-gradient(70rem_70rem_at_center,white,transparent)] stroke-gray-200"
+          >
+            <defs>
+              <pattern
+                x="50%"
+                y={-1}
+                id="1f932ae7-37de-4c0a-a8b0-a6e3b4d44b84"
+                width={200}
+                height={200}
+                patternUnits="userSpaceOnUse"
+              >
+                <path d="M.5 200V.5H200" fill="none" />
+              </pattern>
+            </defs>
+            <svg x="50%" y={-1} className="overflow-visible fill-gray-50">
+              <path
+                d="M-200 0h201v201h-201Z M600 0h201v201h-201Z M-400 600h201v201h-201Z M200 800h201v201h-201Z"
+                strokeWidth={0}
+              />
+            </svg>
+            <svg x="100%" y={0} className="overflow-visible fill-gray-50">
+              <path
+                d="M-200 0h201v201h-201Z M600 0h201v201h-201Z M-400 600h201v201h-201Z M200 800h201v201h-201Z"
+                strokeWidth={0}
+              />
+            </svg>
+            <rect fill="url(#1f932ae7-37de-4c0a-a8b0-a6e3b4d44b84)" width="100%" height="100%" strokeWidth={0} />
+          </svg>
+        <div className='w-4/5 xl:w-3/5 mx-auto text-center'  data-aos="fade-in">
+          <h1 className="heading-main">Frequently Asked Questions</h1>
+          <p className="heading-sub mt30 text-hub">Find answers to common questions about our BBQ grills, customization services, and ordering process.</p>
+        </div>
       </section>
 
       {/* FAQ Content */}
-      <section className="section-1">
-        <div className="container">
+      <section className="section-1" data-aos="fade-in">
+        <div className="container flex flex-col gap80">
             {/* FAQ Items */}
-            <div className="space-y-10">
               {faqData.map((item) => (
-                <div
-                  key={item.id}
-                  className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200"
-                >
+                <div key={item.id}>
                   <button
                     onClick={() => toggleItem(item.id)}
-                    className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors duration-200"
+                    className="w-full text-left flex items-center justify-between"
                   >
                     <div className="flex-1">
-                      <h3 className="text-base md:text-lg font-semibold">
+                      <h2 className="heading-main3">
                         {item.question}
-                      </h3>
+                      </h2>
                     </div>
                     <div className="ml-4 flex-shrink-0">
                       <CaretDown 
@@ -134,8 +162,8 @@ export default function FAQ() {
                       ? 'max-h-96 opacity-100' 
                       : 'max-h-0 opacity-0'
                   }`}>
-                    <div className="px-6 pb-5 xl:pb-10">
-                      <div className="pt-5 xl:pt-10 border-t border-gray-100">
+                    <div className="pt-6">
+                      <div className="">
                         <p className="text">{item.answer}</p>
                       </div>
                     </div>
@@ -143,7 +171,6 @@ export default function FAQ() {
                 </div>
               ))}
             </div>
-          </div>
       </section>
       <FooterContact />
     </div>
