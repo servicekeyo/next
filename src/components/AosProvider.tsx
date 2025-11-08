@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+// @ts-ignore  // 临时忽略类型声明缺失，待添加 @types/aos 或自定义声明文件
 import AOS from "aos";
 import "aos/dist/aos.css";
 

@@ -8,13 +8,8 @@ export default function ContactForm() {
   const [submitMessage, setSubmitMessage] = useState("");
 
   return (
-    <div className="p-6 rounded-xl border border-gray-200 bg-white">
-      <h3 className="text-xl font-semibold">Contact Form</h3>
-      <p className="text-gray-600 mt-2">
-        Thanks for your inquiry! Please complete the brief form and we’ll get back to you.
-      </p>
+    <div>
       <form
-        className="space-y-6 mt-6"
         onSubmit={async (e) => {
           e.preventDefault();
           setIsLoading(true);
@@ -57,8 +52,9 @@ export default function ContactForm() {
           }
         }}
       >
-        <div className="space-y-5">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="sm:space-y-5 space-y-8">
+          <h2 className="heading-main3">Contact Form</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt30">
             <input
               type="text"
               name="name"
@@ -116,7 +112,7 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={isLoading}
-          className={`w-full font-semibold py-3 px-6 rounded-sm transition flex items-center justify-center ${
+          className={`w-full font-semibold mt-8 py-3 px-6 rounded-sm transition flex items-center justify-center ${
             isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-primary hover:bg-hover text-white'
           }`}
         >

@@ -9,7 +9,7 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [aboutSubmenuOpen, setAboutSubmenuOpen] = useState(false);
   return (
-    <header suppressHydrationWarning className="bg-foreground sticky top-0 z-50 px-5 md:px-10 xl:px-24">
+    <header suppressHydrationWarning className="bg-white sticky top-0 z-50 px-5 md:px-10 xl:px-24">
 
       {/* 主导航 */}
       <div className="container mx-auto">
@@ -45,7 +45,7 @@ export default function Header() {
                 </div>
               </div>
             </div>
-            <a href="/contact">ODM/OEM</a>
+            <a href="/odmoem">ODM/OEM</a>
             <div className="relative group">
               <button className="flex items-center gap-1 hover:text-foreground/80 transition-colors py-2">
                 About
