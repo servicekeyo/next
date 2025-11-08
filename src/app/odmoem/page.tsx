@@ -51,7 +51,7 @@ export default function odmoem() {
       <section className="section-1">
         <div className="container flex flex-col gap160">
           <div className="flex flex-row gap160">
-            <div className="w-1/2" data-aos="fade-right"><Image className='rounded-xl box-shadow-xl' src="/images/odm/odm1-1.jpg" alt="odmoem" width={720} height={500} /></div>
+            <div className="w-1/2" data-aos="fade-right"><Image className='rounded-xl box-shadow-xl' src="/images/odm/odm1.jpg" alt="odmoem" width={720} height={500} /></div>
             <div className="w-1/2 flex flex-col justify-center" data-aos="fade-left">
               <span className="heading-sub text-primary font-bold">Step1</span>
               <h2 className="heading-main3 my-5">Share Your Idea or Reference Image</h2>
