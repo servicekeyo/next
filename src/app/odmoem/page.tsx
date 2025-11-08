@@ -51,7 +51,7 @@ export default function odmoem() {
       <section className="section-1">
         <div className="container flex flex-col gap160">
           <div className="flex flex-row gap160">
-            <div className="w-1/2" data-aos="fade-right"><Image className='rounded-xl box-shadow-xl' src="/images/odm/odm2.jpg" alt="odmoem" width={720} height={500} /></div>
+            <div className="w-1/2" data-aos="fade-right"><Image className='rounded-xl box-shadow-xl' src="/images/odm/odm1-1.jpg" alt="odmoem" width={720} height={500} /></div>
             <div className="w-1/2 flex flex-col justify-center" data-aos="fade-left">
               <span className="heading-sub text-primary font-bold">Step1</span>
               <h2 className="heading-main3 my-5">Share Your Idea or Reference Image</h2>
@@ -83,7 +83,7 @@ export default function odmoem() {
               <h2 className="heading-main3 my-5">Define Function & Details</h2>
               <p className="text w-2/3">We confirm product features, structure, assembly, and finish options — ensuring functionality meets your market expectations.</p>
             </div>
-            <div className="w-1/2" data-aos="fade-left"><Image className='rounded-xl box-shadow-xl' src="/images/home/factory (6).jpg" alt="odmoem" width={720} height={500} /></div>
+            <div className="w-1/2" data-aos="fade-left"><Image className='rounded-xl box-shadow-xl' src="/images/odm/odm4.jpg" alt="odmoem" width={720} height={500} /></div>
           </div>
 
           <div className="flex flex-row gap160">
@@ -101,7 +101,7 @@ export default function odmoem() {
               <h2 className="heading-main3 my-5">Sample Approval & Delivery</h2>
               <p className="text w-2/3">Samples are produced, tested, and delivered for your approval — ensuring the final product meets your expectations before production.</p>
             </div>
-            <div className="w-1/2" data-aos="fade-left"><Image className='rounded-xl box-shadow-xl' src="/images/home/factory (6).jpg" alt="odmoem" width={720} height={500} /></div>
+            <div className="w-1/2" data-aos="fade-left"><Image className='rounded-xl box-shadow-xl' src="/images/odm/odm6.jpg" alt="odmoem" width={720} height={500} /></div>
           </div>
           
         </div>
