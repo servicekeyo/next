@@ -59,7 +59,7 @@ export async function getbloglist(page: number = 1, perPage: number = 6): Promis
 }
 
 // 运行时分页：使用 offset 方案规避置顶文章对 page 的干扰
-export async function getPostsPaged(page: number = 1, perPage: number = 3): Promise<{ posts: any[]; totalPages: number; total: number }> {
+export async function getPostsPaged(page: number = 1, perPage: number = 6): Promise<{ posts: any[]; totalPages: number; total: number }> {
   try {
     const safePer = Math.max(1, perPage | 0)
     const safePage = Math.max(1, page | 0)

@@ -67,10 +67,16 @@ export default function BlogListCSR({ initialPosts, perPage = 3, initialTotalPag
              <h3 className="text font-bold hover:text-hover">
               <Link href={`/blog/${post.slug}`} prefetch={false}>{post.title.rendered.replace(/<[^>]+>/g, '')}</Link>
              </h3> 
-              <p className="heading-sub text-hub mt20">
-                {(post.excerpt.rendered.replace(/<[^>]+>/g, '').split(' ').length > 3
-                  ? post.excerpt.rendered.replace(/<[^>]+>/g, '').split(' ').slice(0, 20).join(' ') + '…'
-                  : post.excerpt.rendered.replace(/<[^>]+>/g, ''))}
+              <p
+                className="heading-sub text-hub mt20"
+                style={{
+                  display: '-webkit-box',
+                  WebkitLineClamp: 3,
+                  WebkitBoxOrient: 'vertical',
+                  overflow: 'hidden',
+                }}
+              >
+                {(post?.excerpt?.rendered || '').replace(/<[^>]+>/g, '')}
               </p>
             </div>
           </article>

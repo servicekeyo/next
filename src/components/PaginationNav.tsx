@@ -23,7 +23,7 @@ export default function Pagination({
   return (
     <nav className="flex justify-center mt-10 space-x-2">
       {curr > 1 && (
-        <Link prefetch={false} href={curr - 1 === 1 ? `${basePath}` : `${basePath}?page=${curr - 1}`} className="px-3 py-1 border rounded hover:bg-gray-100">
+        <Link prefetch={false} href={curr - 1 === 1 ? `${basePath}` : `${basePath}?page=${curr - 1}`} className="px-3 py-1 border rounded hover:bg-hover hover:text-white">
           ← Prev
         </Link>
       )}
@@ -33,14 +33,14 @@ export default function Pagination({
           key={page}
           prefetch={false}
           href={page === 1 ? `${basePath}` : `${basePath}?page=${page}`}
-          className={`px-3 py-1 border rounded ${page === curr ? 'bg-gray-200 font-semibold' : 'hover:bg-gray-100'}`}
+          className={`px-3 py-1 border rounded ${page === curr ? 'bg-hover text-white' : 'hover:bg-hover hover:text-white'}`}
         >
           {page}
         </Link>
       ))}
 
       {curr < totalPages && (
-        <Link prefetch={false} href={`${basePath}?page=${curr + 1}`} className="px-3 py-1 border rounded hover:bg-gray-100">
+        <Link prefetch={false} href={`${basePath}?page=${curr + 1}`} className="px-3 py-1 border rounded hover:bg-hover hover:text-white">
           Next →
         </Link>
       )}
