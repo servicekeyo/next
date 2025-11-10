@@ -1,4 +1,10 @@
-// WordPress GraphQL API service for fetching products by category
+// WordPress REST API service for posts and grills
+function logMsg(message: string) {
+  // 在不同运行时（构建/服务器/客户端）统一使用控制台日志
+  try {
+    console.log(`[wp] ${message}`)
+  } catch {}
+}
 
 export interface Product {
   id: number;
@@ -24,20 +30,91 @@ export interface ProductCategory {
 // WordPress REST API configuration
 // Note: Default to admin.keyfirebbq.com REST API; can be overridden via env
 const WORDPRESS_API_URL = process.env.WORDPRESS_API_URL || 'https://admin.keyfirebbq.com/wp-json/wp/v2';
-export async function getbloglist() {
+/* - 若你的 WordPress 使用自定义类型（例如 blog），改成 `${WORDPRESS_API_URL}/blog`
+ * - 构建时调用，用于生成静态路径
+ */
+export async function getbloglist(page: number = 1, perPage: number = 6): Promise<any[]> {
   try {
-    const res = await fetch(`${WORDPRESS_API_URL}/posts?per_page=100&_fields=id,slug,title,excerpt,date`)
-    if (!res.ok) throw new Error(`HTTP ${res.status}`)
-    return res.json()
+    const res = await fetch(`${WORDPRESS_API_URL}/posts?per_page=100&_embed`, {
+      // 'force-cache' 保证构建期抓取，运行时不再请求
+      cache: 'force-cache',
+    })
+    
+
+    if (!res.ok) return [];
+
+    const posts = await res.json()
+
+    if (!Array.isArray(posts)) {
+      console.error('❌ [getbloglist] 返回格式错误:', posts)
+      return []
+    }
+
+    console.log('✅ [getbloglist] 成功获取文章数量:', posts.length)
+    return posts
   } catch (err) {
-    console.error('❌ Failed to fetch WordPress posts:', err)
+    console.error('❌ [getbloglist] 抓取异常:', err)
     return []
   }
 }
+
+// 运行时分页：使用 offset 方案规避置顶文章对 page 的干扰
+export async function getPostsPaged(page: number = 1, perPage: number = 3): Promise<{ posts: any[]; totalPages: number; total: number }> {
+  try {
+    const safePer = Math.max(1, perPage | 0)
+    const safePage = Math.max(1, page | 0)
+    const offset = (safePage - 1) * safePer
+    const url = `${WORDPRESS_API_URL}/posts?_embed&per_page=${safePer}&offset=${offset}&orderby=date&order=desc&status=publish&sticky=false&ignore_sticky_posts=true`
+    const res = await fetch(url, { cache: 'no-store' })
+    if (!res.ok) {
+      console.error('❌ [getPostsPaged] 请求失败:', res.status, url)
+      return { posts: [], totalPages: 1, total: 0 }
+    }
+    const posts = await res.json()
+    const totalHeader = res.headers.get('X-WP-Total')
+    const total = Math.max(0, parseInt(totalHeader || '0', 10) || (Array.isArray(posts) ? posts.length : 0))
+    const totalPages = Math.max(1, Math.ceil(total / safePer))
+    console.log(`✅ [getPostsPaged] page=${safePage} perPage=${safePer} posts=${Array.isArray(posts) ? posts.length : 0} total=${total}`)
+    return { posts: Array.isArray(posts) ? posts : [], totalPages, total }
+  } catch (err) {
+    console.error('❌ [getPostsPaged] 异常:', err)
+    return { posts: [], totalPages: 1, total: 0 }
+  }
+}
+
+/**
+ * 🔹 根据 slug 获取单篇文章
+ * - 用于详情页静态渲染
+ */
 export async function getPostBySlug(slug: string) {
-  const res = await fetch(`${WORDPRESS_API_URL}/posts?slug=${slug}`)
-  const posts = await res.json()
-  return posts.length > 0 ? posts[0] : null
+  if (!slug || typeof slug !== 'string') {
+    console.warn('⚠️ [getPostBySlug] slug 无效:', slug)
+    return null
+  }
+
+  try {
+    const res = await fetch(`${WORDPRESS_API_URL}/posts?slug=${slug}&_embed`, {
+      cache: 'force-cache',
+    })
+
+    if (!res.ok) {
+      console.error('❌ [getPostBySlug] 请求失败:', res.status, res.statusText)
+      return null
+    }
+
+    const data = await res.json()
+
+    if (!Array.isArray(data) || data.length === 0) {
+      console.warn('⚠️ [getPostBySlug] 未找到文章:', slug)
+      return null
+    }
+
+    console.log('✅ [getPostBySlug] 成功获取文章:', slug)
+    return data[0]
+  } catch (err) {
+    console.error('❌ [getPostBySlug] 抓取异常:', err)
+    return null
+  }
 }
 
 
@@ -200,335 +277,6 @@ async function resolveAltViaREST(url: string): Promise<string | null> {
   }
 }
 
-// GraphQL query to fetch posts by category (treating posts as products)
-const GET_PRODUCTS_BY_CATEGORY = `
-  query GetProductsByCategory($categoryName: String!, $first: Int!) {
-    posts(where: {categoryName: $categoryName}, first: $first) {
-      nodes {
-        id
-        databaseId
-        title
-        slug
-        excerpt
-        content
-        featuredImage {
-          node {
-            sourceUrl
-            altText
-          }
-        }
-        categories {
-          nodes {
-            slug
-            name
-            parent {
-              node {
-                slug
-                name
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
-// GraphQL query to fetch posts by subcategory under grill_category
-const GET_PRODUCTS_BY_GRILL_SUBCATEGORY = `
-  query GetProductsByGrillSubcategory($subcategorySlug: String!, $first: Int!) {
-    posts(where: {categoryName: $subcategorySlug}, first: $first) {
-      nodes {
-        id
-        databaseId
-        title
-        slug
-        excerpt
-        content
-        featuredImage {
-          node {
-            sourceUrl
-            altText
-          }
-        }
-        categories {
-          nodes {
-            slug
-            name
-            parent {
-              node {
-                slug
-                name
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
-// GraphQL query to get all categories
-const GET_PRODUCT_CATEGORIES = `
-  query GetProductCategories {
-    categories {
-      nodes {
-        id
-        databaseId
-        name
-        slug
-        description
-      }
-    }
-  }
-`;
-
-// Execute GraphQL query
-async function executeGraphQLQuery(query: string, variables: any = {}) {
-  const response = await fetch(WORDPRESS_API_URL.replace('/wp-json/wp/v2', '/graphql'), {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      query,
-      variables,
-    }),
-  });
-
-  if (!response.ok) {
-    throw new Error(`GraphQL request failed: ${response.status}`);
-  }
-
-  const result = await response.json();
-  
-  if (result.errors) {
-    throw new Error(`GraphQL errors: ${JSON.stringify(result.errors)}`);
-  }
-
-  return result.data;
-}
-
-// Try fetching products via WPGraphQL to read ACF grill group images
-async function fetchProductsByCategoryGraphQL(categorySlug: string, limit: number = 12): Promise<Product[] | null> {
-  // Query variant 1: ACF group with snake_case fields
-  const QUERY_SNAKE = `
-    query GetGrillByCategory($categorySlug: String!, $first: Int!) {
-      posts(where: {categoryName: $categorySlug}, first: $first) {
-        nodes {
-          id
-          databaseId
-          title
-          slug
-          excerpt
-          content
-          featuredImage { node { sourceUrl altText } }
-          acf {
-            grill {
-              front_image { ... on MediaItem { sourceUrl altText mediaItemUrl } }
-              back_image { ... on MediaItem { sourceUrl altText mediaItemUrl } }
-            }
-          }
-          categories { nodes { slug name } }
-        }
-      }
-    }
-  `;
-  // Query variant 2: ACF group with camelCase fields
-  const QUERY_CAMEL = `
-    query GetGrillByCategoryCamel($categorySlug: String!, $first: Int!) {
-      posts(where: {categoryName: $categorySlug}, first: $first) {
-        nodes {
-          id
-          databaseId
-          title
-          slug
-          excerpt
-          content
-          featuredImage { node { sourceUrl altText } }
-          acf {
-            grill {
-              frontImage { ... on MediaItem { sourceUrl altText mediaItemUrl } }
-              backImage { ... on MediaItem { sourceUrl altText mediaItemUrl } }
-            }
-          }
-          categories { nodes { slug name } }
-        }
-      }
-    }
-  `;
-
-  const variables = { categorySlug, first: limit };
-  try {
-    // Try snake_case first
-    const snakeResult = await executeGraphQLQuery(QUERY_SNAKE, variables);
-    const nodes1 = snakeResult?.posts?.nodes || [];
-    if (Array.isArray(nodes1) && nodes1.length > 0) {
-      const mapped: Product[] = await Promise.all(nodes1.map(async (node: any) => {
-        const featured = node?.featuredImage?.node?.sourceUrl || '/placeholder-product.jpg';
-        const frontRaw = node?.acf?.grill?.front_image || null;
-        const backRaw = node?.acf?.grill?.back_image || null;
-        const frontResolved = await resolveMedia(frontRaw);
-        const backResolved = await resolveMedia(backRaw);
-        return {
-          id: node?.databaseId || node?.id || 0,
-          name: node?.title || 'Untitled Product',
-          description: node?.excerpt || node?.content || '',
-          image: featured,
-          slug: node?.slug || '',
-          category: categorySlug,
-          frontImage: frontResolved.url || featured,
-          backImage: backResolved.url || frontResolved.url || featured,
-          frontAlt: frontResolved.alt ?? null,
-          backAlt: backResolved.alt ?? null,
-        } as Product;
-      }));
-      return mapped;
-    }
-  } catch (e1) {
-    // fallthrough to camelCase variant
-  }
-  try {
-    const camelResult = await executeGraphQLQuery(QUERY_CAMEL, variables);
-    const nodes2 = camelResult?.posts?.nodes || [];
-    if (Array.isArray(nodes2) && nodes2.length > 0) {
-      const mapped: Product[] = await Promise.all(nodes2.map(async (node: any) => {
-        const featured = node?.featuredImage?.node?.sourceUrl || '/placeholder-product.jpg';
-        const frontRaw = node?.acf?.grill?.frontImage || null;
-        const backRaw = node?.acf?.grill?.backImage || null;
-        const frontResolved = await resolveMedia(frontRaw);
-        const backResolved = await resolveMedia(backRaw);
-        return {
-          id: node?.databaseId || node?.id || 0,
-          name: node?.title || 'Untitled Product',
-          description: node?.excerpt || node?.content || '',
-          image: featured,
-          slug: node?.slug || '',
-          category: categorySlug,
-          frontImage: frontResolved.url || featured,
-          backImage: backResolved.url || frontResolved.url || featured,
-          frontAlt: frontResolved.alt ?? null,
-          backAlt: backResolved.alt ?? null,
-        } as Product;
-      }));
-      return mapped;
-    }
-  } catch (e2) {
-    // ignore and fallback
-  }
-  // Query variant 3: Custom Post Type grills with search
-  const QUERY_GRILLS_SEARCH = `
-    query GetGrillsBySearch($term: String!, $first: Int!) {
-      grills(where: { search: $term }, first: $first) {
-        nodes {
-          id
-          databaseId
-          title
-          slug
-          excerpt
-          content
-          featuredImage { node { sourceUrl altText } }
-          acf {
-            grill {
-              front_image { ... on MediaItem { sourceUrl altText mediaItemUrl } }
-              back_image { ... on MediaItem { sourceUrl altText mediaItemUrl } }
-            }
-          }
-        }
-      }
-    }
-  `;
-  try {
-    const data = await executeGraphQLQuery(QUERY_GRILLS_SEARCH, { term: categorySlug, first: limit });
-    const nodes3 = data?.grills?.nodes || [];
-    if (Array.isArray(nodes3) && nodes3.length > 0) {
-      const mapped: Product[] = await Promise.all(nodes3.map(async (node: any) => {
-        const featured = node?.featuredImage?.node?.sourceUrl || '/placeholder-product.jpg';
-        const frontRaw = node?.acf?.grill?.front_image || null;
-        const backRaw = node?.acf?.grill?.back_image || null;
-        const frontResolved = await resolveMedia(frontRaw);
-        const backResolved = await resolveMedia(backRaw);
-        return {
-          id: node?.databaseId || node?.id || 0,
-          name: node?.title || 'Untitled Product',
-          description: node?.excerpt || node?.content || '',
-          image: featured,
-          slug: node?.slug || '',
-          category: categorySlug,
-          frontImage: frontResolved.url || featured,
-          backImage: backResolved.url || frontResolved.url || featured,
-          frontAlt: frontResolved.alt ?? null,
-          backAlt: backResolved.alt ?? null,
-        } as Product;
-      }));
-      return mapped;
-    }
-  } catch (e3) {
-    // ignore and fallback to REST
-  }
-  return null;
-}
-/**
- * Fetch Grill posts from WordPress REST API using local proxy to avoid CORS issues
- */
-async function fetchPostsByCategory(categorySlug: string, limit: number = 12): Promise<Product[]> {
-  try {
-    // Try different methods through our proxy API
-    const methods = ['search', 'taxonomy', 'categories', 'all'];
-    
-    for (const method of methods) {
-      try {
-        const response = await fetch(`/api/wordpress?endpoint=${method}&category=${categorySlug}&limit=${limit}`);
-        
-        if (response.ok) {
-          const result = await response.json();
-          
-          if (result.success && result.data && result.data.length > 0) {
-            let posts = result.data;
-            
-            // If method is 'all', filter the posts
-            if (method === 'all') {
-              posts = result.data.filter((post: any) => {
-                const title = post.title?.rendered?.toLowerCase() || '';
-                const content = post.content?.rendered?.toLowerCase() || '';
-                const excerpt = post.excerpt?.rendered?.toLowerCase() || '';
-                const searchTerm = categorySlug.toLowerCase().replace('-', ' ');
-                
-                return title.includes(searchTerm) || 
-                       content.includes(searchTerm) || 
-                       excerpt.includes(searchTerm) ||
-                       title.includes(categorySlug) ||
-                       content.includes(categorySlug);
-              });
-            }
-            
-            if (posts.length > 0) {
-              const products: Product[] = posts.map((post: any) => ({
-                id: post.id,
-                name: post.title?.rendered || 'Untitled Product',
-                description: post.excerpt?.rendered?.replace(/<[^>]*>/g, '') || 
-                            post.content?.rendered?.replace(/<[^>]*>/g, '').substring(0, 150) + '...' || 
-                            'No description available',
-                image: post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '/placeholder-product.jpg',
-                slug: post.slug,
-                category: categorySlug,
-              }));
-              
-              return products;
-            }
-          }
-        }
-      } catch (methodError) {
-        continue;
-      }
-    }
-    
-    throw new Error(`No posts found for category '${categorySlug}' using any proxy method`);
-  } catch (error) {
-    console.error('Proxy API error:', error);
-    throw error;
-  }
-}
 
 /**
  * Fetch Grill products from WordPress by category using direct API calls for static export
@@ -821,29 +569,4 @@ function getFallbackProducts(categorySlug: string): Product[] {
   return list.map(p => ({ ...p, frontImage: p.image, backImage: p.image }));
 }
 
-/**
- * Get all available product categories using GraphQL
- */
-export async function getProductCategories(): Promise<ProductCategory[]> {
-  try {
-    const data = await executeGraphQLQuery(GET_PRODUCT_CATEGORIES);
-
-    if (!data?.categories?.nodes) {
-      throw new Error('No categories found');
-    }
-
-    return data.categories.nodes.map((category: any) => ({
-      id: category.databaseId || category.id,
-      name: category.name,
-      slug: category.slug,
-      description: category.description
-    }));
-    
-  } catch (error) {
-    console.error('Error fetching categories via GraphQL:', error);
-    return [
-      { id: 1, name: 'Charcoal Grill', slug: 'charcoal-grill' },
-      { id: 2, name: 'Gas Grill', slug: 'gas-grill' }
-    ];
-  }
-}
+// End of REST helpers

@@ -1,28 +1,29 @@
 import { getbloglist, getPostBySlug } from '@/lib/wordpress'
-import { notFound } from 'next/navigation'
+export const dynamic = 'force-static'
+export const dynamicParams = false
+export const revalidate = false
 
-export const revalidate = 3600 // ISR (cache 1h per page)
-export const dynamic = 'force-dynamic' // always generate on demand (with ISR cache)
+
+export async function generateStaticParams() {
+  const posts = await getbloglist()
+  return posts.map(p => ({ slug: p.slug }))
+}
 
 export default async function PostPage({ params }: { params: { slug: string } }) {
-  const post = await getPostBySlug(params.slug)
 
-  // 如果文章已删除，返回404（自动清理旧页面）
-  if (!post) return notFound()
+ const { slug } = await params  // ✅ 这里要 await
+  console.log('[DEBUG] slug =', slug)
 
+  const post = await getPostBySlug(slug)
+  console.log('[DEBUG] post =', post)
+
+  const strip = (html: string = '') => html.replace(/<[^>]+>/g, '').trim()
+  const title = post ? (strip(post.title?.rendered) || slug) : 'Article Not Found'
+  const html = post?.content?.rendered || post?.excerpt?.rendered || '<p>Article content is unavailable.</p>'
   return (
     <article className="prose mx-auto py-16 px-6">
-      <h1
-        className="text-3xl font-bold text-gray-900"
-        dangerouslySetInnerHTML={{ __html: post.title.rendered }}
-      />
-      <p className="text-gray-500 text-sm mt-2">
-        {new Date(post.date).toLocaleDateString()}
-      </p>
-      <div
-        className="mt-6 prose-lg"
-        dangerouslySetInnerHTML={{ __html: post.content.rendered }}
-      />
+      <h1 className="text-3xl font-bold text-gray-800">{title}</h1>
+      <div className="mt-6" dangerouslySetInnerHTML={{ __html: html }} />
     </article>
   )
 }

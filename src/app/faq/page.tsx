@@ -90,8 +90,6 @@ export default function FAQ() {
     );
   };
 
-  const categories = Array.from(new Set(faqData.map(item => item.category))).filter(Boolean);
-
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -133,7 +131,7 @@ export default function FAQ() {
       </section>
 
       {/* FAQ Content */}
-      <section className="section-1" data-aos="fade-in">
+      <section className="section-3" data-aos="fade-in">
         <div className="container flex flex-col gap80">
             {/* FAQ Items */}
               {faqData.map((item) => (

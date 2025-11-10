@@ -47,7 +47,7 @@ export default function odmoem() {
         </div>
       </section>
 
-      <section className="section-1">
+      <section className="section-3">
         <div className="container flex flex-col gap160">
 
           <div className="flex flex-col-reverse md:flex-row gap160">
