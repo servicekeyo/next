@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 
-export default function BlogListCSR({ initialPosts, perPage = 3, initialTotalPages }: { initialPosts: any[]; perPage?: number; initialTotalPages: number }) {
+export default function BlogListCSR({ initialPosts, perPage = 6, initialTotalPages }: { initialPosts: any[]; perPage?: number; initialTotalPages: number }) {
   const searchParams = useSearchParams()
   const pageFromUrl = useMemo(() => Math.max(1, parseInt(searchParams.get('page') || '1', 10) || 1), [searchParams])
   const [posts, setPosts] = useState<any[]>(initialPosts || [])

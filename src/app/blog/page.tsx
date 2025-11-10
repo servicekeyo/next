@@ -8,7 +8,7 @@ export default async function Blog({
 }: {
   searchParams?: { page?: string }
 }) {
-  const perPage = 3
+  const perPage = 6
   // 静态生成首屏：构建期抓取全部文章并在前端切片
   const allPosts = await getbloglist()
   const initialPosts = Array.isArray(allPosts) ? allPosts.slice(0, perPage) : []
