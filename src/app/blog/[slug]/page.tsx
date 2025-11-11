@@ -7,25 +7,53 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   const strip = (html: string = '') => html.replace(/<[^>]+>/g, '').trim()
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://keyfirebbq.com/'
-  const canonical = post?.yoast_head_json?.canonical || `${siteUrl}/blog/${slug}`
+  const canonicalFromRank = post?.rank_math_canonical_url || post?.rank_math_canonical
+  const canonical = canonicalFromRank || post?.yoast_head_json?.canonical || `${siteUrl}/blog/${slug}`
   const featured = post?._embedded?.['wp:featuredmedia']?.[0]?.source_url || post?.jetpack_featured_media_url || post?.yoast_head_json?.og_image?.[0]?.url || undefined
-  const title = post?.rank_math_title || post?.yoast_head_json?.title || strip(post?.title?.rendered) || slug
-  const description = post?.rank_math_description || post?.yoast_head_json?.description || post?.yoast_head_json?.og_description || strip(post?.excerpt?.rendered || post?.content?.rendered || '') || undefined
+
+  const title = (typeof post?.rank_math_title === 'string' && post.rank_math_title.trim())
+    ? post.rank_math_title
+    : (post?.yoast_head_json?.title || strip(post?.title?.rendered) || slug)
+
+  const description = (typeof post?.rank_math_description === 'string' && post.rank_math_description.trim())
+    ? post.rank_math_description
+    : (post?.yoast_head_json?.description || post?.yoast_head_json?.og_description || strip(post?.excerpt?.rendered || post?.content?.rendered || '') || undefined)
+
   const tagTerms: any[] = Array.isArray(post?._embedded?.['wp:term']) ? (post._embedded['wp:term'].flat().filter((t: any) => t?.taxonomy === 'post_tag')) : []
   const tagKeywords = tagTerms.map((t: any) => t?.name).filter(Boolean)
   const keywordsStr = (typeof post?.rank_math_focus_keyword === 'string' && post.rank_math_focus_keyword.trim()) ? post.rank_math_focus_keyword : (tagKeywords.join(', '))
+  const keywords = keywordsStr ? keywordsStr.split(/,\s*/) : undefined
+
+  const robotsSrc: any = post?.rank_math_robots || post?.yoast_head_json?.robots
+  const robots = {
+    index: robotsSrc?.index ? String(robotsSrc.index).toLowerCase() !== 'noindex' : true,
+    follow: robotsSrc?.follow ? String(robotsSrc.follow).toLowerCase() !== 'nofollow' : true,
+    googleBot: {
+      index: robotsSrc?.index ? String(robotsSrc.index).toLowerCase() !== 'noindex' : true,
+      follow: robotsSrc?.follow ? String(robotsSrc.follow).toLowerCase() !== 'nofollow' : true,
+    },
+  }
+
+  const author = post?._embedded?.author?.[0]?.name || 'Key Fire'
+  const publishedTime = post?.date || undefined
+  const modifiedTime = post?.modified || post?.date || undefined
 
   return {
     title,
     description,
-    keywords: keywordsStr ? keywordsStr.split(/,\s*/) : undefined,
+    keywords,
     alternates: { canonical },
+    robots,
     openGraph: {
       type: 'article',
       url: canonical,
       title,
       description,
       images: featured ? [{ url: featured }] : undefined,
+      publishedTime,
+      modifiedTime,
+      authors: author ? [author] : undefined,
+      tags: tagKeywords.length ? tagKeywords : undefined,
     },
     twitter: {
       card: 'summary_large_image',
@@ -48,10 +76,10 @@ export async function generateStaticParams() {
 export default async function PostPage({ params }: { params: { slug: string } }) {
 
  const { slug } = await params  // ✅ 这里要 await
-  console.log('[DEBUG] slug =', slug)
+  //console.log('[DEBUG] slug =', slug)
 
   const post = await getPostBySlug(slug)
-  console.log('[DEBUG] post =', post)
+  //console.log('[DEBUG] post =', post)
 
   const strip = (html: string = '') => html.replace(/<[^>]+>/g, '').trim()
   const title = post ? (strip(post.title?.rendered) || slug) : 'Article Not Found'
@@ -59,7 +87,7 @@ export default async function PostPage({ params }: { params: { slug: string } })
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://keyfirebbq.com/'
   const canonical = post?.yoast_head_json?.canonical || `${siteUrl}/blog/${slug}`
   const featured = post?._embedded?.['wp:featuredmedia']?.[0]?.source_url || post?.jetpack_featured_media_url || post?.yoast_head_json?.og_image?.[0]?.url || '/images/home/index_banner3.jpg'
-  const author = post?._embedded?.author?.[0]?.name || 'Keyo Barbecue'
+  const author = post?._embedded?.author?.[0]?.name || 'Key Fire'
   const keywords = (typeof post?.rank_math_focus_keyword === 'string' && post.rank_math_focus_keyword.trim())
     ? post.rank_math_focus_keyword
     : (Array.isArray(post?._embedded?.['wp:term'])
@@ -122,18 +150,24 @@ export default async function PostPage({ params }: { params: { slug: string } })
           </svg>
         <div className='w-4/5 xl:w-3/5 mx-auto text-center'  data-aos="fade-in">
           <h1 className="heading-main">{title}</h1>
-          <p className="heading-sub text-hub mt20"> {new Date(post.date).toLocaleDateString('en-US', {month: 'short',day: 'numeric',year: 'numeric',})}</p>
+          {post?.date && (
+            <p className="heading-sub text-hub mt20">
+              {new Date(post.date).toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric',
+              })}
+            </p>
+          )}
         </div>
       </section>
-      <section className="section-3 pt-0">
-        <div className="container relative flex gap80 items-start">
+        <section className="container relative flex gap80 items-start">
           <div className="w-2/3" dangerouslySetInnerHTML={{ __html: html }} />
           <div className="w-1/3 border border-gray-200 rounded-2xl p-6 sticky top-24">
             <h2 className="text-2xl font-bold text-gray-800">Related Posts</h2>
           </div>
           {/* SEO JSON-LD Schema */}
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-        </div>
       </section>
     </div>
 

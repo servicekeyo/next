@@ -37,7 +37,8 @@ export async function getbloglist(page: number = 1, perPage: number = 6): Promis
   try {
     const res = await fetch(`${WORDPRESS_API_URL}/posts?per_page=100&_embed`, {
       // 'force-cache' 保证构建期抓取，运行时不再请求
-      cache: 'force-cache',
+      //cache: 'force-cache',
+      cache: 'no-store'
     })
     
 
@@ -94,7 +95,8 @@ export async function getPostBySlug(slug: string) {
 
   try {
     const res = await fetch(`${WORDPRESS_API_URL}/posts?slug=${slug}&_embed`, {
-      cache: 'force-cache',
+      //cache: 'force-cache',
+      cache: 'no-store'
     })
 
     if (!res.ok) {
