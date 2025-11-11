@@ -117,6 +117,47 @@ export async function getPostBySlug(slug: string) {
   }
 }
 
+/**
+ * 🔹 获取相关文章（按分类优先，其次标签；都为空时返回最新文章）
+ * - 会排除当前文章 ID
+ */
+export async function getRelatedPosts(
+  currentId: number,
+  categories: number[] = [],
+  tags: number[] = [],
+  limit: number = 3,
+): Promise<any[]> {
+  try {
+    const safeLimit = Math.max(1, limit | 0)
+    const params = new URLSearchParams({
+      _embed: '1',
+      per_page: String(safeLimit),
+      orderby: 'date',
+      order: 'desc',
+      status: 'publish',
+    })
+    if (currentId) params.set('exclude', String(currentId))
+
+    let url = `${WORDPRESS_API_URL}/posts?${params.toString()}`
+    if (Array.isArray(categories) && categories.length > 0) {
+      url += `&categories=${categories.filter(Boolean).join(',')}`
+    } else if (Array.isArray(tags) && tags.length > 0) {
+      url += `&tags=${tags.filter(Boolean).join(',')}`
+    }
+
+    const res = await fetch(url, { cache: 'force-cache' })
+    if (!res.ok) {
+      console.error('❌ [getRelatedPosts] 请求失败:', res.status, url)
+      return []
+    }
+    const posts = await res.json()
+    console.log(`✅ [getRelatedPosts] limit=${safeLimit} got=${Array.isArray(posts) ? posts.length : 0}`)
+    return Array.isArray(posts) ? posts : []
+  } catch (err) {
+    console.error('❌ [getRelatedPosts] 异常:', err)
+    return []
+  }
+}
 
 
 const WORDPRESS_ORIGIN = (() => {

@@ -41,7 +41,7 @@ export default function BlogListCSR({ initialPosts, perPage = 6, initialTotalPag
   }, [pageFromUrl, perPage, initialPosts])
 
   return (
-    <div className="container relative">
+    <div className="container relative"  data-aos="fade-up">
       <div className="grid gap30 md:grid-cols-2 lg:grid-cols-3">
         {posts.map((post: any) => (
           <article key={post.id} className="flex flex-col mb-5 xl:mb-10 hover:shadow-lg rounded-2xl hover:scale-105 transition-all duration-300 p-6">
