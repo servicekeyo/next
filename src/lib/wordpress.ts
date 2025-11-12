@@ -131,3 +131,38 @@ export async function getGrillsByCategory(categoryId: number, perPage: number = 
     return []
   }
 }
+
+export type Product = {
+  id: number
+  name: string
+  slug: string
+  image: string
+  description?: string
+  price?: string
+  category: string
+}
+
+export async function fetchProductsByCategory(categorySlug: string, limit: number = 12): Promise<Product[]> {
+  try {
+    const cats = await getGrillCategories()
+    const cat = (Array.isArray(cats) ? cats : []).find((c: any) => c?.slug === categorySlug)
+    if (!cat) return []
+    const grills = await getGrillsByCategory(cat.id, limit)
+    return (Array.isArray(grills) ? grills : []).slice(0, limit).map((item: any) => {
+      const title = item?.title?.rendered ?? item?.title ?? ''
+      const media = item?._embedded?.['wp:featuredmedia']?.[0]
+      const image = media?.source_url || media?.media_details?.sizes?.medium?.source_url || ''
+      const description = (item?.excerpt?.rendered || '').replace(/<[^>]+>/g, '')
+      return {
+        id: item?.id ?? 0,
+        name: title,
+        slug: item?.slug ?? String(item?.id ?? ''),
+        image,
+        description,
+        category: categorySlug,
+      } as Product
+    })
+  } catch {
+    return []
+  }
+}
