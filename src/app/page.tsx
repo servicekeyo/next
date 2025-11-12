@@ -1,17 +1,31 @@
-"use client";
+import RankSchema from '@/components/RankSchema';
+import { withRankMetadata } from '@/lib/rankseo';
 import { QuoteButtonPrimary} from '@/components/QuoteButton';
 import Image from "next/image";
-import { Scroll,CalendarCheck,Factory,Handshake,Aperture,Bell,Lightbulb,Ruler,Cube,Flask,Package } from 'phosphor-react';
+import {Factory,Aperture,Bell,Ruler,Cube,Flask } from '@/components/Icons';
 import FooterContact from '@/components/FooterContact';
 import GrillTabs from '@/components/GrillTabs';
 import ProductAccessorySwitcher from '@/components/ProductAccessorySwitcher';
+import YouTubeLite from '@/components/YouTubeLite';
+import BlogListCSR from '@/components/BlogListCSR';
+import { getbloglist } from '@/lib/wordpress';
+export const dynamic = 'force-static'
+export const revalidate = false
 
-export default function Home() {
-  
+export const generateMetadata = withRankMetadata('https://admin.keyfirebbq.com/home')
+
+export default async function Home() {
+  const perPage = 3
+  const allPosts = await getbloglist()
+  const initialPosts = Array.isArray(allPosts) ? allPosts.slice(0, perPage) : []
+  const initialTotalPages = Array.isArray(allPosts) && allPosts.length > 0 ? Math.ceil(allPosts.length / perPage) : 1
+
   return (
+
     <div className="min-h-screen">
+      <RankSchema wpUrl="https://admin.keyfirebbq.com/home" />
       <main className="section-1 bg-foreground">
-        <div className="container flex-col md:flex-row flex items-center gap160">
+        <div className="container flex-col md:flex-row items-center flex gap160">
           <div className="sm:w-[570px] md:w-1/2">
             <h1 className="heading-main">Your Trusted Custom BBQ Grill Manufacturer in China</h1>
             <div className="heading-sub mt30 text-hub">
@@ -20,31 +34,41 @@ export default function Home() {
             </p>
             </div>
             
-            <div className="flex flex-col lg:flex-row  gap-5 mt40">
+            <div className="flex flex-col lg:flex-row  gap-5 mt50">
               <QuoteButtonPrimary>
                 <span className="flex items-center gap-2">
                   <Bell size={20}/>
                   Get a Free Quote
                 </span>
               </QuoteButtonPrimary>
-              <button className="btn-secondary">
+              <a href="/about" className="btn-secondary">
                 <span className="flex items-center gap-2">
                   <Aperture size={20} />
-                  Explore Customization
+                  Know More About Us
                 </span>
-              </button>
+              </a>
             </div>
             
           </div>
           <div className="sm:w-1/2 flex justify-end">
-            <Image src="/images/home/index_banner3.jpg" alt="Keyo Customize" width={600} height={400} className="rounded-lg xl:rounded-tl-[100px]"
-            />
+            <Image src="/images/home/index_banner3.jpg" alt="Keyo Customize" width={720} height={400} className="rounded-lg xl:rounded-tl-[100px]"/>
           </div>
         </div>
       </main>
 
+      
       <section className="section-1">
-        <div className='w-2/3 mx-auto text-center '>
+        <div className='herotitle-w'>
+          <h2 className="heading-main2">Custom Your BBQ Grill</h2>
+          <p className="heading-sub mt20 text-hub">
+            Delivering high-quality, eco-friendly custom packaging with flexible designs and reliable manufacturing to help your brand stand out with confidence and sustainability.
+          </p>
+        </div>
+        <GrillTabs /> 
+      </section>  
+
+      <section className="section-1 bg-foreground">
+        <div className='herotitle-w'>
           <h2 className="heading-main2">Share your idea, we’ll make it real</h2>
           <p className="heading-sub mt20 text-hub">
             From concept to production, we turn your ideas into visual designs, structural plans, and manufacturing solutions. Each stage is clear, adjustable, and transparent — ensuring the final product perfectly matches your expectations.
@@ -61,7 +85,7 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Step 3 */}
+            {/* Step 2 */}
             <div className="step-item text-center space-y-3">
               <Cube size={64} weight="duotone" className="mx-auto" />
               <h3 className="heading-main3">3D Design</h3>
@@ -70,7 +94,7 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Step 4 */}
+            {/* Step 3 */}
             <div className="step-item text-center space-y-3">
               <Flask size={64} weight="duotone" className="mx-auto" />
               <h3 className="heading-main3">Modeling & Production</h3>
@@ -81,163 +105,73 @@ export default function Home() {
 
             {/* Step 5 */}
             <div className="step-item text-center space-y-3">
-              <Factory size={64} weight="duotone" className="mx-auto" />
+             <Factory size={64} weight="duotone" className="mx-auto" />
               <h3 className="heading-main3">Sample Approval</h3>
               <p className="heading-sub">
                 Produce the final sample for your inspection, ensuring every detail meets your specifications before full-scale production.
               </p>
             </div>
           </div>
+          <div className='mt50 text-center'><a href="/odmoem" className="btn-secondary">Explore Customization</a></div>
+          
+      </section>
+
+      <section className="section-1">
+        <div className='container flex-col md:flex-row items-center flex gap160'>
+          <div className='w-3/5'>
+            <YouTubeLite
+              embedUrl="https://www.youtube.com/embed/NS7Ndh6BNpk?list=PLyLZfD9mW35KgvIHkVhRef1shmiFPn2cg&index=2"
+              title="China BBQ Grill Manufacturer and Supplier-KEYO automatic production line"
+              poster="https://img.youtube.com/vi/NS7Ndh6BNpk/hqdefault.jpg"
+            />
+          </div>
+          <div className='w-2/5 flex flex-col'>
+              <h2 className="heading-main2">Innovation That Shapes Your Brand</h2>
+              <p className="heading-sub mt30 text-hub">
+                Behind every custom BBQ grill is our relentless pursuit of innovation.
+From intelligent design to precision manufacturing, we turn your ideas into market-ready products — with superior craftsmanship, reliable quality, and faster delivery.
+              </p>
+              <div className='mt50'><a href="/odmoem" className="btn-secondary">Learn More</a></div>
+          </div>
+        </div>
       </section>
       
       <ProductAccessorySwitcher />
 
-      <div className="section-1">
-        <div className='container flex flex-col gap160'>
-          <div className='container flex flex-row gap160'>
-            <div className="w-1/2">
-              <img alt="" src="/images/home/indx_one4.jpg" className="rounded-xl shadow-md" />
-            </div>
-            <div className='w-1/2 flex flex-col gap30 justify-center'>
-                <h2 className="heading-main2">Why Choose Us</h2>
-                <p className='text text-hub'>
-                    At KEYO, we deliver One-Stop OEM & ODM solution—from R&D and customization to manufacturing, quality control, packaging, and logistics. Our expert team ensures a smooth journey, enabling businesses to turn their BBQ grill concepts into market-ready products successfully.
-                </p>
-                <dl className="grid grid-cols-2 gap-8 sm:grid-cols-2 md:grid-cols-3 mt50">
-                  <div className="flex flex-col gap-y-3 border-l border-gray-900/10 pl-6 dark:border-white/10">
-                    <dt className="text-sm/6 text-gray-600 dark:text-gray-400">Units Annually</dt>
-                      <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">2.4 Million</dd>
-                  </div>
-                  <div className="flex flex-col gap-y-3 border-l border-gray-900/10 pl-6 dark:border-white/10">
-                    <dt className="text-sm/6 text-gray-600 dark:text-gray-400">Manufacturing Facility</dt>
-                      <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">40,000㎡</dd>
-                  </div>
-                  <div className="flex flex-col gap-y-3 border-l border-gray-900/10 pl-6 dark:border-white/10">
-                    <dt className="text-sm/6 text-gray-600 dark:text-gray-400">Warehouse</dt>
-                      <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">20,000㎡</dd>
-                  </div>
-                </dl>
-            </div>
-          </div>
-
-          <div className="flex flex-col gap80">
-            <div className="max-w-4xl">
-              <h2 className="heading-main2">Professional Team</h2>
-              <p className="heading-sub mt20 text-hub">
-                  20+ Years Of Manufacturing experience
-KEYO has over 20 years of experience serving 2,000+ customers across 100+ countries, delivering reliable, high-quality production solution
-                </p>
-            </div>
-            
-            <div className='grid grid-cols-1 lg:grid-cols-2 gap80'>
-              <div className="text flex flex-col gap30">
-                <p><strong>400 Skilled Workers</strong> – Ensuring stable, high-volume production capacity.</p>
-                <p><strong>20 Account Managers</strong> – Dedicated support for seamless global communication.</p>
-                <p><strong>10 Professional R&D</strong> – Creative solutions for product and packaging customization.</p>
-                <p><strong>12 Quality Control Specialists</strong> – Strict inspections guaranteeing reliable performance.</p>
-                <p>
-                  we offer marketing support with catalogs and manuals.Our design team ensures your brand stands out with professional visuals that help grow your presence in the market.
-                </p>
-              </div>
-              <div className="pt-16 lg:row-span-2 lg:-mr-16 xl:mr-auto">
-                <div className="-mx-8 grid grid-cols-2 gap-4 sm:-mx-16 sm:grid-cols-4 lg:mx-0 lg:grid-cols-2 xl:gap-8">
-                  <div className="">
-                    <img  alt="" src="images/home/a7.jpg" className="block size-full object-cover rounded-md"/>
-                  </div>
-                  <div className="-mt-24 ">
-                    <img  alt="" src="images/home/a2.jpg" className="block size-full object-cover rounded-md"/>
-                  </div>
-                  <div className="">
-                    <img  alt="" src="images/home/a1.jpg" className="block size-full object-cover rounded-md"/>
-                  </div>
-                  <div className="-mt-24 ">
-                    <img  alt="" src="images/home/a8.jpg" className="block size-full object-cover rounded-md"/>
-                  </div>
-                  <div className="">
-                    
-                  </div>
-                  <div className="-mt-24 ">
-                    <img  alt="" src="images/home/a10.jpg" className="block size-full object-cover rounded-md"/>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <section className='section-1 relative isolate'>
+ 
+        <div className='herotitle-w'>
+            <h1 className="heading-main2">Keyfire has established a robust compliance system</h1>
+            <p className="heading-sub mt30 text-hub">Factory Audit Report: FCCA,Higg Index, BSCI,Sedex,BEPI,Ecoadis.
+Product Testing Certification: CE,REACH,CCRF,Intertek,ROHS,LFGB,UKCA,ISO14000,ISO9001.</p>
         </div>
-
-      </div>
-
-      <section className="section-1 banner bg-fixed  bg-[url('https://packoi.com/wp-content/uploads/2022/03/custom-printed-boxes.jpg')]">
-        <div>
-        <h2 className='heading-main2 text-center '>What Our Customers Say About Us</h2>
-        <p className="heading-sub mt20 text-center">We’ve served hundreds of satisfied customers. Here are some of their reviews.</p>
-        </div>
-        <div className="container grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap80">
-          
-          {/* 客户评价卡片 1 */}
-          <div className="bg-white/95 backdrop-blur-sm rounded-lg p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
-            <p className="text-gray-700 leading-relaxed">
-              "Keyo Customize delivered exactly what we needed for our product packaging. The quality exceeded our expectations and the turnaround time was impressive. Our customers love the professional look!"
-            </p>
-            <div className="flex items-center my-6 justify-center">
-              <div className="ml-4">
-                <h4 className="font-semibold text-gray-900">Sarah Johnson</h4>
-                <p className="text-sm text-gray-600">E-commerce Store Owner</p>
-              </div>
-            </div>
-            <div className="flex mb-4 justify-center">
-              {[...Array(5)].map((_, i) => (
-                <span key={i} className="text-yellow-400 text-lg">★</span>
-              ))}
-            </div>
-            
+        <div className="container flex flex-col items-center justify-center gap30">
+          <div className='grid grid-cols-3 md:grid-cols-6 gap-5 items-center'>
+            <Image alt="" src="/images/logo/walmart.jpg" width={300} height={200}/>
+            <Image alt="" src="/images/logo/higg.jpg" width={300} height={200}/>
+            <Image alt="" src="/images/logo/bsci.jpg" width={300} height={200}/>
+            <Image alt="" src="/images/logo/sedex.jpg" width={300} height={200}/>
+            <Image alt="" src="/images/logo/bepi.jpg" width={300} height={200}/>
+            <Image alt="" src="/images/logo/eco.jpg" width={300} height={200}/>
           </div>
-
-          {/* 客户评价卡片 2 */}
-          <div className="bg-white/95 backdrop-blur-sm rounded-lg p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
-            <p className="text-gray-700 leading-relaxed">
-              "Working with Keyo has been a game-changer for our brand. Their custom bags are not only beautiful but also eco-friendly. The team was responsive and helped us through every step of the process."
-            </p>
-            <div className="flex items-center my-6 justify-center">
-              <div className="ml-4">
-                <h4 className="font-semibold text-gray-900">Michael Chen</h4>
-                <p className="text-sm text-gray-600">Startup Founder</p>
-              </div>
-            </div>
-            <div className="flex mb-4 justify-center">
-              {[...Array(5)].map((_, i) => (
-                <span key={i} className="text-yellow-400 text-lg">★</span>
-              ))}
-            </div>
-            
+          <div className='grid grid-cols-6 md:grid-cols-9 gap-5 items-center'>
+            <Image alt="" src="/images/logo/ce.jpg" width={200} height={200}/>
+            <Image alt="" src="/images/logo/reach.jpg" width={200} height={200}/>
+            <Image alt="" src="/images/logo/ccrf.jpg" width={200} height={200}/>
+            <Image alt="" src="/images/logo/intertek.jpg" width={200} height={200}/>
+            <Image alt="" src="/images/logo/rohs.jpg" width={200} height={200}/>
+            <Image alt="" src="/images/logo/lfgb.jpg" width={200} height={200}/>
+            <Image alt="" src="/images/logo/ukca.jpg" width={200} height={200}/>
+            <Image alt="" src="/images/logo/iso.jpg" width={200} height={200}/>
+            <Image alt="" src="/images/logo/iso9001.jpg" width={200} height={200}/>
           </div>
-
-          {/* 客户评价卡片 3 */}
-          <div className="bg-white/95 backdrop-blur-sm rounded-lg p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
-            <p className="text-gray-700 leading-relaxed">
-              "The marketing materials from Keyo helped us stand out at trade shows. The print quality is outstanding and the design perfectly captured our brand identity. Highly recommended!"
-            </p>
-            <div className="flex items-center my-6 justify-center">
-              <div className="ml-4">
-                <h4 className="font-semibold text-gray-900">Lisa Rodriguez</h4>
-                <p className="text-sm text-gray-600">Marketing Director</p>
-              </div>
-            </div>
-            <div className="flex mb-4 justify-center">
-              {[...Array(5)].map((_, i) => (
-                <span key={i} className="text-yellow-400 text-lg">★</span>
-              ))}
-            </div>
-            
-          </div>
-
         </div>
       </section>
 
-      <section className="section-1">
-        <div>
-          <h2 className='heading-main2 text-center'>Frequently Asked Questions</h2>
-          <p className="heading-sub mt20 text-center">Below you can find some frequently asked questions regarding custom packaging and print. Please feel free to contact us if you have any other questions.</p>
+      <section className="section-1 bg-foreground">
+        <div className='herotitle-w'>
+          <h2 className='heading-main2'>Frequently Asked Questions</h2>
+          <p className="heading-sub mt30 text-hub">Below you can find some frequently asked questions regarding custom packaging and print. Please feel free to contact us if you have any other questions.</p>
         </div>
         <div className="container grid grid-cols-1 md:grid-cols-2  gap80">
           <div className='flex flex-col gap30'>
@@ -265,12 +199,23 @@ KEYO has over 20 years of experience serving 2,000+ customers across 100+ countr
             <p>Absolutely. We offer sustainable materials, including recycled paperboard, FSC-certified kraft, soy-based inks, and biodegradable coatings. Whether you’re a clean beauty or DTC brand, we help align your packaging with your sustainability goals.</p>
           </div>
         </div>
+        <div className='mt50 text-center'><a href="/faq" className="btn-secondary">Learn More</a></div>
       </section>
 
-      
+      <section className="section-1">
+        <div className='herotitle-w'>
+          <h2 className='heading-main2'>Custom BBQ Solutions</h2>
+          <p className="heading-sub mt30 text-hub">From material selection to full-scale manufacturing, we share knowledge that helps you choose the right BBQ supplier and achieve high-quality custom grill production for your market.</p>
+        </div>
+        <div className="container">
+          <BlogListCSR initialPosts={initialPosts} perPage={perPage} initialTotalPages={initialTotalPages} />
+        </div>
+        <div className='mt50 text-center'><a href="/blog" className="btn-secondary">Learn More</a></div>
+      </section>
 
        <FooterContact />
 
     </div>
+
   );
 }

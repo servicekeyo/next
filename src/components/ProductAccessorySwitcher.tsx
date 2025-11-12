@@ -85,7 +85,7 @@ export default function ProductAccessorySwitcher() {
                       ${activeOption.id === opt.id ? 'border-primary shadow-lg' : 'border-gray-300 hover:shadow-md'}
                     `}
                   >
-                    <img src={opt.class_img} className="w-full h-24 object-cover" />
+                    <img src={opt.class_img} className=" object-cover" />
                   </button>
                 ))}
               </div>
