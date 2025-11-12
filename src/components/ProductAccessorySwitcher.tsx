@@ -53,7 +53,7 @@ export default function ProductAccessorySwitcher() {
   return (
 
     <section className="section-1 bg-foreground">
-      <div className='w-2/3 mx-auto'>
+      <div className='w-2/3 mx-auto' data-aos="fade-in">
         <h2 className='heading-main2 text-center'>Customize every detail</h2>
         <p className="heading-sub mt20 text-hub text-center">
           Swap lids, side tables, legs, or finishes — create your own perfect match.
@@ -61,7 +61,7 @@ export default function ProductAccessorySwitcher() {
       </div>
       <div className="container flex-col md:flex-row flex items-center gap80">
         {/* 左侧产品 */}
-        <div className="lg:w-2/3">
+        <div className="lg:w-2/3" data-aos="zoom-in">
           <img
             src={activeOption.img}
             className="w-full h-auto max-h-[700px] object-contain rounded-xl transition-all duration-500"
@@ -69,10 +69,10 @@ export default function ProductAccessorySwitcher() {
         </div>
 
         {/* 右侧配件选择 */}
-        <div className="lg:w-1/3 space-y-6">
+        <div className="lg:w-1/3 space-y-6" data-aos="fade-left" data-aos-delay="100">
           {/* 按分类分组展示所有选项（不使用TAB） */}
           {accessoryCategories.map((cat) => (
-            <div key={cat.id} className="space-y-3">
+            <div key={cat.id} className="space-y-3" data-aos="fade-up">
               <div className="flex items-center justify-between">
                 <h4 className="text font-semibold">{cat.label}</h4>
               </div>
