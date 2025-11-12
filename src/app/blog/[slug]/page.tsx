@@ -1,68 +1,9 @@
 import { getbloglist, getPostBySlug } from '@/lib/wordpress'
-import type { Metadata } from 'next'
-
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const slug = params?.slug
-  const post: any = await getPostBySlug(slug)
-  const strip = (html: string = '') => html.replace(/<[^>]+>/g, '').trim()
-
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://keyfirebbq.com/'
-  const canonicalFromRank = post?.rank_math_canonical_url || post?.rank_math_canonical
-  const canonical = canonicalFromRank || post?.yoast_head_json?.canonical || `${siteUrl}/blog/${slug}`
-  const featured = post?._embedded?.['wp:featuredmedia']?.[0]?.source_url || post?.jetpack_featured_media_url || post?.yoast_head_json?.og_image?.[0]?.url || undefined
-
-  const title = (typeof post?.rank_math_title === 'string' && post.rank_math_title.trim())
-    ? post.rank_math_title
-    : (post?.yoast_head_json?.title || strip(post?.title?.rendered) || slug)
-
-  const description = (typeof post?.rank_math_description === 'string' && post.rank_math_description.trim())
-    ? post.rank_math_description
-    : (post?.yoast_head_json?.description || post?.yoast_head_json?.og_description || strip(post?.excerpt?.rendered || post?.content?.rendered || '') || undefined)
-
-  const tagTerms: any[] = Array.isArray(post?._embedded?.['wp:term']) ? (post._embedded['wp:term'].flat().filter((t: any) => t?.taxonomy === 'post_tag')) : []
-  const tagKeywords = tagTerms.map((t: any) => t?.name).filter(Boolean)
-  const keywordsStr = (typeof post?.rank_math_focus_keyword === 'string' && post.rank_math_focus_keyword.trim()) ? post.rank_math_focus_keyword : (tagKeywords.join(', '))
-  const keywords = keywordsStr ? keywordsStr.split(/,\s*/) : undefined
-
-  const robotsSrc: any = post?.rank_math_robots || post?.yoast_head_json?.robots
-  const robots = {
-    index: robotsSrc?.index ? String(robotsSrc.index).toLowerCase() !== 'noindex' : true,
-    follow: robotsSrc?.follow ? String(robotsSrc.follow).toLowerCase() !== 'nofollow' : true,
-    googleBot: {
-      index: robotsSrc?.index ? String(robotsSrc.index).toLowerCase() !== 'noindex' : true,
-      follow: robotsSrc?.follow ? String(robotsSrc.follow).toLowerCase() !== 'nofollow' : true,
-    },
-  }
-
-  const author = post?._embedded?.author?.[0]?.name || 'Key Fire'
-  const publishedTime = post?.date || undefined
-  const modifiedTime = post?.modified || post?.date || undefined
-
-  return {
-    title,
-    description,
-    keywords,
-    alternates: { canonical },
-    robots,
-    openGraph: {
-      type: 'article',
-      url: canonical,
-      title,
-      description,
-      images: featured ? [{ url: featured }] : undefined,
-      publishedTime,
-      modifiedTime,
-      authors: author ? [author] : undefined,
-      tags: tagKeywords.length ? tagKeywords : undefined,
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      images: featured ? [featured] : undefined,
-    },
-  }
-}
+import { withRankMetadata } from '@/lib/rankseo'
+import RankSchema from '@/components/RankSchema'
+import ShareButton from '@/components/ShareButton'
+import TableOfContents from '@/components/TableOfContents'
+import FooterContact from '@/components/FooterContact';
 export const dynamic = 'force-static'
 export const dynamicParams = false
 export const revalidate = false
@@ -73,54 +14,96 @@ export async function generateStaticParams() {
   return posts.map(p => ({ slug: p.slug }))
 }
 
-export default async function PostPage({ params }: { params: { slug: string } }) {
+export const generateMetadata = withRankMetadata(({ params }: { params: { slug: string } }) => `https://admin.keyfirebbq.com/${params.slug}`)
 
- const { slug } = await params  // ✅ 这里要 await
-  //console.log('[DEBUG] slug =', slug)
+export default async function PostPage({ params }: { params: { slug: string } }) {
+  const { slug } = await params
+ // console.log('[DEBUG] slug =', slug)
 
   const post = await getPostBySlug(slug)
   //console.log('[DEBUG] post =', post)
 
+  const formatDate = (dateString?: string) => {
+    try {
+      if (!dateString) return ''
+      const d = new Date(dateString)
+      if (isNaN(d.getTime())) return ''
+      return d.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) // e.g., "Mar 16, 2020"
+    } catch {
+      return ''
+    }
+  }
+
   const strip = (html: string = '') => html.replace(/<[^>]+>/g, '').trim()
   const title = post ? (strip(post.title?.rendered) || slug) : 'Article Not Found'
+  const publishDate = formatDate(post?.date) || formatDate(post?.date_gmt) || ''
   const html = post?.content?.rendered || post?.excerpt?.rendered || '<p>Article content is unavailable.</p>'
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://keyfirebbq.com/'
-  const canonical = post?.yoast_head_json?.canonical || `${siteUrl}/blog/${slug}`
-  const featured = post?._embedded?.['wp:featuredmedia']?.[0]?.source_url || post?.jetpack_featured_media_url || post?.yoast_head_json?.og_image?.[0]?.url || '/images/home/index_banner3.jpg'
-  const author = post?._embedded?.author?.[0]?.name || 'Key Fire'
-  const keywords = (typeof post?.rank_math_focus_keyword === 'string' && post.rank_math_focus_keyword.trim())
-    ? post.rank_math_focus_keyword
-    : (Array.isArray(post?._embedded?.['wp:term'])
-        ? post._embedded['wp:term'].flat().filter((t: any) => t?.taxonomy === 'post_tag').map((t: any) => t?.name).filter(Boolean).join(', ')
-        : '')
-  const defaultSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
-    headline: title,
-    name: title,
-    description: strip(html),
-    image: featured ? [featured] : undefined,
-    datePublished: post?.date,
-    dateModified: post?.modified || post?.date,
-    author: { '@type': 'Person', name: author },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Keyo Barbecue',
-      logo: { '@type': 'ImageObject', url: `${siteUrl}/images/LOGO1.png` },
-    },
-    mainEntityOfPage: canonical,
-    articleSection: (Array.isArray(post?._embedded?.['wp:term'])
-      ? post._embedded['wp:term'].flat().filter((t: any) => t?.taxonomy === 'category').map((t: any) => t?.name).filter(Boolean)
-      : []),
-    keywords,
+  const slugify = (text: string) => {
+    return (text || '')
+      .toLowerCase()
+      .replace(/&amp;|&/g, 'and')
+      .replace(/[^a-z0-9\s-]/g, '')
+      .trim()
+      .replace(/\s+/g, '-')
   }
-  const schema = post?.rank_math_schema || post?.yoast_head_json?.schema || defaultSchema
+
+  const extractHeadingsAndInjectIds = (sourceHtml: string) => {
+    const items: { id: string; text: string; level: number }[] = []
+    const used = new Map<string, number>()
+    const regex = /<h([2-4])(\s[^>]*)?>([\s\S]*?)<\/h\1>/gi
+    let result = ''
+    let lastIndex = 0
+    let m: RegExpExecArray | null
+    while ((m = regex.exec(sourceHtml)) !== null) {
+      const level = Number(m[1])
+      const attrs = m[2] || ''
+      const inner = m[3] || ''
+      const start = m.index
+      const end = regex.lastIndex
+      const text = strip(inner)
+      if (!text) {
+        result += sourceHtml.slice(lastIndex, end)
+        lastIndex = end
+        continue
+      }
+      let base = slugify(text)
+      if (!base) base = `section-${items.length + 1}`
+      const count = (used.get(base) || 0) + 1
+      used.set(base, count)
+      const id = count > 1 ? `${base}-${count}` : base
+      const cleanAttrs = attrs.replace(/\s*id="[^"]*"/i, '')
+      const replaced = `<h${level}${cleanAttrs} id="${id}">${inner}</h${level}>`
+      result += sourceHtml.slice(lastIndex, start) + replaced
+      lastIndex = end
+      items.push({ id, text, level })
+    }
+    result += sourceHtml.slice(lastIndex)
+    return { html: result, items }
+  }
+
+  const { html: htmlWithIds, items: tocItems } = extractHeadingsAndInjectIds(html)
+
+  // 计算上一篇/下一篇（按日期降序：最新在前）
+  const list = await getbloglist()
+  const sorted = Array.isArray(list)
+    ? list.slice().sort((a: any, b: any) => {
+        const da = a?.date ? new Date(a.date).getTime() : 0
+        const db = b?.date ? new Date(b.date).getTime() : 0
+        return db - da
+      })
+    : []
+  const index = sorted.findIndex((p: any) => p?.slug === slug)
+  const prevPost = index >= 0 && index < sorted.length - 1 ? sorted[index + 1] : null
+  const nextPost = index > 0 ? sorted[index - 1] : null
+  const prev = prevPost ? { slug: prevPost.slug as string, title: strip(prevPost?.title?.rendered || '') } : null
+  const next = nextPost ? { slug: nextPost.slug as string, title: strip(nextPost?.title?.rendered || '') } : null
   return (
     <div className="min-h-screen">
-      <section className="section-1 relative isolate -z-10">
+      <RankSchema wpUrl={`https://admin.keyfirebbq.com/${slug}`} />
+      <section className="section-1 relative isolate">
           <svg
             aria-hidden="true"
-            className="absolute inset-x-0 top-0 -z-10 h-80 xl:h-90 w-full mask-[radial-gradient(70rem_70rem_at_center,white,transparent)] stroke-gray-200"
+            className="absolute inset-x-0 top-0 -z-10 pointer-events-none h-70 xl:h-110 w-full mask-[radial-gradient(70rem_70rem_at_center,white,transparent)] stroke-gray-200"
           >
             <defs>
               <pattern
@@ -147,29 +130,39 @@ export default async function PostPage({ params }: { params: { slug: string } })
               />
             </svg>
             <rect fill="url(#1f932ae7-37de-4c0a-a8b0-a6e3b4d44b84)" width="100%" height="100%" strokeWidth={0} />
-          </svg>
-        <div className='w-4/5 xl:w-3/5 mx-auto text-center'  data-aos="fade-in">
+        </svg>
+        <div className='w-4/5 xl:w-3/5 mx-auto text-center' suppressHydrationWarning data-aos="fade-in">
           <h1 className="heading-main">{title}</h1>
-          {post?.date && (
-            <p className="heading-sub text-hub mt20">
-              {new Date(post.date).toLocaleDateString('en-US', {
-                month: 'short',
-                day: 'numeric',
-                year: 'numeric',
-              })}
-            </p>
-          )}
+          <div className="mt30 text-hub flex items-center justify-center gap-4 relative z-50">
+            <p className="heading-sub">{publishDate ? `${publishDate}` : ''}</p>
+            <ShareButton
+              title={title}
+              url={post?.link || `https://admin.keyfirebbq.com/${slug}`}
+              className='relative z-50'
+            />
+          </div>
+        </div>
+        <div className="container py-10 flex flex-col md:flex-row gap160">
+          <div className="md:w-2/3">
+            <div className="detail" dangerouslySetInnerHTML={{ __html: htmlWithIds }}/>
+            <hr className='pt-10'/>
+            <div className="mt30 flex items-center justify-between">
+              {prev ? (
+                <a href={`/blog/${prev.slug}`} title={prev.title} className="btn-secondary">Previous</a>
+              ) : <span />}
+              {next ? (
+                <a href={`/blog/${next.slug}`} title={next.title} className="btn-secondary">Next</a>
+              ) : <span />}
+            </div>
+          </div>
+          <div className="md:w-1/3">
+            {tocItems.length > 0 ? (
+              <TableOfContents items={tocItems} />
+            ) : null}
+          </div>
         </div>
       </section>
-        <section className="container relative flex gap80 items-start">
-          <div className="w-2/3" dangerouslySetInnerHTML={{ __html: html }} />
-          <div className="w-1/3 border border-gray-200 rounded-2xl p-6 sticky top-24">
-            <h2 className="text-2xl font-bold text-gray-800">Related Posts</h2>
-          </div>
-          {/* SEO JSON-LD Schema */}
-          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-      </section>
+      <FooterContact />
     </div>
-
   )
 }

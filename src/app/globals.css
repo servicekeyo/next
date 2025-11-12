@@ -43,10 +43,11 @@
 .heading-main2 {@apply text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-bold leading-6 lg:leading-10 xl:leading-12 2xl:leading-14 capitalize;}
 .heading-main3 {@apply text-lg lg:text-lg xl:text-xl 2xl:text-2xl font-bold;}
 .text{@apply text-sm lg:text-base xl:text-lg leading-6 xl:leading-8;}
-.section-1 {@apply px-5 md:px-10 xl:px-24 py-12 md:py-20 xl:py-26 2xl:py-32 space-y-8 lg:space-y-10 xl:space-y-20;}
+.section-1 {@apply px-5 md:px-10 xl:px-24 py-12 md:py-20 xl:py-26 2xl:py-32 space-y-8 lg:space-y-10 xl:space-y-24;}
 .section-2 {@apply px-5 md:px-10 xl:px-24 py-12 md:py-12 xl:py-14 2xl:py-16;}
 .section-3 {@apply pb-5 md:pb-10 xl:pb-24 pb-12 md:pb-20 xl:pb-26 2xl:pb-32 2xl:pt-20 space-y-8 lg:space-y-10 xl:space-y-20;}
 .heading-line {@apply w-32 h-0.5 bg-primary self-center;}
+.herotitle-w{@apply w-4/5 xl:w-3/5 mx-auto text-center;}
 .gap30 {@apply gap-5 xl:gap-6 2xl:gap-8;}
 .gap50 {@apply gap-5 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12;}
 .gap80 {@apply gap-8 md:gap-12 lg:gap-16 xl:gap-18 2xl:gap-20;}
@@ -69,9 +70,23 @@
 .footer-text{@apply text-sm lg:text-base leading-4 xl:leading-6 ;}
 .footer-text li{@apply transition-colors hover:text-foreground;}
 
+
 .step-item{@apply bg-white px-5 rounded-md md:px-8 py-12 md:py-12 shadow-xl transition transform hover:-translate-y-2 hover:shadow-lg hover:bg-hover hover:text-white text-center justify-center items-center flex flex-col;}
 .step-item svg{@apply mb-8 w-60;}
 
+.detail{@apply flex flex-col gap-5}
+.detail p{@apply text-sm lg:text-base xl:text-lg leading-6 xl:leading-8;}
+.wp-block-heading{ @apply text-lg lg:text-lg xl:text-xl 2xl:text-2xl font-bold;}
+hr{@apply border-0 border-b border-solid border-b-[#e5e5e5] xl:my-5;}
+
+/* 平滑滚动与锚点偏移，避免点击目录后顶到最上面 */
+html { scroll-behavior: smooth; }
+.detail h2,
+.detail h3,
+.detail h4,
+.detail .wp-block-heading {
+  scroll-margin-top: 110px; /* 约等于 Header 高度 100px，稍微多一点 */
+}
 
 body {
   background: var(--background);
@@ -84,7 +99,11 @@ body {
   max-width: 1440px;
   margin: auto;
 }
-input{background:var(--background);}
+
+input{background:var(--background);} 
+.tab-group{@apply flex flex-wrap justify-center;}
+.tab-btn{@apply px-4 py-2 rounded-md bg-white text-gray-700 border border-gray-300 hover:border-gray-400 transition;}
+.tab-btn-active{@apply bg-primary text-white border-primary;}
 /*img {
   max-width: 100%;
   height: auto;

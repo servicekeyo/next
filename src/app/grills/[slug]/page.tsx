@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { fetchProductsByCategory } from '@/lib/wordpress';
+
 
 type PageProps = {
   params: { slug: string };
@@ -8,14 +8,8 @@ type PageProps = {
 
 export default async function GrillCategoryPage({ params }: PageProps) {
   const slug = params.slug;
-  let products: any[] = [];
-  let error: string | null = null;
-
-  try {
-    products = await fetchProductsByCategory(slug, 24);
-  } catch (e: any) {
-    error = e?.message || '加载分类产品时出现错误';
-  }
+  const products: any[] = [];
+  const error: string | null = null;
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

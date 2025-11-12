@@ -13,8 +13,8 @@ export default function Header() {
 
       {/* 主导航 */}
       <div className="container mx-auto">
-        <div className="flex items-center h-[100px] justify-between">
-          <a href="/" className="text-lg font-semibold text-foreground"><Image src="/images/LOGO1.png" alt="Keyo Customize" width={120} height={40} /></a>
+        <div className="flex items-center h-[80px] justify-between">
+          <a href="/" className="text-lg font-semibold text-foreground"><Image src="/images/LOGO1.png" alt="Keyo Customize" width={120} height={32} /></a>
 
           <nav className="hidden items-center gap-6 md:flex">
             <a href="/" >Home</a>

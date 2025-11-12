@@ -18,33 +18,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://keyfirebbq.com";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-  title: {
-    default: "Key Fire",
-    template: "%s | Key Fire",
-  },
-  description: "Custom BBQ solutions, manufacturing insights, and grill supplier guidance.",
   robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-    },
-  },
-  alternates: {
-    canonical: siteUrl,
-  },
-  openGraph: {
-    siteName: "Key Fire",
-    url: siteUrl,
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
+    index: false,
+    follow: false,
   },
 };
 
