@@ -8,8 +8,8 @@ type PageProps = {
 
 export default async function GrillCategoryPage({ params }: PageProps) {
   const slug = params.slug;
-  let products: any[] = [];
-  let error: string | null = null;
+  const products: any[] = [];
+  const error: string | null = null;
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
