@@ -17,8 +17,7 @@ const WORDPRESS_API_URL = process.env.WORDPRESS_API_URL || 'https://admin.keyfir
 export async function getbloglist(page: number = 1, perPage: number = 6): Promise<any[]> {
   try {
     const res = await fetch(`${WORDPRESS_API_URL}/posts?per_page=100&_embed`, {
-      // 'force-cache' 保证构建期抓取，运行时不再请求
-      cache: 'force-cache',
+      next: { revalidate: 600 },
     })
     
 
@@ -75,7 +74,7 @@ export async function getPostBySlug(slug: string) {
 
   try {
     const res = await fetch(`${WORDPRESS_API_URL}/posts?slug=${slug}&_embed`, {
-      cache: 'force-cache',
+      next: { revalidate: 600 },
     })
 
     if (!res.ok) {
@@ -100,7 +99,7 @@ export async function getPostBySlug(slug: string) {
 
 export async function getGrillCategories(): Promise<any[]> {
   try {
-    const res = await fetch(`${WORDPRESS_API_URL}/grill_category?per_page=100`, { cache: 'force-cache' })
+    const res = await fetch(`${WORDPRESS_API_URL}/grill_category?per_page=100`, { next: { revalidate: 600 } })
     if (!res.ok) return []
     const data = await res.json()
     return Array.isArray(data) ? data : []
@@ -111,7 +110,7 @@ export async function getGrillCategories(): Promise<any[]> {
 
 export async function getGrills(perPage: number = 100): Promise<any[]> {
   try {
-    const res = await fetch(`${WORDPRESS_API_URL}/grill?per_page=${perPage}&_embed`, { cache: 'force-cache' })
+    const res = await fetch(`${WORDPRESS_API_URL}/grill?per_page=${perPage}&_embed`, { next: { revalidate: 600 } })
     if (!res.ok) return []
     const data = await res.json()
     return Array.isArray(data) ? data : []
@@ -123,7 +122,7 @@ export async function getGrills(perPage: number = 100): Promise<any[]> {
 export async function getGrillsByCategory(categoryId: number, perPage: number = 100): Promise<any[]> {
   if (!categoryId || typeof categoryId !== 'number') return []
   try {
-    const res = await fetch(`${WORDPRESS_API_URL}/grill?per_page=${perPage}&grill_category=${categoryId}&_embed`, { cache: 'force-cache' })
+    const res = await fetch(`${WORDPRESS_API_URL}/grill?per_page=${perPage}&grill_category=${categoryId}&_embed`, { next: { revalidate: 600 } })
     if (!res.ok) return []
     const data = await res.json()
     return Array.isArray(data) ? data : []

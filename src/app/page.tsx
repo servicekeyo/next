@@ -10,7 +10,7 @@ import YouTubeLite from '@/components/YouTubeLite';
 import BlogListCSR from '@/components/BlogListCSR';
 import { getbloglist } from '@/lib/wordpress';
 export const dynamic = 'force-static'
-export const revalidate = false
+export const revalidate = 600
 
 export const generateMetadata = withRankMetadata('https://admin.keyfirebbq.com/home')
 
