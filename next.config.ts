@@ -7,12 +7,6 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "packoi.com",
-        port: "",
-        pathname: "/wp-content/uploads/**",
-      },
-      {
-        protocol: "https",
         hostname: "keyobarbecue.com",
         port: "",
         pathname: "/wp-content/uploads/**",
@@ -20,6 +14,12 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "admin.keyfirebbq.com",
+        port: "",
+        pathname: "/wp-content/uploads/**",
+      },
+      {
+        protocol: "https",
+        hostname: "packoi.com",
         port: "",
         pathname: "/wp-content/uploads/**",
       },

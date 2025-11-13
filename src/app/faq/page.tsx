@@ -97,6 +97,8 @@ export default function FAQ() {
           <svg
             aria-hidden="true"
             className="absolute inset-x-0 top-0 -z-10 h-60 xl:h-110 w-full mask-[radial-gradient(70rem_70rem_at_center,white,transparent)] stroke-gray-200"
+            data-aos="fade-in"
+            data-aos-duration="1000"
           >
             <defs>
               <pattern
@@ -124,24 +126,24 @@ export default function FAQ() {
             </svg>
             <rect fill="url(#1f932ae7-37de-4c0a-a8b0-a6e3b4d44b84)" width="100%" height="100%" strokeWidth={0} />
           </svg>
-        <div className='w-4/5 xl:w-3/5 mx-auto text-center'  data-aos="fade-in">
-          <h1 className="heading-main">Frequently Asked Questions</h1>
-          <p className="heading-sub mt30 text-hub">Find answers to common questions about our BBQ grills, customization services, and ordering process.</p>
+        <div className='w-4/5 xl:w-3/5 mx-auto text-center' data-aos="fade-up" data-aos-duration="800">
+          <h1 className="heading-main" data-aos="fade-up" data-aos-delay="200">Frequently Asked Questions</h1>
+          <p className="heading-sub mt30 text-hub" data-aos="fade-up" data-aos-delay="400">Find answers to common questions about our BBQ grills, customization services, and ordering process.</p>
         </div>
       </section>
 
       {/* FAQ Content */}
-      <section className="section-3" data-aos="fade-in">
-        <div className="container flex flex-col gap80">
+      <section className="section-3">
+        <div className="container flex flex-col gap80" data-aos="fade-up" data-aos-duration="800">
             {/* FAQ Items */}
-              {faqData.map((item) => (
-                <div key={item.id}>
+              {faqData.map((item, index) => (
+                <div key={item.id} data-aos="fade-up" data-aos-delay={index * 100}>
                   <button
                     onClick={() => toggleItem(item.id)}
                     className="w-full text-left flex items-center justify-between"
                   >
                     <div className="flex-1">
-                      <h2 className="heading-main3">
+                      <h2 className="heading-main3" data-aos="fade-right">
                         {item.question}
                       </h2>
                     </div>
@@ -162,7 +164,7 @@ export default function FAQ() {
                   }`}>
                     <div className="pt-6">
                       <div className="">
-                        <p className="text">{item.answer}</p>
+                        <p className="text" data-aos="fade-up" data-aos-delay="200">{item.answer}</p>
                       </div>
                     </div>
                   </div>

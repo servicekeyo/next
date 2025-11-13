@@ -14,6 +14,8 @@ export default function odmoem() {
           <svg
             aria-hidden="true"
             className="absolute inset-x-0 top-0 -z-10 h-80 xl:h-110 w-full mask-[radial-gradient(70rem_70rem_at_center,white,transparent)] stroke-gray-200"
+            data-aos="fade-in"
+            data-aos-duration="1000"
           >
             <defs>
               <pattern
@@ -41,14 +43,14 @@ export default function odmoem() {
             </svg>
             <rect fill="url(#1f932ae7-37de-4c0a-a8b0-a6e3b4d44b84)" width="100%" height="100%" strokeWidth={0} />
           </svg>
-        <div className='w-4/5 xl:w-3/5 mx-auto text-center'  data-aos="fade-in">
-          <h1 className="heading-main">From Idea To Product In Just 6 Steps</h1>
-          <p className="heading-sub mt30 text-hub">Whether it starts with a sketch, a photo, or simply an idea, our team turns your vision into a real, manufacturable product. A clear process, step by step — making customization simple and efficient.</p>
+        <div className='w-4/5 xl:w-3/5 mx-auto text-center' data-aos="fade-up" data-aos-duration="800">
+          <h1 className="heading-main" data-aos="fade-up" data-aos-delay="200">From Idea To Product In Just 6 Steps</h1>
+          <p className="heading-sub mt30 text-hub" data-aos="fade-up" data-aos-delay="400">Whether it starts with a sketch, a photo, or simply an idea, our team turns your vision into a real, manufacturable product. A clear process, step by step — making customization simple and efficient.</p>
         </div>
       </section>
 
       <section className="section-3">
-        <div className="container flex flex-col gap160">
+        <div className="container flex flex-col gap160" data-aos="fade-up" data-aos-duration="800">
 
           <div className="flex flex-col-reverse md:flex-row gap160">
             <div className="md:w-1/2" data-aos="fade-right"><Image className='rounded-xl box-shadow-xl' src="/images/odm/odm1.jpg" alt="odmoem" width={720} height={500} /></div>

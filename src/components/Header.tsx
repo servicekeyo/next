@@ -9,22 +9,22 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [aboutSubmenuOpen, setAboutSubmenuOpen] = useState(false);
   return (
-    <header suppressHydrationWarning className="bg-white sticky top-0 z-50 px-5 md:px-10 xl:px-24">
+    <header suppressHydrationWarning className="bg-white sticky top-0 z-50 px-5 md:px-10 xl:px-24 shadow-sm">
 
       {/* 主导航 */}
       <div className="container mx-auto">
-        <div className="flex items-center h-[80px] justify-between">
-          <a href="/" className="text-lg font-semibold text-foreground"><Image src="/images/LOGO1.png" alt="Keyo Customize" width={120} height={32} /></a>
+        <div className="flex items-center h-[60px] lg:h-[100px] justify-between">
+          <a href="/"><Image src="/images/LOGO1.png" alt="Keyo Customize" width={120} height={32} /></a>
 
-          <nav className="hidden items-center gap-6 md:flex">
+          <nav className="hidden items-center gap-10 md:flex">
             <a href="/" >Home</a>
             <div className="relative group">
-              <button className="flex items-center gap-1 hover:text-foreground/80 transition-colors py-2">
+              <a className="flex items-center gap-1 ">
                 Prodcuts
                 <svg className="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
-              </button>
+              </a>
               <div className="absolute top-full left-0 pt-2 w-48 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                 <div className="bg-white shadow-lg rounded-md border border-gray-200 py-2">
                   <a href="/wholesale/charcoal-grill" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
@@ -47,12 +47,12 @@ export default function Header() {
             </div>
             <a href="/odmoem">ODM/OEM</a>
             <div className="relative group">
-              <button className="flex items-center gap-1 hover:text-foreground/80 transition-colors py-2">
+              <a className="flex items-center gap-1 hover:text-foreground/80 transition-colors py-2">
                 About
                 <svg className="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
-              </button>
+              </a>
               <div className="absolute top-full left-0 pt-2 w-48 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                 <div className="bg-white shadow-lg rounded-md border border-gray-200 py-2">
                   <a href="/about" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
@@ -102,12 +102,7 @@ export default function Header() {
           }`}>
             {/* 抽屉头部 */}
             <div className="flex items-center justify-between p-6 border-b border-gray-200">
-              <Image 
-                src="https://packoi.com/wp-content/uploads/2021/12/cropped-cropped-Packoi.webp" 
-                alt="Keyo Customize" 
-                width={120} 
-                height={40} 
-              />
+              <Image src="/images/LOGO1.png" alt="Keyo Customize" width={120} height={32} />
               <button
                 onClick={() => {
                   setOpen(false);

@@ -104,6 +104,8 @@ export default async function PostPage({ params }: { params: { slug: string } })
           <svg
             aria-hidden="true"
             className="absolute inset-x-0 top-0 -z-10 pointer-events-none h-70 xl:h-110 w-full mask-[radial-gradient(70rem_70rem_at_center,white,transparent)] stroke-gray-200"
+            data-aos="fade-in"
+            data-aos-duration="1000"
           >
             <defs>
               <pattern
@@ -131,9 +133,9 @@ export default async function PostPage({ params }: { params: { slug: string } })
             </svg>
             <rect fill="url(#1f932ae7-37de-4c0a-a8b0-a6e3b4d44b84)" width="100%" height="100%" strokeWidth={0} />
         </svg>
-        <div className='w-4/5 xl:w-3/5 mx-auto text-center' suppressHydrationWarning data-aos="fade-in">
-          <h1 className="heading-main">{title}</h1>
-          <div className="mt30 text-hub flex items-center justify-center gap-4 relative z-50">
+        <div className='w-4/5 xl:w-3/5 mx-auto text-center' suppressHydrationWarning data-aos="fade-up" data-aos-duration="800">
+          <h1 className="heading-main" data-aos="fade-up" data-aos-delay="200">{title}</h1>
+          <div className="mt30 text-hub flex items-center justify-center gap-4 relative z-50" data-aos="fade-up" data-aos-delay="400">
             <p className="heading-sub">{publishDate ? `${publishDate}` : ''}</p>
             <ShareButton
               title={title}
@@ -142,8 +144,8 @@ export default async function PostPage({ params }: { params: { slug: string } })
             />
           </div>
         </div>
-        <div className="container py-10 flex flex-col md:flex-row gap160">
-          <div className="md:w-2/3">
+        <div className="container py-10 flex flex-col md:flex-row gap160" data-aos="fade-up" data-aos-duration="800">
+          <div className="md:w-2/3" data-aos="fade-right" data-aos-delay="200">
             <div className="detail" dangerouslySetInnerHTML={{ __html: htmlWithIds }}/>
             <hr className='pt-10'/>
             <div className="mt30 flex items-center justify-between">
@@ -155,7 +157,7 @@ export default async function PostPage({ params }: { params: { slug: string } })
               ) : <span />}
             </div>
           </div>
-          <div className="md:w-1/3">
+          <div className="md:w-1/3" data-aos="fade-left" data-aos-delay="400">
             {tocItems.length > 0 ? (
               <TableOfContents items={tocItems} />
             ) : null}

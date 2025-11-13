@@ -19,6 +19,8 @@ export default async function Blog({
           <svg
             aria-hidden="true"
             className="absolute inset-x-0 top-0 -z-10 h-70 xl:h-110 w-full mask-[radial-gradient(70rem_70rem_at_center,white,transparent)] stroke-gray-200"
+            data-aos="fade-in"
+            data-aos-duration="1000"
           >
             <defs>
               <pattern
@@ -46,13 +48,13 @@ export default async function Blog({
             </svg>
             <rect fill="url(#1f932ae7-37de-4c0a-a8b0-a6e3b4d44b84)" width="100%" height="100%" strokeWidth={0} />
           </svg>
-        <div className='w-4/5 xl:w-3/5 mx-auto text-center' suppressHydrationWarning data-aos="fade-in">
-          <h1 className="heading-main">Custom BBQ Solutions</h1>
-          <p className="heading-sub mt30 text-hub">From material selection to full-scale manufacturing, we share knowledge that helps you choose the right BBQ supplier and achieve high-quality custom grill production for your market.</p>
+        <div className='w-4/5 xl:w-3/5 mx-auto text-center' suppressHydrationWarning data-aos="fade-up" data-aos-duration="800">
+          <h1 className="heading-main" data-aos="fade-up" data-aos-delay="200">Custom BBQ Solutions</h1>
+          <p className="heading-sub mt30 text-hub" data-aos="fade-up" data-aos-delay="400">From material selection to full-scale manufacturing, we share knowledge that helps you choose the right BBQ supplier and achieve high-quality custom grill production for your market.</p>
         </div>
       </section>
 
-      <section className="section-3 2xl:mt-[-30px]">
+      <section className="section-3 2xl:mt-[-30px]" data-aos="fade-up" data-aos-duration="800">
         <BlogListCSR initialPosts={initialPosts} perPage={perPage} initialTotalPages={initialTotalPages} />
         {/* Pagination */}
         <PaginationNav totalPages={initialTotalPages} />

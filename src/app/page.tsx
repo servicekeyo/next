@@ -139,7 +139,6 @@ From intelligent design to precision manufacturing, we turn your ideas into mark
       <ProductAccessorySwitcher />
 
       <section className='section-1 relative isolate'>
- 
         <div className='herotitle-w' data-aos="fade-in">
             <h1 className="heading-main2">Keyfire has established a robust compliance system</h1>
             <p className="heading-sub mt30 text-hub">Factory Audit Report: FCCA,Higg Index, BSCI,Sedex,BEPI,Ecoadis.

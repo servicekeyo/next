@@ -6,11 +6,13 @@ export default function Contact() {
   return (
     <div className="relative section-1">
       <div className="grid container grid-cols-1 lg:grid-cols-2 items-center gap80">
-          <div className="max-w-xl lg:mx-0 lg:max-w-lg">
+          <div className="max-w-xl lg:mx-0 lg:max-w-lg" data-aos="fade-right" data-aos-duration="800">
             <div className="absolute inset-y-0 left-0 -z-10 w-full overflow-hidden bg-foreground ring-1 ring-gray-900/10 lg:w-1/2 dark:bg-gray-900 dark:ring-white/10">
               <svg
                 aria-hidden="true"
                 className="absolute inset-0 size-full mask-[radial-gradient(100%_100%_at_top_right,white,transparent)] stroke-gray-200 dark:stroke-white/10"
+                data-aos="fade-in"
+                data-aos-duration="1200"
               >
                 <defs>
                   <pattern
@@ -43,13 +45,13 @@ export default function Contact() {
                 />
               </div>
             </div>
-            <h2 className="heading-main">
+            <h2 className="heading-main" data-aos="fade-up" data-aos-delay="200">
               Get in touch
             </h2>
-            <p className="text mt20 text-hub">
+            <p className="text mt20 text-hub" data-aos="fade-up" data-aos-delay="400">
               Thanks for your inquiry! Please complete the brief form and we’ll get back to you.
             </p>
-            <div className="mt50 flex flex-col gap30">
+            <div className="mt50 flex flex-col gap30" data-aos="fade-up" data-aos-delay="600">
               <div className="space-y-1">
                 <h3 className="text font-bold">Send Us a Email</h3>
                 <p className="text text-hub"><a href="mailto:ky01@keyobbq.com" target="_blank">ky01@keyobbq.com</a></p>
@@ -65,7 +67,7 @@ export default function Contact() {
             </div>
         </div>
 
-        <div className=" xl:pl-20 2xl:pl-40">
+        <div className=" xl:pl-20 2xl:pl-40" data-aos="fade-left" data-aos-duration="800" data-aos-delay="400">
           <ContactForm />
         </div>
       </div>
