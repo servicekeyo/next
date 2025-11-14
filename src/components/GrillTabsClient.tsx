@@ -1,9 +1,10 @@
 "use client"
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Autoplay } from 'swiper/modules'
+import { Autoplay } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
+import { CaretLeft, CaretRight } from 'phosphor-react'
 
 type Props = {
   categories: any[]
@@ -15,23 +16,10 @@ export default function GrillTabsClient({ categories, itemsByCat }: Props) {
   const [active, setActive] = useState<number | null>(initialId)
   const activeItems = useMemo(() => (active ? itemsByCat?.[active] ?? [] : []), [active, itemsByCat])
   const activeCat = useMemo(() => (categories || []).find((c: any) => c.id === active) || null, [categories, active])
-  const prevRef = useRef<HTMLButtonElement | null>(null)
-  const nextRef = useRef<HTMLButtonElement | null>(null)
   const [swiperInst, setSwiperInst] = useState<any>(null)
 
-  useEffect(() => {
-    if (!swiperInst || !prevRef.current || !nextRef.current) return
-    swiperInst.params.navigation.prevEl = prevRef.current
-    swiperInst.params.navigation.nextEl = nextRef.current
-    if (swiperInst.navigation) {
-      swiperInst.navigation.destroy()
-      swiperInst.navigation.init()
-      swiperInst.navigation.update()
-    }
-  }, [swiperInst, active])
-
   return (
-    <div className="flex flex-col gap50">
+    <div className="flex flex-col gap80">
       <div className="tab-group gap-5">
         {(categories || []).map((c: any) => (
           <button
@@ -46,8 +34,7 @@ export default function GrillTabsClient({ categories, itemsByCat }: Props) {
 
       <div className="relative">
         <Swiper
-          modules={[Navigation, Autoplay]}
-          navigation={{ enabled: true }}
+          modules={[Autoplay]}
           onSwiper={setSwiperInst}
           loop
           autoplay={{ delay: 5000, disableOnInteraction: false }}
@@ -57,7 +44,7 @@ export default function GrillTabsClient({ categories, itemsByCat }: Props) {
             640: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
           }}
-          className="[&_.swiper-button-prev]:hidden [&_.swiper-button-next]:hidden"
+          className="w-full"
         >
         {activeItems.map((item: any) => {
           const title = item?.title?.rendered ?? item?.title ?? ''
@@ -85,16 +72,16 @@ export default function GrillTabsClient({ categories, itemsByCat }: Props) {
           )
         })}
         </Swiper>
-        <div className="absolute inset-y-0 left-0 flex items-center z-10">
-          <button ref={prevRef} aria-label="Previous" className="btn-secondary btn-small rounded-full">‹</button>
+        <div className="absolute inset-y-0 -left-0 xl:-left-16 flex items-center z-10">  
+            <CaretLeft size={48} className='hover:text-primary' weight="bold" onClick={() => swiperInst?.slidePrev()} aria-label="Previous"/>
         </div>
-        <div className="absolute inset-y-0 right-0 flex items-center z-10">
-          <button ref={nextRef} aria-label="Next" className="btn-secondary btn-small rounded-full">›</button>
+        <div className="absolute inset-y-0 -right-0 xl:-right-16 flex items-center z-10">
+            <CaretRight size={48} className='hover:text-primary' weight="bold" onClick={() => swiperInst?.slideNext()} aria-label="Next"/>
         </div>
       </div>
       {activeCat ? (
         <div className="flex justify-center">
-          <a href={activeCat?.slug ? `/grills/${activeCat.slug}` : `/grills/`} className="btn-secondary">View More</a>
+          <a href={activeCat?.slug ? `/grills/${activeCat.slug}` : `/grills/`} className="btn-secondary">View More {activeCat?.name ?? activeCat?.slug ?? 'Category'}</a>
         </div>
       ) : null}
     </div>

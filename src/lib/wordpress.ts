@@ -39,12 +39,12 @@ export async function getbloglist(page: number = 1, perPage: number = 6): Promis
 }
 
 // 运行时分页：使用 offset 方案规避置顶文章对 page 的干扰
-export async function getPostsPaged(page: number = 1, perPage: number = 6): Promise<{ posts: any[]; totalPages: number; total: number }> {
+export async function getPostsPaged(post:"posts", page: number = 1, perPage: number = 6): Promise<{ posts: any[]; totalPages: number; total: number }> {
   try {
     const safePer = Math.max(1, perPage | 0)
     const safePage = Math.max(1, page | 0)
     const offset = (safePage - 1) * safePer
-    const url = `${WORDPRESS_API_URL}/posts?_embed&per_page=${safePer}&offset=${offset}&orderby=date&order=desc&status=publish&sticky=false&ignore_sticky_posts=true`
+    const url = `${WORDPRESS_API_URL}/${post}$?_embed&per_page=${safePer}&offset=${offset}&orderby=date&order=desc&status=publish&sticky=false&ignore_sticky_posts=true`
     const res = await fetch(url, { cache: 'no-store' })
     if (!res.ok) {
       //console.error('❌ [getPostsPaged] 请求失败:', res.status, url)

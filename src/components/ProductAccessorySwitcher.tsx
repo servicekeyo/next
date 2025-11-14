@@ -53,7 +53,7 @@ export default function ProductAccessorySwitcher() {
   return (
 
     <section className="section-1 bg-foreground">
-      <div className='w-2/3 mx-auto' data-aos="fade-in">
+      <div className='herotitle-w' data-aos="fade-in">
         <h2 className='heading-main2 text-center'>Customize every detail</h2>
         <p className="heading-sub mt20 text-hub text-center">
           Swap lids, side tables, legs, or finishes — create your own perfect match.

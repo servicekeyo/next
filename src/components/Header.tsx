@@ -9,13 +9,13 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [aboutSubmenuOpen, setAboutSubmenuOpen] = useState(false);
   return (
-    <header suppressHydrationWarning className="bg-white sticky top-0 z-50 px-5 md:px-10 xl:px-24 shadow-sm">
+    <header suppressHydrationWarning className="bg-white sticky top-0 z-50 px-5 md:px-10 xl:px-24 border-b border-gray-100">
 
       {/* 主导航 */}
       <div className="container mx-auto">
-        <div className="flex items-center h-[60px] lg:h-[100px] justify-between">
+        <div className="flex items-center h-[60px] lg:h-[80px] justify-between">
           <a href="/"><Image src="/images/LOGO1.png" alt="Keyo Customize" width={120} height={32} /></a>
-
+ 
           <nav className="hidden items-center gap-10 md:flex">
             <a href="/" >Home</a>
             <div className="relative group">

@@ -6,7 +6,7 @@ export default function Contact() {
   return (
     <div className="relative section-1">
       <div className="grid container grid-cols-1 lg:grid-cols-2 items-center gap80">
-          <div className="max-w-xl lg:mx-0 lg:max-w-lg" data-aos="fade-right" data-aos-duration="800">
+          <div className="max-w-xl lg:mx-0 lg:max-w-lg">
             <div className="absolute inset-y-0 left-0 -z-10 w-full overflow-hidden bg-foreground ring-1 ring-gray-900/10 lg:w-1/2 dark:bg-gray-900 dark:ring-white/10">
               <svg
                 aria-hidden="true"

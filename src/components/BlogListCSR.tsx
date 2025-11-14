@@ -42,9 +42,9 @@ export default function BlogListCSR({ initialPosts, perPage = 6, initialTotalPag
 
   return (
     <div className="container relative"  data-aos="fade-up">
-      <div className="grid gap30 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap30 md:grid-cols-2 lg:grid-cols-3" data-aos="fade-up" data-aos-delay="100">
         {posts.map((post: any, index) => (
-          <article key={post.id} className="flex flex-col mb-5 xl:mb-10 hover:shadow-lg rounded-2xl hover:scale-105 transition-all duration-300 p-6" data-aos="fade-up" data-aos-delay={index * 100}>
+          <article key={post.id} className="flex flex-col mb-5 xl:mb-10 hover:shadow-lg rounded-2xl hover:scale-105 transition-all duration-300 p-6">
             <img
               alt={
                 post?._embedded?.['wp:featuredmedia']?.[0]?.alt_text ||

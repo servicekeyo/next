@@ -62,7 +62,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <div className="section-1">
+      <div className="section-3">
         <div className='container flex flex-col gap160'>
           {/* 第一个轮播区域 - Why Choose Us */}
           <div className='container flex flex-col lg:flex-row gap160' data-aos="fade-up" data-aos-duration="800">
@@ -92,14 +92,14 @@ export default function AboutPage() {
                     clickable: true,
                     dynamicBullets: true,
                   }}
-                  className="rounded-xl shadow-md w-[720px] h-[450px] mx-auto"
+                  className="rounded-xl shadow-md w-full max-w-[720px] mx-auto"
                 >
                   {mainImages.map((image, index) => (
                     <SwiperSlide key={index}>
                       <img
                         src={image.src}
                         alt={image.alt}
-                        className="w-full h-full object-cover rounded-xl"
+                        className="w-full h-auto object-cover rounded-xl"
                       />
                     </SwiperSlide>
                   ))}
@@ -113,7 +113,7 @@ export default function AboutPage() {
                   freeMode={true}
                   watchSlidesProgress={true}
                   modules={[FreeMode, Thumbs]}
-                  className="thumbs-swiper h-24 [&_.swiper-slide]:opacity-50 [&_.swiper-slide]:transition-opacity [&_.swiper-slide-thumb-active]:opacity-100 w-[720px] mx-auto"
+                  className="thumbs-swiper h-24 w-full max-w-[720px] mx-auto [&_.swiper-slide]:opacity-50 [&_.swiper-slide]:transition-opacity [&_.swiper-slide-thumb-active]:opacity-100"
                 >
                   {mainImages.map((image, index) => (
                     <SwiperSlide key={index}>
@@ -121,7 +121,7 @@ export default function AboutPage() {
                         <img
                           src={image.src}
                           alt={image.alt}
-                          className="w-full h-full object-cover"
+                          className="w-full h-auto object-cover"
                         />
                       </div>
                     </SwiperSlide>
@@ -171,25 +171,25 @@ export default function AboutPage() {
                   we offer marketing support with catalogs and manuals.Our design team ensures your brand stands out with professional visuals that help grow your presence in the market.
                 </p>
               </div>
-              <div className="pt-16 lg:row-span-2 lg:-mr-16 xl:mr-auto">
-                <div className="-mx-8 grid grid-cols-2 gap-4 sm:-mx-16 sm:grid-cols-4 lg:mx-0 lg:grid-cols-2 xl:gap-8">
+              <div className="xl:pt-16 lg:row-span-2">
+                <div className=" grid grid-cols-2 gap-4 sm:grid-cols-4 lg:mx-0 lg:grid-cols-2 xl:gap-8">
                   <div className="">
-                    <img alt="" src="images/home/a7.jpg" className="block object-cover rounded-md"/>
+                    <Image alt="" src="/images/home/a7.jpg" className="block object-cover rounded-md" width={400} height={210}/>
                   </div>
-                  <div className="-mt-24 ">
-                    <img alt="" src="images/home/a2.jpg" className="block object-cover rounded-md"/>
-                  </div>
-                  <div className="">
-                    <img alt="" src="images/home/a1.jpg" className="block object-cover rounded-md"/>
-                  </div>
-                  <div className="-mt-24 ">
-                    <img alt="" src="images/home/a8.jpg" className="block object-cover rounded-md"/>
+                  <div className="xl:-mt-24 ">
+                    <Image alt="" src="/images/home/a2.jpg" className="block object-cover rounded-md" width={400} height={210}/>
                   </div>
                   <div className="">
+                    <Image alt="" src="/images/home/a1.jpg" className="block object-cover rounded-md" width={400} height={210}/>
+                  </div>
+                  <div className="xl:-mt-24 ">
+                    <Image alt="" src="/images/home/a8.jpg" className="block object-cover rounded-md" width={400} height={210}/>
+                  </div>
+                  <div className="hidden xl:block">
                     
                   </div>
-                  <div className="-mt-24 ">
-                    <img alt="" src="images/home/a10.jpg" className="block object-cover rounded-md"/>
+                  <div className="xl:-mt-24 ">
+                    <Image alt="" src="/images/home/a10.jpg" className="block object-cover rounded-md" width={400} height={210}/>
                   </div>
                 </div>
               </div>
@@ -220,14 +220,14 @@ export default function AboutPage() {
                     nextEl: '.swiper-button-next-logistics2',
                     prevEl: '.swiper-button-prev-logistics2',
                   }}
-                  className="rounded-xl shadow-md w-[720px] h-[450px] mx-auto"
+                  className="rounded-xl shadow-md w-full max-w-[720px] mx-auto"
                 >
                   {logisticsImages.map((image, index) => (
                     <SwiperSlide key={index}>
                       <img 
                         src={image.src} 
                         alt={image.alt} 
-                        className="w-full h-full object-cover rounded-xl" 
+                        className="w-full h-auto object-cover rounded-xl" 
                       />
                     </SwiperSlide>
                   ))}
@@ -241,7 +241,7 @@ export default function AboutPage() {
                   freeMode={true}
                   watchSlidesProgress={true}
                   modules={[FreeMode, Thumbs]}
-                  className="thumbs-swiper h-24 [&_.swiper-slide]:opacity-50 [&_.swiper-slide]:transition-opacity [&_.swiper-slide-thumb-active]:opacity-100 w-[720px] mx-auto"
+                  className="thumbs-swiper h-24 w-full max-w-[720px] mx-auto [&_.swiper-slide]:opacity-50 [&_.swiper-slide]:transition-opacity [&_.swiper-slide-thumb-active]:opacity-100"
                 >
                   {logisticsImages.map((image, index) => (
                     <SwiperSlide key={index}>
@@ -249,7 +249,7 @@ export default function AboutPage() {
                         <img
                           src={image.src}
                           alt={image.alt}
-                          className="w-full h-full object-cover"
+                          className="w-full h-auto object-cover"
                         />
                       </div>
                     </SwiperSlide>

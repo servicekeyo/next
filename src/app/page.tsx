@@ -67,7 +67,7 @@ export default async function Home() {
         <div data-aos="fade-up"><GrillTabs /></div>
       </section>  
 
-      <section className="section-1 bg-foreground">
+      <section className="section-1 bg-foreground flex flex-col">
         <div className='herotitle-w' data-aos="fade-in">
           <h2 className="heading-main2">Share your idea, we’ll make it real</h2>
           <p className="heading-sub mt20 text-hub">
@@ -75,57 +75,65 @@ export default async function Home() {
           </p>
         </div>
 
-          <div className="container grid md:grid-cols-2 lg:grid-cols-4 gap50">
+          <div className="container grid md:grid-cols-2 xl:grid-cols-4 gap50">
             {/* Step 1 */}
-            <div className="step-item text-center space-y-3" data-aos="fade-up" data-aos-delay="0">
-              <Ruler size={64} weight="duotone" className="mx-auto" />
-              <h3 className="heading-main3">2D Drawing</h3>
-              <p className="heading-sub">
-                Based on your ideas, we create detailed 2D drawings to clearly define dimensions, structure, and layout for easy confirmation.
-              </p>
+            <div data-aos="fade-up" data-aos-delay="0" >
+              <div className="step-item" >
+                <Ruler size={64} weight="duotone" className="mx-auto transition-transform duration-300 ease-out group-hover:scale-105" />
+                <h3 className="heading-main3">2D Drawing</h3>
+                <p className="heading-sub">
+                  Based on your ideas, we create detailed 2D drawings to clearly define dimensions, structure, and layout for easy confirmation.
+                </p>
+              </div>
             </div>
 
             {/* Step 2 */}
-            <div className="step-item text-center space-y-3" data-aos="fade-up" data-aos-delay="100">
-              <Cube size={64} weight="duotone" className="mx-auto" />
-              <h3 className="heading-main3">3D Design</h3>
-              <p className="heading-sub">
-                Transform the approved 2D drawings into realistic 3D models, showing appearance, materials, and functional details.
-              </p>
+            <div data-aos="fade-up" data-aos-delay="100">
+              <div className="step-item">
+                <Cube size={64} weight="duotone" className="mx-auto transition-transform duration-300 ease-out group-hover:scale-105" />
+                <h3 className="heading-main3">3D Design</h3>
+                <p className="heading-sub">
+                  Transform the approved 2D drawings into realistic 3D models, showing appearance, materials, and functional details.
+                </p>
+              </div>
             </div>
 
             {/* Step 3 */}
-            <div className="step-item text-center space-y-3" data-aos="fade-up" data-aos-delay="200">
-              <Flask size={64} weight="duotone" className="mx-auto" />
-              <h3 className="heading-main3">Modeling & Production</h3>
-              <p className="heading-sub">
-                Build production-ready models and molds, preparing for efficient and precise manufacturing.
-              </p>
+            <div data-aos="fade-up" data-aos-delay="200">
+              <div className="step-item">
+                <Flask size={64} weight="duotone" className="mx-auto transition-transform duration-300 ease-out group-hover:scale-105" />
+                <h3 className="heading-main3">Modeling & Production</h3>
+                <p className="heading-sub">
+                  Build production-ready models and molds, preparing for efficient and precise manufacturing.
+                </p>
+              </div>
             </div>
 
-            {/* Step 5 */}
-            <div className="step-item text-center space-y-3" data-aos="fade-up" data-aos-delay="300">
-             <Factory size={64} weight="duotone" className="mx-auto" />
-              <h3 className="heading-main3">Sample Approval</h3>
-              <p className="heading-sub">
-                Produce the final sample for your inspection, ensuring every detail meets your specifications before full-scale production.
-              </p>
+            {/* Step 4 */}
+            <div data-aos="fade-up" data-aos-delay="300">
+              <div className="step-item">
+              <Factory size={64} weight="duotone" className="mx-auto transition-transform duration-300 ease-out group-hover:scale-105" />
+                <h3 className="heading-main3">Sample Approval</h3>
+                <p className="heading-sub">
+                  Produce the final sample for your inspection, ensuring every detail meets your specifications before full-scale production.
+                </p>
+              </div>
             </div>
           </div>
-          <div className='mt50 text-center'><a href="/odmoem" className="btn-secondary">Explore Customization</a></div>
+          <div className='mt-15 xl:mt-30 text-center'><a href="/odmoem" className="btn-secondary">Explore Customization</a></div>
           
       </section>
 
       <section className="section-1">
         <div className='container flex-col md:flex-row items-center flex gap160'>
-          <div className='w-3/5' data-aos="zoom-in">
+          <div className='w-full md:w-3/5' data-aos="zoom-in">
             <YouTubeLite
               embedUrl="https://www.youtube.com/embed/NS7Ndh6BNpk?list=PLyLZfD9mW35KgvIHkVhRef1shmiFPn2cg&index=2"
               title="China BBQ Grill Manufacturer and Supplier-KEYO automatic production line"
               poster="https://img.youtube.com/vi/NS7Ndh6BNpk/hqdefault.jpg"
             />
           </div>
-          <div className='w-2/5 flex flex-col' data-aos="fade-left" data-aos-delay="100">
+          <div className='md:w-2/5 flex flex-col' data-aos="fade-left" data-aos-delay="100">
               <h2 className="heading-main2">Innovation That Shapes Your Brand</h2>
               <p className="heading-sub mt30 text-hub">
                 Behind every custom BBQ grill is our relentless pursuit of innovation.
