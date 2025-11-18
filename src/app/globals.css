@@ -7,7 +7,7 @@
   --text-color: oklch(21% 0.034 264.665);
   /*--primary-color:oklch(62.3% 0.214 259.815);*/
   --primary-color: #008FDC;
-  --hover-color: oklch(72% 0.214 259.815); /* 比主色暗一点 */
+  --hover-color: #0076b6; /* 比主色暗一点 */
   --primary2-color: oklch(21% 0.034 264.665);
   --hover2-color: oklch(31% 0.034 264.665); /* 比主色暗一点 */
   --hub-color: oklch(55.1% 0.027 264.364);
@@ -71,8 +71,12 @@
 .footer-text li{@apply transition-colors hover:text-foreground;}
 
 
-.step-item{@apply h-full bg-white px-5 rounded-md md:px-8 py-12 md:py-12 shadow-xl transition transform hover:-translate-y-2 hover:shadow-lg hover:bg-hover hover:text-white text-center justify-center items-center flex flex-col transition-all duration-300 ease-out hover:-translate-y-0.5;}
+.step-item{@apply h-full bg-white px-5 rounded-md md:px-8 py-12 md:py-12 shadow-xl transition transform hover:-translate-y-2 hover:shadow-lg hover:bg-hover hover:text-white hover:[&_a]:text-white text-center justify-center items-center flex flex-col transition-all duration-300 ease-out hover:-translate-y-0.5;}
 .step-item svg{@apply mb-8 w-60;}
+.step-item a{@apply text-primary hover:text-white;}
+
+.l-arrow{@apply text-[30px] p-2 rounded-full hover:bg-primary hover:text-white border;}
+.r-arrow{@apply text-[30px] p-2 rounded-full hover:bg-primary hover:text-white border;}
 
 .detail{@apply flex flex-col gap-5}
 .detail p{@apply text-sm lg:text-base xl:text-lg leading-6 xl:leading-8;}

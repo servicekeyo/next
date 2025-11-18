@@ -2,7 +2,7 @@ import RankSchema from '@/components/RankSchema';
 import { withRankMetadata } from '@/lib/rankseo';
 import { QuoteButtonPrimary} from '@/components/QuoteButton';
 import Image from "next/image";
-import {Factory,Aperture,Bell,Ruler,Cube,Flask } from '@/components/Icons';
+import {Factory,Aperture,Bell,Package,Truck,Cube,Flask } from '@/components/Icons';
 import FooterContact from '@/components/FooterContact';
 import GrillTabs from '@/components/GrillTabs';
 import ProductAccessorySwitcher from '@/components/ProductAccessorySwitcher';
@@ -79,7 +79,7 @@ export default async function Home() {
             {/* Step 1 */}
             <div data-aos="fade-up" data-aos-delay="0" >
               <div className="step-item" >
-                <Ruler size={64} weight="duotone" className="mx-auto transition-transform duration-300 ease-out group-hover:scale-105" />
+                <Package size={64} weight="duotone" className="mx-auto transition-transform duration-300 ease-out group-hover:scale-105" />
                 <h3 className="heading-main3">2D Drawing</h3>
                 <p className="heading-sub">
                   Based on your ideas, we create detailed 2D drawings to clearly define dimensions, structure, and layout for easy confirmation.
@@ -128,7 +128,7 @@ export default async function Home() {
         <div className='container flex-col md:flex-row items-center flex gap160'>
           <div className='w-full md:w-3/5' data-aos="zoom-in">
             <YouTubeLite
-              embedUrl="https://www.youtube.com/embed/NS7Ndh6BNpk?list=PLyLZfD9mW35KgvIHkVhRef1shmiFPn2cg&index=2"
+              embedUrl="https://www.youtube.com/embed/qCE2ZXcQSY0"
               title="China BBQ Grill Manufacturer and Supplier-KEYO automatic production line"
               poster="https://img.youtube.com/vi/NS7Ndh6BNpk/hqdefault.jpg"
             />
@@ -139,7 +139,7 @@ export default async function Home() {
                 Behind every custom BBQ grill is our relentless pursuit of innovation.
 From intelligent design to precision manufacturing, we turn your ideas into market-ready products — with superior craftsmanship, reliable quality, and faster delivery.
               </p>
-              <div className='mt50'><a href="/odmoem" className="btn-secondary">Learn More</a></div>
+              <div className='mt50'><a href="/about" className="btn-secondary">Learn More</a></div>
           </div>
         </div>
       </section>

@@ -44,7 +44,7 @@ export async function getPostsPaged(post:"posts", page: number = 1, perPage: num
     const safePer = Math.max(1, perPage | 0)
     const safePage = Math.max(1, page | 0)
     const offset = (safePage - 1) * safePer
-    const url = `${WORDPRESS_API_URL}/${post}$?_embed&per_page=${safePer}&offset=${offset}&orderby=date&order=desc&status=publish&sticky=false&ignore_sticky_posts=true`
+    const url = `${WORDPRESS_API_URL}/${post}?_embed&per_page=${safePer}&offset=${offset}&orderby=date&order=desc&status=publish&sticky=false&ignore_sticky_posts=true`
     const res = await fetch(url, { cache: 'no-store' })
     if (!res.ok) {
       //console.error('❌ [getPostsPaged] 请求失败:', res.status, url)
@@ -108,9 +108,9 @@ export async function getGrillCategories(): Promise<any[]> {
   }
 }
 
-export async function getGrills(perPage: number = 100): Promise<any[]> {
+export async function getGrills(page: number = 1, perPage: number = 6): Promise<any[]> {
   try {
-    const res = await fetch(`${WORDPRESS_API_URL}/grill?per_page=${perPage}&_embed`, { next: { revalidate: 600 } })
+    const res = await fetch(`${WORDPRESS_API_URL}/grill?per_page=100&_embed`, { next: { revalidate: 600 } })
     if (!res.ok) return []
     const data = await res.json()
     return Array.isArray(data) ? data : []

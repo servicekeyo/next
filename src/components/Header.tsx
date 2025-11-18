@@ -45,7 +45,27 @@ export default function Header() {
                 </div>
               </div>
             </div>
-            <a href="/odmoem">ODM/OEM</a>
+            <div className="relative group">
+              <a className="flex items-center gap-1 hover:text-foreground/80 transition-colors py-2">
+                Services
+                <svg className="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </a>
+              <div className="absolute top-full left-0 pt-2 w-48 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <div className="bg-white shadow-lg rounded-md border border-gray-200 py-2">
+                  <a href="/odmoem" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
+                    ODM/OEM
+                  </a>
+                  <a href="/custom_packaging" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
+                    Custom Packaging
+                  </a>
+                  <a href="/packaging_shipping" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
+                    Packaging Shipping
+                  </a>
+                </div>
+              </div>
+            </div>
             <div className="relative group">
               <a className="flex items-center gap-1 hover:text-foreground/80 transition-colors py-2">
                 About
@@ -71,7 +91,7 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-3">
-            <QuoteButtonPrimary className="hidden lg:inline-flex">Get A Instant Quote Now</QuoteButtonPrimary>
+            <QuoteButtonPrimary className="hidden lg:inline-flex">Get a Custom Quote</QuoteButtonPrimary>
             <button
               type="button"
               aria-label="Toggle menu"

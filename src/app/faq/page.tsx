@@ -170,7 +170,7 @@ export default function FAQ() {
                   </div>
                 </div>
               ))}
-            </div>
+        </div>
       </section>
       <FooterContact />
     </div>

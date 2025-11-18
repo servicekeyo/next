@@ -11,6 +11,13 @@ import {
   Cube,
   Flask,
   Package,
+  Scissors,
+  Stamp,
+  Wrench,
+  Truck,
+  PaintBrush,
+  PuzzlePiece,
+  Gear,
 } from 'phosphor-react';
 export {
   Scroll,
@@ -23,5 +30,12 @@ export {
   Ruler,
   Cube,
   Flask,
+  Truck,
   Package,
+  Scissors,
+  Stamp,
+  Wrench,
+  PaintBrush,
+  PuzzlePiece,
+  Gear,
 };
