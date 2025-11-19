@@ -58,7 +58,7 @@ export default function TestimonialsCarousel({ items }: { items?: Testimonial[] 
       >
         {list.map((t, i) => (
           <SwiperSlide key={i} className="h-full">
-            <div ref={(el) => { cardRefs.current[i] = el }} className=" bg-white rounded-2xl border border-gray-200 p-6 transition h-full flex flex-col ">
+            <div ref={(el) => { cardRefs.current[i] = el }} data-aos="fade-up" data-aos-delay={`${i * 100}`} className=" bg-white rounded-2xl border border-gray-200 p-6 transition h-full flex flex-col ">
               <div className="flex items-center gap-1">
                 {Array.from({ length: 5 }).map((_, k) => (
                   <Star key={k} size={18} weight={k < (t.rating || 0) ? "fill" : "duotone"} className={k < (t.rating || 0) ? "text-primary" : "text-gray-300"} />

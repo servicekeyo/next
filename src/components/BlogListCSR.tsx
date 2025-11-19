@@ -60,9 +60,9 @@ export default function BlogListCSR({ initialPosts, perPage = 6, initialTotalPag
     <div className="container relative" data-aos="fade-up" suppressHydrationWarning>
       <div className="grid gap30 md:grid-cols-2 lg:grid-cols-3">
         {posts.map((post: any, index) => (
+          <div className="flex flex-col mb-5 xl:mb-10 hover:shadow-xl rounded-xl hover:scale-[1.02] transition-all duration-500 ease-out p-6 group cursor-pointer" >
           <article 
             key={post.id} 
-            className="flex flex-col mb-5 xl:mb-10 hover:shadow-xl rounded-2xl hover:scale-[1.02] transition-all duration-500 ease-out p-6 group cursor-pointer" 
             data-aos="fade-up" data-aos-delay={`${index * 100}`}
           >
             <img
@@ -78,7 +78,7 @@ export default function BlogListCSR({ initialPosts, perPage = 6, initialTotalPag
                 '/images/home/index_banner3.jpg'
               }
               loading="lazy"
-              className="w-full rounded-2xl bg-gray-100 object-cover h-[250px] xl:h-[310px] group-hover:scale-105 transition-transform duration-500 ease-out"
+              className="w-full rounded-2xl bg-gray-100 object-cover h-[250px] xl:h-[310px]"
             />
             <time dateTime={post.date} className='text-sm text-hub mt30'>
                 {new Date(post.date).toLocaleDateString('en-US', {month: 'short',day: 'numeric',year: 'numeric',})}
@@ -102,6 +102,7 @@ export default function BlogListCSR({ initialPosts, perPage = 6, initialTotalPag
               </p>
             </div>
           </article>
+          </div>
         ))}
         {!loading && posts.length === 0 && (
           <div className="mt20 md:col-span-2 lg:col-span-3 text-center text-gray-600">No posts found.</div>

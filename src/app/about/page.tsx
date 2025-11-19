@@ -209,7 +209,7 @@ export default function AboutPage() {
 
           {/* 第二个轮播区域 - Reliable Supply */}
           <div className='container flex flex-col lg:flex-row gap160'>
-            <div className="lg:w-1/2">
+            <div className="lg:w-1/2" data-aos="fade-right" data-aos-delay="200">
               <div className="space-y-4">
                 {/* 第二个主轮播 */}
                 <Swiper
@@ -268,7 +268,7 @@ export default function AboutPage() {
                 </Swiper>
               </div>
             </div>
-            <div className='lg:w-1/2 flex flex-col gap30 justify-center'>
+            <div className='lg:w-1/2 flex flex-col gap30 justify-center' data-aos="fade-left" data-aos-delay="200">
               <h2 className="heading-main2">Reliable Supply, Efficient Delivery</h2>
               <p className='text text-hub'>
                 With 3,000 containers of annual capacity, KEYO ensures reliable and efficient fulfillment of bulk orders.Orders are shipped within 30–40 days after payment, helping you keep your products on the market without delay.

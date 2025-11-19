@@ -69,8 +69,8 @@ export default function GrillListCSR({ initialPosts, perPage = 6, initialTotalPa
           const fallback = media?.source_url || media?.media_details?.sizes?.medium?.source_url || post?.yoast_head_json?.og_image?.[0]?.url || post?.jetpack_featured_media_url || '/images/home/index_banner3.jpg'
           const href = categorySlug ? `/grills/${post.slug}` : `/blog/${post.slug}`
           return (
-            <a key={post.id ?? index} href={href} className="group rounded-lg overflow-hidden bg-white shadow-sm hover:shadow-md transition">
-              <div className="relative pt-[100%]">
+            <a key={post.id ?? index} href={href} className="group rounded-lg overflow-hidden bg-white shadow-sm hover:shadow-xl rounded-xl hover:scale-[1.02] transition-all duration-500 ease-out">
+              <div className="relative pt-[100%]" data-aos="fade-up" data-aos-delay={`${index * 100}`}>
                 {front ? (
                   <img src={front} alt={title} className={`absolute inset-0 w-full h-full object-cover ${back ? 'transition-opacity duration-300 group-hover:opacity-0' : ''}`} />
                 ) : (

@@ -65,10 +65,10 @@ export default async function GrillCategoryPage({ params }: { params: Promise<{ 
           </svg>
           <rect fill="url(#grid-pattern)" width="100%" height="100%" strokeWidth={0} />
         </svg>
-        <div className='herotitle-w text-center' suppressHydrationWarning data-aos="fade-in">
-          <h1 className="heading-main">{hero_title}</h1>
-          <p className="heading-sub mt30 text-hub">{page?.acf?.hero?.p || ''}</p>
-          <div className="mt50"><QuoteButtonPrimary>Get a Free Quote</QuoteButtonPrimary></div>
+        <div className='herotitle-w text-center' suppressHydrationWarning data-aos="fade-up" data-aos-duration="800">
+          <h1 className="heading-main" data-aos="fade-up" data-aos-delay="200">{hero_title}</h1>
+          <p className="heading-sub mt30 text-hub" data-aos="fade-up" data-aos-delay="300">{page?.acf?.hero?.p || ''}</p>
+          <div className="mt50" data-aos="fade-up" data-aos-delay="400"><QuoteButtonPrimary>Get a Free Quote</QuoteButtonPrimary></div>
         </div>
       </section>
 
@@ -77,16 +77,16 @@ export default async function GrillCategoryPage({ params }: { params: Promise<{ 
         <PaginationNav totalPages={initialTotalPages} basePath={`/grills/${slug}`} />
       </section>
 
-      <section className="section-1 bg-foreground" data-aos="fade-up">
+      <section className="section-1 bg-foreground">
         <div className='container flex-col md:flex-row items-center flex gap160'>
-          <div className='w-full md:w-1/2'>
+          <div className='w-full md:w-1/2' data-aos="fade-right" data-aos-delay="200">
             <YouTubeLite
               embedUrl={page?.acf?.['3d_video']?.video_url || ''}
               title={page?.acf?.['3d_video']?.video_alt || ''}
               poster={page?.acf?.['3d_video']?.video_image || ''}
             />
           </div>
-          <div className='md:w-1/2 flex flex-col'>
+          <div className='md:w-1/2 flex flex-col' data-aos="fade-left" data-aos-delay="400">
             <h2 className="heading-main2">3D Installation Support</h2>
             <p className="heading-sub mt20 text-hub">We provide comprehensive 3D installation videos tailored for business partners. These videos offer precise, step-by-step visual guidance to fully understand product assembly, functionality, and key features.</p>
             <div className="grid grid-cols-1 gap-8 mt40">
@@ -123,7 +123,7 @@ export default async function GrillCategoryPage({ params }: { params: Promise<{ 
 
       <PackagingShipping />
 
-      <section className="section-1 bg-foreground" data-aos="fade-up">
+      <section className="section-1 bg-foreground">
         <div className="herotitle-w" data-aos="fade-in">
           <h2 className="heading-main2">What Our Customers Say About Us</h2>
           <p className="text text-hub mt20">We’ve served hundreds of satisfied customers. Here are some of their reviews.</p>
@@ -154,7 +154,7 @@ export default async function GrillCategoryPage({ params }: { params: Promise<{ 
           <h2 className="heading-main2">Frequently Asked Questions</h2>
           <p className="text text-hub mt20">Find answers to common questions about our BBQ grills, customization services, and ordering process.</p>
         </div>
-        <div className="container grid grid-cols-1 md:grid-cols-2  gap80">
+        <div className="container grid grid-cols-1 md:grid-cols-2  gap80" data-aos="fade-in" data-aos-delay="400">
           {(() => {
             const src = Array.isArray(page?.acf?.faq)
               ? page.acf.faq

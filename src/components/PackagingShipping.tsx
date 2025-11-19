@@ -4,11 +4,11 @@ export default function PackagingShipping() {
 
   return (
     <section className="section-1 relative overflow-hidden">
-      <div className="herotitle-w text-left">
+      <div className="herotitle-w text-left" data-aos="fade-in" data-aos-delay="200">
         <h2 className="heading-main2">Packaging & Shipping</h2>
         <p className="text text-hub mt20">Find answers to common questions about our BBQ grills, customization services, and ordering process.</p>
       </div>
-      <div className="container grid grid-cols-1 md:grid-cols-2 gap80">
+      <div className="container grid grid-cols-1 md:grid-cols-2 gap80" data-aos="fade-in" data-aos-delay="400">
         <div className="step-item !text-left !items-start">
           <div className="flex items-start gap-6">
             <Factory size={64} weight="duotone" />
@@ -21,7 +21,7 @@ export default function PackagingShipping() {
             </div>
           </div>
         </div>
-        <div className="step-item !text-left !items-start">
+        <div className="step-item !text-left !items-start" >
           <div className="flex items-start gap-6">
             <Package size={64} weight="duotone" />
             <div className="flex flex-col text-left">
