@@ -34,11 +34,12 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning className={`${poppins.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}>
         <QuoteProvider>
-          <AosProvider />
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <ScrollToTop />
+          <AosProvider>
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <ScrollToTop />
+          </AosProvider>
         </QuoteProvider>
       </body>
     </html>

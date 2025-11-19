@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { Phone, EnvelopeSimple, MapPin } from "phosphor-react";
+import { Phone,EnvelopeSimple,MapPin } from '@/components/Icons'
 export default function Footer() {
   const year = new Date().getFullYear();
   

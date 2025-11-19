@@ -1,13 +1,20 @@
 'use client'
-import { useEffect, useMemo, useState } from 'react'
+import { useLayoutEffect, useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
+import AOS from 'aos'
 
 export default function BlogListCSR({ initialPosts, perPage = 6, initialTotalPages }: { initialPosts: any[]; perPage?: number; initialTotalPages: number }) {
   const searchParams = useSearchParams()
   const pageFromUrl = useMemo(() => Math.max(1, parseInt(searchParams.get('page') || '1', 10) || 1), [searchParams])
   const [posts, setPosts] = useState<any[]>(initialPosts || [])
   const [loading, setLoading] = useState(false)
+  
+
+  // 调试信息
+  useEffect(() => {
+    // Debug logs removed
+  }, [initialPosts, posts, pageFromUrl])
 
   useEffect(() => {
     let cancelled = false
@@ -40,11 +47,24 @@ export default function BlogListCSR({ initialPosts, perPage = 6, initialTotalPag
     }
   }, [pageFromUrl, perPage, initialPosts])
 
+  useLayoutEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 100,
+    })
+    AOS.refresh()
+  }, [])
+
   return (
-    <div className="container relative"  data-aos="fade-up">
-      <div className="grid gap30 md:grid-cols-2 lg:grid-cols-3" data-aos="fade-up" data-aos-delay="100">
+    <div className="container relative" data-aos="fade-up" suppressHydrationWarning>
+      <div className="grid gap30 md:grid-cols-2 lg:grid-cols-3">
         {posts.map((post: any, index) => (
-          <article key={post.id} className="flex flex-col mb-5 xl:mb-10 hover:shadow-lg rounded-2xl hover:scale-105 transition-all duration-300 p-6">
+          <article 
+            key={post.id} 
+            className="flex flex-col mb-5 xl:mb-10 hover:shadow-xl rounded-2xl hover:scale-[1.02] transition-all duration-500 ease-out p-6 group cursor-pointer" 
+            data-aos="fade-up" data-aos-delay={`${index * 100}`}
+          >
             <img
               alt={
                 post?._embedded?.['wp:featuredmedia']?.[0]?.alt_text ||
@@ -58,14 +78,16 @@ export default function BlogListCSR({ initialPosts, perPage = 6, initialTotalPag
                 '/images/home/index_banner3.jpg'
               }
               loading="lazy"
-              className="w-full rounded-2xl bg-gray-100 object-cover h-[250px] xl:h-[310px]"
+              className="w-full rounded-2xl bg-gray-100 object-cover h-[250px] xl:h-[310px] group-hover:scale-105 transition-transform duration-500 ease-out"
             />
             <time dateTime={post.date} className='text-sm text-hub mt30'>
                 {new Date(post.date).toLocaleDateString('en-US', {month: 'short',day: 'numeric',year: 'numeric',})}
             </time>
             <div className="group relative mt20"> 
-             <h3 className="text font-bold hover:text-hover">
-              <Link href={`/blog/${post.slug}`} prefetch={false}>{post.title.rendered.replace(/<[^>]+>/g, '')}</Link>
+             <h3 className="text font-bold text-gray-900 group-hover:text-hover transition-colors duration-300">
+              <Link href={`/blog/${post.slug}`} target="_blank" prefetch={false}>
+                {post?.title?.rendered ? post.title.rendered.replace(/<[^>]+>/g, '') : 'Untitled Post'}
+              </Link>
              </h3> 
               <p
                 className="heading-sub text-hub mt20"

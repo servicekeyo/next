@@ -1,7 +1,8 @@
 'use client'
-import { useEffect, useMemo, useState } from 'react'
+import { useLayoutEffect, useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
+import AOS from 'aos'
 
 export default function GrillListCSR({ initialPosts, perPage = 6, initialTotalPages, categorySlug }: { initialPosts: any[]; perPage?: number; initialTotalPages: number; categorySlug?: string }) {
   const searchParams = useSearchParams()
@@ -48,6 +49,14 @@ export default function GrillListCSR({ initialPosts, perPage = 6, initialTotalPa
     }
   }, [pageFromUrl, perPage, initialPosts])
 
+  useLayoutEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 100,
+    })
+  }, [])
+
   return (
     <div className="container relative"  data-aos="fade-up">
       <div className="grid gap30 md:grid-cols-2 lg:grid-cols-4" data-aos="fade-up" data-aos-delay="100">
@@ -71,8 +80,8 @@ export default function GrillListCSR({ initialPosts, perPage = 6, initialTotalPa
                   <img src={back} alt={title} className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 ) : null}
               </div>
-              <div className="p-4">
-                <div className="text text-center">{title}</div>
+              <div className="p-4 group-hover:bg-gray-50 transition-colors duration-300">
+                <div className="text text-center font-medium group-hover:text-hover transition-colors duration-300">{title}</div>
               </div>
             </a>
           )

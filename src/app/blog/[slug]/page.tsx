@@ -1,6 +1,5 @@
 import { getbloglist, getPostBySlug } from '@/lib/wordpress'
-import { withRankMetadata } from '@/lib/rankseo'
-import RankSchema from '@/components/RankSchema'
+import SEO from '@/components/SEO'
 import ShareButton from '@/components/ShareButton'
 import TableOfContents from '@/components/TableOfContents'
 import FooterContact from '@/components/FooterContact';
@@ -14,7 +13,7 @@ export async function generateStaticParams() {
   return posts.map(p => ({ slug: p.slug }))
 }
 
-export const generateMetadata = withRankMetadata(({ params }: { params: { slug: string } }) => `https://admin.keyfirebbq.com/${params.slug}`)
+// 移除服务端 SEO，改用客户端 SEO 组件
 
 export default async function PostPage({ params }: { params: { slug: string } }) {
   const { slug } = await params
@@ -38,6 +37,9 @@ export default async function PostPage({ params }: { params: { slug: string } })
   const title = post ? (strip(post.title?.rendered) || slug) : 'Article Not Found'
   const publishDate = formatDate(post?.date) || formatDate(post?.date_gmt) || ''
   const html = post?.content?.rendered || post?.excerpt?.rendered || '<p>Article content is unavailable.</p>'
+
+  // WordPress permalink: prefer post.link if available to fetch RankMath SEO data accurately
+  const wpUrl = typeof post?.link === 'string' && post.link ? post.link : `https://admin.keyfirebbq.com/blog/${slug}`
   const slugify = (text: string) => {
     return (text || '')
       .toLowerCase()
@@ -99,7 +101,11 @@ export default async function PostPage({ params }: { params: { slug: string } })
   const next = nextPost ? { slug: nextPost.slug as string, title: strip(nextPost?.title?.rendered || '') } : null
   return (
     <div className="min-h-screen">
-      <RankSchema wpUrl={`https://admin.keyfirebbq.com/${slug}`} />
+      <SEO 
+        wpUrl={wpUrl}
+        fallbackTitle="Blog Post - BBQ Grill Manufacturing Insights | Keyo Customize" 
+        fallbackDescription="Read our latest blog post about BBQ grill manufacturing, customization tips, and industry insights from Keyo Customize."
+      />
       <section className="section-1 relative isolate">
           <svg
             aria-hidden="true"
@@ -134,26 +140,26 @@ export default async function PostPage({ params }: { params: { slug: string } })
             <rect fill="url(#1f932ae7-37de-4c0a-a8b0-a6e3b4d44b84)" width="100%" height="100%" strokeWidth={0} />
         </svg>
         <div className='w-4/5 xl:w-3/5 mx-auto text-center' suppressHydrationWarning data-aos="fade-up" data-aos-duration="800">
-          <h1 className="heading-main" data-aos="fade-up" data-aos-delay="200">{title}</h1>
+          <h1 className="heading-main transition-all duration-500 ease-out" data-aos="fade-up" data-aos-delay="200">{title}</h1>
           <div className="mt30 text-hub flex items-center justify-center gap-4 relative z-50" data-aos="fade-up" data-aos-delay="400">
-            <p className="heading-sub">{publishDate ? `${publishDate}` : ''}</p>
+            <p className="heading-sub hover:scale-105 transition-all duration-300 ease-out">{publishDate ? `${publishDate}` : ''}</p>
             <ShareButton
               title={title}
               url={post?.link || `https://admin.keyfirebbq.com/${slug}`}
-              className='relative z-50'
+              className='relative z-50 hover:scale-110 transition-all duration-300 ease-out'
             />
           </div>
         </div>
         <div className="container py-10 flex flex-col md:flex-row gap160" data-aos="fade-up" data-aos-duration="800">
           <div className="md:w-2/3" data-aos="fade-right" data-aos-delay="200">
             <div className="detail" dangerouslySetInnerHTML={{ __html: htmlWithIds }}/>
-            <hr className='pt-10'/>
-            <div className="mt30 flex items-center justify-between">
+            <hr className='pt-10 transition-all duration-500 ease-out' data-aos="fade-in" data-aos-delay="600"/>
+            <div className="mt30 flex items-center justify-between" data-aos="fade-up" data-aos-delay="800">
               {prev ? (
-                <a href={`/blog/${prev.slug}`} title={prev.title} className="btn-secondary">Previous</a>
+                <a href={`/blog/${prev.slug}`} title={prev.title} className="btn-secondary hover:scale-105 transition-all duration-300 ease-out">Previous</a>
               ) : <span />}
               {next ? (
-                <a href={`/blog/${next.slug}`} title={next.title} className="btn-secondary">Next</a>
+                <a href={`/blog/${next.slug}`} title={next.title} className="btn-secondary hover:scale-105 transition-all duration-300 ease-out">Next</a>
               ) : <span />}
             </div>
           </div>

@@ -1,18 +1,18 @@
-import RankSchema from '@/components/RankSchema';
-import { withRankMetadata } from '@/lib/rankseo';
+import SEO from '@/components/SEO';
 import { QuoteButtonPrimary} from '@/components/QuoteButton';
 import Image from "next/image";
-import {Factory,Aperture,Bell,Package,Truck,Cube,Flask } from '@/components/Icons';
+import {Factory,Aperture,Bell,Package,Cube,Flask } from '@/components/Icons';
 import FooterContact from '@/components/FooterContact';
 import GrillTabs from '@/components/GrillTabs';
 import ProductAccessorySwitcher from '@/components/ProductAccessorySwitcher';
 import YouTubeLite from '@/components/YouTubeLite';
 import BlogListCSR from '@/components/BlogListCSR';
 import { getbloglist } from '@/lib/wordpress';
+import AOSWrapper from '@/components/AOSWrapper';
 export const dynamic = 'force-static'
 export const revalidate = 600
 
-export const generateMetadata = withRankMetadata('https://admin.keyfirebbq.com/home')
+// 移除服务端 SEO，改用客户端 SEO 组件
 
 export default async function Home() {
   const perPage = 3
@@ -23,7 +23,12 @@ export default async function Home() {
   return (
 
     <div className="min-h-screen">
-      <RankSchema wpUrl="https://admin.keyfirebbq.com/home" />
+      <SEO 
+        wpUrl="https://admin.keyfirebbq.com/home" 
+        fallbackTitle="Keyo Customize | Custom BBQ Grill Manufacturer in China" 
+        fallbackDescription="Leading OEM & ODM BBQ grill manufacturer in China, providing custom charcoal, gas, and electric grills tailored for your brand and market."
+      />
+      <AOSWrapper>
       <main className="section-1 bg-foreground">
         <div className="container flex-col md:flex-row items-center flex gap160">
           <div className="sm:w-[570px] md:w-1/2" data-aos="fade-right">
@@ -35,15 +40,15 @@ export default async function Home() {
             </div>
             
             <div className="flex flex-col lg:flex-row  gap-5 mt50">
-              <QuoteButtonPrimary>
-                <span className="flex items-center gap-2">
-                  <Bell size={20}/>
+              <QuoteButtonPrimary className="group">
+                <span className="flex items-center gap-2 group-hover:translate-x-1 transition-transform duration-300">
+                  <Bell size={20} className="group-hover:rotate-12 transition-transform duration-300"/>
                   Get a Free Quote
                 </span>
               </QuoteButtonPrimary>
-              <a href="/about" className="btn-secondary">
-                <span className="flex items-center gap-2">
-                  <Aperture size={20} />
+              <a href="/about" className="btn-secondary group">
+                <span className="flex items-center gap-2 group-hover:translate-x-1 transition-transform duration-300">
+                  <Aperture size={20} className="group-hover:rotate-12 transition-transform duration-300"/>
                   Know More About Us
                 </span>
               </a>
@@ -51,7 +56,7 @@ export default async function Home() {
             
           </div>
           <div className="sm:w-1/2 flex justify-end" data-aos="fade-left">
-            <Image src="/images/home/index_banner3.jpg" alt="Keyo Customize" width={720} height={400} className="rounded-lg xl:rounded-tl-[100px]"/>
+            <Image src="/images/home/index_banner3.jpg" alt="Keyo Customize" width={720} height={400} className="rounded-lg xl:rounded-tl-[100px] hover:scale-105 transition-transform duration-500 ease-out" loading="eager" priority/>
           </div>
         </div>
       </main>
@@ -214,14 +219,14 @@ Product Testing Certification: CE,REACH,CCRF,Intertek,ROHS,LFGB,UKCA,ISO14000,IS
           <h2 className='heading-main2'>Custom BBQ Solutions</h2>
           <p className="heading-sub mt30 text-hub">From material selection to full-scale manufacturing, we share knowledge that helps you choose the right BBQ supplier and achieve high-quality custom grill production for your market.</p>
         </div>
-        <div className="container" data-aos="fade-up">
+
           <BlogListCSR initialPosts={initialPosts} perPage={perPage} initialTotalPages={initialTotalPages} />
-        </div>
+
         <div className='mt50 text-center'><a href="/blog" className="btn-secondary">Learn More</a></div>
       </section>
 
        <FooterContact />
-
+      </AOSWrapper>
     </div>
 
   );

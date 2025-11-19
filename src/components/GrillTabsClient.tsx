@@ -25,7 +25,7 @@ export default function GrillTabsClient({ categories, itemsByCat }: Props) {
           <button
             key={c.id}
             onClick={() => setActive(c.id)}
-            className={`tab-btn ${active === c.id ? 'tab-btn-active' : ''}`}
+            className={`tab-btn ${active === c.id ? 'tab-btn-active' : ''} hover:scale-105 transition-transform duration-200 ease-out`}
           >
             {c?.name ?? c?.slug ?? 'Category'}
           </button>
@@ -55,7 +55,7 @@ export default function GrillTabsClient({ categories, itemsByCat }: Props) {
           const back = imgFrom(item?.acf?.back_image) || ''
           return (
             <SwiperSlide key={item?.id ?? title}>
-              <div className="rounded-lg overflow-hidden bg-white transition">
+              <div className="rounded-lg overflow-hidden bg-white transition-all duration-500 ease-out hover:shadow-lg hover:scale-[1.02] cursor-pointer">
                 <div className="relative group pt-[100%]">
                   {front ? (
                     <img src={front} alt={title} className={`absolute inset-0 w-full h-full object-cover ${back ? 'transition-opacity duration-300 group-hover:opacity-0' : ''}`} />
@@ -65,7 +65,7 @@ export default function GrillTabsClient({ categories, itemsByCat }: Props) {
                   ) : null}
                 </div>
                 <div className="p-4">
-                  <div className="text font-semibold">{title}</div>
+                  <div className="text font-semibold group-hover:text-hover transition-colors duration-300">{title}</div>
                 </div>
               </div>
             </SwiperSlide>

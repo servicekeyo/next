@@ -1,3 +1,6 @@
+
+
+
 'use client';
 
 import { useState } from 'react';
@@ -10,6 +13,8 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/thumbs';
 import 'swiper/css/free-mode';
+import SEO from '@/components/SEO';
+import AOSPageWrapper from '@/components/AOSPageWrapper';
 
 export default function AboutPage() {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
@@ -35,7 +40,13 @@ export default function AboutPage() {
   ];
 
   return (
+    <AOSPageWrapper>
     <div className="min-h-screen">
+      <SEO 
+        wpUrl="https://admin.keyfirebbq.com/about"
+        fallbackTitle="About Us - Keyo Customize | BBQ Grill Manufacturer China"
+        fallbackDescription="Learn about Keyo Customize, a leading BBQ grill manufacturer in China with years of experience in custom grill design and production."
+      />
       {/* Hero Section */}
       <section className="section-1 relative isolate -z-10">
         <svg
@@ -299,5 +310,6 @@ export default function AboutPage() {
 
       <FooterContact />
     </div>
+    </AOSPageWrapper>
   );
 }

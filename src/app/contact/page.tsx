@@ -1,10 +1,19 @@
-import ContactForm from "@/components/ContactForm";
+'use client';
 
+import ContactForm from "@/components/ContactForm";
+import SEO from '@/components/SEO';
+import AOSPageWrapper from '@/components/AOSPageWrapper';
 
 
 export default function Contact() {
   return (
+    <AOSPageWrapper>
     <div className="relative section-1">
+      <SEO 
+        wpUrl="https://admin.keyfirebbq.com/contact"
+        fallbackTitle="Contact Us - Keyo Customize | BBQ Grill Manufacturer"
+        fallbackDescription="Get in touch with Keyo Customize for custom BBQ grill manufacturing, OEM/ODM services, and wholesale inquiries. Professional support team ready to help."
+      />
       <div className="grid container grid-cols-1 lg:grid-cols-2 items-center gap80">
           <div className="max-w-xl lg:mx-0 lg:max-w-lg">
             <div className="absolute inset-y-0 left-0 -z-10 w-full overflow-hidden bg-foreground ring-1 ring-gray-900/10 lg:w-1/2 dark:bg-gray-900 dark:ring-white/10">
@@ -72,6 +81,7 @@ export default function Contact() {
         </div>
       </div>
     </div>
+    </AOSPageWrapper>
   )
 }
 

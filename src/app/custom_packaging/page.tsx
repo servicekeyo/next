@@ -1,13 +1,18 @@
 'use client';
 
-import { useState } from 'react';
 import FooterContact from '@/components/FooterContact';
 import Image from 'next/image';
+import SEO from '@/components/SEO';
 
 export default function custom_packaging() {
 
   return (
     <div className="min-h-screen">
+      <SEO 
+        wpUrl="https://admin.keyfirebbq.com/custom_packaging"
+        fallbackTitle="Custom Packaging Services - BBQ Grill Packaging Solutions | Keyo Customize"
+        fallbackDescription="Professional custom packaging services for BBQ grills. Branded packaging solutions with your logo, design, and specifications. OEM/ODM packaging available."
+      />
       {/* Hero Section */}
       
       <section className="section-1 relative isolate -z-10">

@@ -15,7 +15,7 @@ export default function QuoteButton({
 }: QuoteButtonProps) {
   const { openQuote } = useQuote();
 
-  const baseStyles = 'transition-colors duration-200 cursor-pointer';
+  const baseStyles = 'transition-all duration-300 ease-out cursor-pointer transform hover:scale-105 active:scale-95';
   
   const variantStyles = {
     primary: 'bg-primary hover:bg-hover text-white py-3 px-6 rounded-md',

@@ -5,7 +5,7 @@ export default function ProductionProcess({ title, description }: { title?: stri
   const heading = title ?? 'Production Process'
   const desc = description ?? 'Every high-quality grill starts with precise design and careful planning. From materials to final assembly, each step is controlled to ensure durability, safety, and consistent performance.'
   return (
-    <section className="section-1 bg-foreground">
+    <section className="section-1">
         <div className="herotitle-w">
           <h2 className="heading-main2">{heading}</h2>
           <p className="heading-sub text-hub mt20">{desc}</p>

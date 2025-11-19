@@ -1,8 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { CaretDown, CaretUp } from 'phosphor-react';
+import {CaretDown } from '@/components/Icons';
 import FooterContact from '@/components/FooterContact';
+import SEO from '@/components/SEO';
+import AOSPageWrapper from '@/components/AOSPageWrapper';
 
 interface FAQItem {
   id: number;
@@ -91,7 +93,13 @@ export default function FAQ() {
   };
 
   return (
+    <AOSPageWrapper>
     <div className="min-h-screen">
+      <SEO 
+        wpUrl="https://admin.keyfirebbq.com/faq"
+        fallbackTitle="FAQ - Frequently Asked Questions | Keyo Customize"
+        fallbackDescription="Find answers to common questions about our BBQ grill manufacturing, OEM/ODM services, ordering process, MOQ, lead times, and more."
+      />
       {/* Hero Section */}
       <section className="section-1 relative isolate -z-10">
           <svg
@@ -174,5 +182,6 @@ export default function FAQ() {
       </section>
       <FooterContact />
     </div>
+    </AOSPageWrapper>
   );
 }

@@ -1,14 +1,19 @@
 'use client';
 
-import { useState } from 'react';
 import FooterContact from '@/components/FooterContact';
 import Image from 'next/image';
 import YouTubeLite from '@/components/YouTubeLite';
+import SEO from '@/components/SEO';
 
 export default function packaging_shipping() {
 
   return (
     <div className="min-h-screen">
+      <SEO 
+        wpUrl="https://admin.keyfirebbq.com/packaging_shipping"
+        fallbackTitle="Packaging & Shipping Services - BBQ Grill Logistics | Keyo Customize"
+        fallbackDescription="Professional packaging and shipping services for BBQ grills. Safe, secure, and timely delivery of your custom grill orders worldwide."
+      />
       {/* Hero Section */}
       
       <section className="section-1 relative isolate -z-10">

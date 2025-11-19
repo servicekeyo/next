@@ -1,13 +1,20 @@
 'use client';
 
-import { useState } from 'react';
 import FooterContact from '@/components/FooterContact';
 import Image from 'next/image';
+import YouTubeLite from '@/components/YouTubeLite';
+import SEO from '@/components/SEO';
+import AOSPageWrapper from '@/components/AOSPageWrapper';
 
-export default function odmoem() {
-
+export default function ODMOEMPage() {
   return (
+    <AOSPageWrapper>
     <div className="min-h-screen">
+      <SEO 
+        wpUrl="https://admin.keyfirebbq.com/odmoem"
+        fallbackTitle="From Idea To Product In Just 6 Steps - BBQ Grill Logistics | Keyo Customize"
+        fallbackDescription="Whether it starts with a sketch, a photo, or simply an idea, our team turns your vision into a real, manufacturable product. A clear process, step by step — making customization simple and efficient."
+      />
       {/* Hero Section */}
       
       <section className="section-1 relative isolate -z-10">
@@ -52,64 +59,94 @@ export default function odmoem() {
       <section className="section-3">
         <div className="container flex flex-col gap160" data-aos="fade-up" data-aos-duration="800">
 
+          {/* Step 1 */}
           <div className="flex flex-col-reverse md:flex-row gap160">
-            <div className="md:w-1/2" data-aos="fade-right"><Image className='rounded-xl box-shadow-xl' src="/images/odm/odm1.jpg" alt="odmoem" width={720} height={500} /></div>
+            <div className="md:w-1/2" data-aos="fade-right">
+              <Image src="/images/odm/odm1.jpg" className='rounded-xl' alt="Step 1" width={720} height={500} />
+            </div>
             <div className="md:w-1/2 flex flex-col justify-center" data-aos="fade-left">
-              <span className="heading-sub text-primary font-bold">Step1</span>
-              <h2 className="heading-main3 my-5">Share Your Idea or Reference Image</h2>
-              <p className="text w-2/3">Tell us what you want to create or send a product image reference — we’ll study your concept and prepare for design planning.</p>
+              <div className='w-3/4'>
+                <span className="heading-sub text-primary font-bold">Step1</span>
+                <h2 className="heading-main3 my-5">Share Your Idea or Reference Image</h2>
+                <p className="text ">Tell us what you want to create or send a product image reference — we’ll study your concept and prepare for design planning.</p>
+              </div>
             </div>
           </div>
 
+          {/* Step 2 */}
           <div className="flex flex-col md:flex-row justify-between gap160">
             <div className="md:w-1/2 flex flex-col justify-center" data-aos="fade-right">
-              <span className="heading-sub text-primary font-bold">Step2</span>
-              <h2 className="heading-main3 my-5">Confirm Dimensions with 2D Drawings</h2>
-              <p className="text w-2/3">We create detailed 2D drawings to confirm structure and measurements, ensuring all dimensions meet your functional requirements.</p>
+              <div className='w-3/4'>
+                <span className="heading-sub text-primary font-bold">Step2</span>
+                <h2 className="heading-main3 my-5">Confirm Dimensions with 2D Drawings</h2>
+                <p className="text ">We create detailed 2D drawings to confirm structure and measurements, ensuring all dimensions meet your functional requirements.</p>
+              </div>
             </div>
-            <div className="md:w-1/2" data-aos="fade-left"><Image className='rounded-xl box-shadow-xl' src="/images/odm/odm2.jpg" alt="odmoem" width={720} height={500} /></div>
+            <div className="md:w-1/2" data-aos="fade-left">
+              <Image src="/images/odm/odm2.jpg" className='rounded-xl' alt="Step 1" width={720} height={500} />
+            </div>
           </div>
 
+          {/* Step 3 */}
           <div className="flex flex-col-reverse md:flex-row gap160">
-            <div className="md:w-1/2" data-aos="fade-right"><Image className='rounded-xl box-shadow-xl' src="/images/odm/odm3.jpg" alt="odmoem" width={720} height={500} /></div>
+            <div className="md:w-1/2" data-aos="fade-right">
+              <Image src="/images/odm/odm3.jpg" className='rounded-xl' alt="Step 3" width={720} height={500} />
+            </div>
             <div className="md:w-1/2 flex flex-col justify-center" data-aos="fade-left">
-              <span className="heading-sub text-primary font-bold">Step3</span>
-              <h2 className="heading-main3 my-5">Visualize in 3D Model</h2>
-              <p className="text w-2/3">A 3D model is created based on your approved dimensions, allowing you to preview and refine the product’s final appearance.</p>
+              <div className='w-3/4'>
+                <span className="heading-sub text-primary font-bold">Step3</span>
+                <h2 className="heading-main3 my-5">Visualize in 3D Model</h2>
+                <p className="text ">A 3D model is created based on your approved dimensions, allowing you to preview and refine the product’s final appearance.</p>
+              </div>
             </div>
           </div>
 
-          <div className="flex flex-col md:flex-row gap160">
+          {/* Step 4 */}
+          <div className="flex flex-col md:flex-row justify-between gap160">
             <div className="md:w-1/2 flex flex-col justify-center" data-aos="fade-right">
-              <span className="heading-sub text-primary font-bold">Step4</span>
-              <h2 className="heading-main3 my-5">Define Function & Details</h2>
-              <p className="text w-2/3">We confirm product features, structure, assembly, and finish options — ensuring functionality meets your market expectations.</p>
+              <div className='w-3/4'>
+                <span className="heading-sub text-primary font-bold">Step4</span>
+                <h2 className="heading-main3 my-5">Define Function & Details</h2>
+                <p className="text ">We confirm product features, structure, assembly, and finish options — ensuring functionality meets your market expectations.</p>
+              </div>
             </div>
-            <div className="md:w-1/2" data-aos="fade-left"><Image className='rounded-xl box-shadow-xl' src="/images/odm/odm4.jpg" alt="odmoem" width={720} height={500} /></div>
+            <div className="md:w-1/2" data-aos="fade-left">
+              <Image src="/images/odm/odm4.jpg" className='rounded-xl' alt="Step 4" width={720} height={500} />
+            </div>
           </div>
 
+          {/* Step 5 */}
           <div className="flex flex-col-reverse md:flex-row gap160">
-            <div className="md:w-1/2" data-aos="fade-right"><Image className='rounded-xl box-shadow-xl' src="/images/home/factory (6).jpg" alt="odmoem" width={720} height={500} /></div>
+            <div className="md:w-1/2" data-aos="fade-right">
+              <Image src="/images/home/factory (6).jpg" className='rounded-xl hover:scale-105 transition-all duration-500 ease-out' alt="Step 5" width={720} height={500} />
+            </div>
             <div className="md:w-1/2 flex flex-col justify-center" data-aos="fade-left">
-              <span className="heading-sub text-primary font-bold">Step5</span>
-              <h2 className="heading-main3 my-5">Molding & Production Setup</h2>
-              <p className="text w-2/3">Once designs are approved, we move into tooling and trial production to guarantee precision and readiness for mass manufacturing.</p>
+              <div className='w-3/4'>
+                <span className="heading-sub text-primary font-bold">Step5</span>
+                <h2 className="heading-main3 my-5">Molding & Production Setup</h2>
+                <p className="text ">Once designs are approved, we move into tooling and trial production to guarantee precision and readiness for mass manufacturing.</p>
+              </div>
             </div>
           </div>
 
-          <div className="flex flex-col md:flex-row gap160">
+          {/* Step 6 */}
+          <div className="flex flex-col md:flex-row justify-between gap160">
             <div className="md:w-1/2 flex flex-col justify-center" data-aos="fade-right">
-              <span className="heading-sub text-primary font-bold">Step6</span>
-              <h2 className="heading-main3 my-5">Sample Approval & Delivery</h2>
-              <p className="text w-2/3">Samples are produced, tested, and delivered for your approval — ensuring the final product meets your expectations before production.</p>
+              <div className='w-3/4'>
+                <span className="heading-sub text-primary font-bold">Step6</span>
+                <h2 className="heading-main3 my-5">Sample Approval & Delivery</h2>
+                <p className="text ">Samples are produced, tested, and delivered for your approval — ensuring the final product meets your expectations before production.</p>
+              </div>
             </div>
-            <div className="md:w-1/2" data-aos="fade-left"><Image className='rounded-xl box-shadow-xl' src="/images/odm/odm6.jpg" alt="odmoem" width={720} height={500} /></div>
+            <div className="md:w-1/2" data-aos="fade-left">
+              <Image src="/images/odm/odm6.jpg" className='rounded-xl' alt="Step 6" width={720} height={500} />
+            </div>
           </div>
-          
+
         </div>
       </section>
       <FooterContact />
-
-     </div>
-  );
+    </div>
+    </AOSPageWrapper>
+  )
 }

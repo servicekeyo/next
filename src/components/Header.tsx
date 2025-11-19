@@ -8,6 +8,7 @@ import { List, X, CaretDown } from "phosphor-react";
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [aboutSubmenuOpen, setAboutSubmenuOpen] = useState(false);
+  const [servicesSubmenuOpen, setServicesSubmenuOpen] = useState(false);
   return (
     <header suppressHydrationWarning className="bg-white sticky top-0 z-50 px-5 md:px-10 xl:px-24 border-b border-gray-100">
 
@@ -27,19 +28,19 @@ export default function Header() {
               </a>
               <div className="absolute top-full left-0 pt-2 w-48 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                 <div className="bg-white shadow-lg rounded-md border border-gray-200 py-2">
-                  <a href="/wholesale/charcoal-grill" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
+                  <a href="/grills/charcoal-grill" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
                     Charcoal Grill
                   </a>
-                  <a href="/wholesale/gas-grill" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
+                  <a href="/grills/gas-grill" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
                     Gas Grill
                   </a>
-                   <a href="/wholesale/electrical-grill" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
+                   <a href="/grills/electrical-grill" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
                     Electrical Grill
                   </a>
-                   <a href="/wholesale/kettle-grill" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
+                   <a href="/grills/kettle-grill" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
                     Kettle Grill
                   </a>
-                   <a href="/wholesale/smoker" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
+                   <a href="/grills/smoker" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
                     Smoker
                   </a>
                 </div>
@@ -113,6 +114,7 @@ export default function Header() {
             onClick={() => {
               setOpen(false);
               setAboutSubmenuOpen(false);
+              setServicesSubmenuOpen(false);
             }}
           />
           
@@ -127,6 +129,7 @@ export default function Header() {
                 onClick={() => {
                   setOpen(false);
                   setAboutSubmenuOpen(false);
+                  setServicesSubmenuOpen(false);
                 }}
                 className="p-2 rounded-md hover:bg-gray-100 transition-colors"
                 aria-label="Close menu"
@@ -151,7 +154,7 @@ export default function Header() {
                   <div className="text-lg font-medium text-gray-900">Products</div>
                   <div className="pl-4 space-y-3">
                     <a 
-                      href="/wholesale/charcoal-grill" 
+                      href="/grills/charcoal-grill" 
                       className="block text-base text-gray-600 hover:text-primary transition-colors"
                       onClick={() => setOpen(false)}
                     >
@@ -159,7 +162,15 @@ export default function Header() {
                     </a>
                     
                     <a 
-                      href="/wholesale/electrical-grill" 
+                      href="/grills/gas-grill" 
+                      className="block text-base text-gray-600 hover:text-primary transition-colors"
+                      onClick={() => setOpen(false)}
+                    >
+                      Gas Grill
+                    </a>
+
+                    <a 
+                      href="/grills/electrical-grill" 
                       className="block text-base text-gray-600 hover:text-primary transition-colors"
                       onClick={() => setOpen(false)}
                     >
@@ -167,7 +178,7 @@ export default function Header() {
                     </a>
 
                     <a 
-                      href="/wholesale/kettle-grill" 
+                      href="/grills/kettle-grill" 
                       className="block text-base text-gray-600 hover:text-primary transition-colors"
                       onClick={() => setOpen(false)}
                     >
@@ -175,7 +186,7 @@ export default function Header() {
                     </a>
 
                     <a 
-                      href="/wholesale/smoker" 
+                      href="/grills/smoker" 
                       className="block text-base text-gray-600 hover:text-primary transition-colors"
                       onClick={() => setOpen(false)}
                     >
@@ -183,9 +194,54 @@ export default function Header() {
                     </a>
                   </div>
                 </div>
-                <a href="/odmoem"  className="text-lg font-medium text-gray-900 hover:text-primary transition-colors" onClick={() => setOpen(false)}>
-                  ODM/OEM
-                </a>
+                <div className="space-y-3">
+                  <button 
+                    className="flex items-center justify-between w-full text-lg font-medium text-gray-900 hover:text-primary transition-colors"
+                    onClick={() => setServicesSubmenuOpen(!servicesSubmenuOpen)}
+                  >
+                    <span>Services</span>
+                    <CaretDown 
+                      size={16} 
+                      className={`transition-transform duration-200 ${
+                        servicesSubmenuOpen ? 'rotate-180' : 'rotate-0'
+                      }`}
+                    />
+                  </button>
+                  {servicesSubmenuOpen && (
+                    <div className="pl-4 space-y-3 animate-in slide-in-from-top-2 duration-200">
+                      <a 
+                        href="/odmoem" 
+                        className="block text-base text-gray-600 hover:text-primary transition-colors"
+                        onClick={() => {
+                          setOpen(false);
+                          setServicesSubmenuOpen(false);
+                        }}
+                      >
+                        ODM/OEM
+                      </a>
+                      <a 
+                        href="/custom_packaging" 
+                        className="block text-base text-gray-600 hover:text-primary transition-colors"
+                        onClick={() => {
+                          setOpen(false);
+                          setServicesSubmenuOpen(false);
+                        }}
+                      >
+                        Custom Packaging
+                      </a>
+                      <a 
+                        href="/packaging_shipping" 
+                        className="block text-base text-gray-600 hover:text-primary transition-colors"
+                        onClick={() => {
+                          setOpen(false);
+                          setServicesSubmenuOpen(false);
+                        }}
+                      >
+                        Packaging Shipping
+                      </a>
+                    </div>
+                  )}
+                </div>
                 {/* About 下拉菜单 */}
                 <div className="space-y-3">
                   <button 
@@ -224,6 +280,16 @@ export default function Header() {
                        >
                          FAQ
                        </a>
+                        <a 
+                          href="/blog" 
+                          className="block text-base text-gray-600 hover:text-primary transition-colors"
+                          onClick={() => {
+                            setOpen(false);
+                            setAboutSubmenuOpen(false);
+                          }}
+                        >
+                          Blog
+                        </a>
                     </div>
                   )}
                 </div>

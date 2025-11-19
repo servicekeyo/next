@@ -17,7 +17,7 @@ const WORDPRESS_API_URL = process.env.WORDPRESS_API_URL || 'https://admin.keyfir
 export async function getbloglist(page: number = 1, perPage: number = 6): Promise<any[]> {
   try {
     const res = await fetch(`${WORDPRESS_API_URL}/posts?per_page=100&_embed`, {
-      next: { revalidate: 600 },
+      cache: "force-cache"
     })
     
 
@@ -26,14 +26,11 @@ export async function getbloglist(page: number = 1, perPage: number = 6): Promis
     const posts = await res.json()
 
     if (!Array.isArray(posts)) {
-      //console.error('❌ [getbloglist] 返回格式错误:', posts)
       return []
     }
 
-   // console.log('✅ [getbloglist] 成功获取文章数量:', posts.length)
     return posts
   } catch (err) {
-    //console.error('❌ [getbloglist] 抓取异常:', err)
     return []
   }
 }
@@ -74,8 +71,9 @@ export async function getPostBySlug(slug: string) {
 
   try {
     const res = await fetch(`${WORDPRESS_API_URL}/posts?slug=${slug}&_embed`, {
-      next: { revalidate: 600 },
+      cache: "force-cache"
     })
+    console.log(`${WORDPRESS_API_URL}/posts?slug=${slug}&_embed`)
 
     if (!res.ok) {
      // console.error('❌ [getPostBySlug] 请求失败:', res.status, res.statusText)
@@ -99,7 +97,7 @@ export async function getPostBySlug(slug: string) {
 
 export async function getGrillCategories(): Promise<any[]> {
   try {
-    const res = await fetch(`${WORDPRESS_API_URL}/grill_category?per_page=100`, { next: { revalidate: 600 } })
+    const res = await fetch(`${WORDPRESS_API_URL}/grill_category?per_page=100`, { next: { revalidate: 300, tags: ['grill-categories'] } })
     if (!res.ok) return []
     const data = await res.json()
     return Array.isArray(data) ? data : []
@@ -110,7 +108,7 @@ export async function getGrillCategories(): Promise<any[]> {
 
 export async function getGrills(page: number = 1, perPage: number = 6): Promise<any[]> {
   try {
-    const res = await fetch(`${WORDPRESS_API_URL}/grill?per_page=100&_embed`, { next: { revalidate: 600 } })
+    const res = await fetch(`${WORDPRESS_API_URL}/grill?per_page=100&_embed`, { next: { revalidate: 300, tags: ['grills-all'] } })
     if (!res.ok) return []
     const data = await res.json()
     return Array.isArray(data) ? data : []
@@ -122,7 +120,7 @@ export async function getGrills(page: number = 1, perPage: number = 6): Promise<
 export async function getGrillsByCategory(categoryId: number, perPage: number = 100): Promise<any[]> {
   if (!categoryId || typeof categoryId !== 'number') return []
   try {
-    const res = await fetch(`${WORDPRESS_API_URL}/grill?per_page=${perPage}&grill_category=${categoryId}&_embed`, { next: { revalidate: 600 } })
+    const res = await fetch(`${WORDPRESS_API_URL}/grill?per_page=${perPage}&grill_category=${categoryId}&_embed`, { next: { revalidate: 300, tags: [`grills-cat-${categoryId}`] } })
     if (!res.ok) return []
     const data = await res.json()
     return Array.isArray(data) ? data : []
@@ -163,5 +161,18 @@ export async function fetchProductsByCategory(categorySlug: string, limit: numbe
     })
   } catch {
     return []
+  }
+}
+
+export async function getPageBySlug(slug: string): Promise<any | null> {
+  if (!slug || typeof slug !== 'string') return null
+  try {
+    const res = await fetch(`${WORDPRESS_API_URL}/pages?slug=${slug}&_embed`, { next: { revalidate: 300, tags: ['wp-page', `wp-page-${slug}`] } })
+    if (!res.ok) return null
+    const data = await res.json()
+    if (!Array.isArray(data) || data.length === 0) return null
+    return data[0]
+  } catch {
+    return null
   }
 }

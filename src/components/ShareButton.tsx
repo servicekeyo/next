@@ -29,7 +29,7 @@ export default function ShareButton({ className = '', url, title }: ShareButtonP
         target="_blank"
         rel="noopener noreferrer"
         aria-label="分享到 Facebook"
-        className="p-1 rounded hover:bg-gray-100 transition-colors"
+        className="p-1 rounded hover:bg-gray-100 hover:scale-125 transition-all duration-300 ease-out transform"
         title="Facebook"
       >
         <FacebookLogo size={20} />
@@ -39,7 +39,7 @@ export default function ShareButton({ className = '', url, title }: ShareButtonP
         target="_blank"
         rel="noopener noreferrer"
         aria-label="分享到 X/Twitter"
-        className="p-1 rounded hover:bg-gray-100 transition-colors"
+        className="p-1 rounded hover:bg-gray-100 hover:scale-125 transition-all duration-300 ease-out transform"
         title="X/Twitter"
       >
         <TwitterLogo size={20} />
@@ -49,7 +49,7 @@ export default function ShareButton({ className = '', url, title }: ShareButtonP
         target="_blank"
         rel="noopener noreferrer"
         aria-label="分享到 LinkedIn"
-        className="p-1 rounded hover:bg-gray-100 transition-colors"
+        className="p-1 rounded hover:bg-gray-100 hover:scale-125 transition-all duration-300 ease-out transform"
         title="LinkedIn"
       >
         <LinkedinLogo size={20} />
@@ -59,7 +59,7 @@ export default function ShareButton({ className = '', url, title }: ShareButtonP
         target="_blank"
         rel="noopener noreferrer"
         aria-label="分享到 Reddit"
-        className="p-1 rounded hover:bg-gray-100 transition-colors"
+        className="p-1 rounded hover:bg-gray-100 hover:scale-125 transition-all duration-300 ease-out transform"
         title="Reddit"
       >
         <RedditLogo size={20} />

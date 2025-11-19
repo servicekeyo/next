@@ -18,6 +18,11 @@ import {
   PaintBrush,
   PuzzlePiece,
   Gear,
+  Phone,
+  EnvelopeSimple,
+  MapPin,
+  CaretDown,
+  CaretUp
 } from 'phosphor-react';
 export {
   Scroll,
@@ -38,4 +43,9 @@ export {
   PaintBrush,
   PuzzlePiece,
   Gear,
+  Phone,
+  EnvelopeSimple,
+  MapPin,
+  CaretDown,
+  CaretUp
 };

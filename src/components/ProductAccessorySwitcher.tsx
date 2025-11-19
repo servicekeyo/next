@@ -1,5 +1,7 @@
 "use client";
-import { useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 type AccessoryOption = { id: string; col:number; img: string; class_img:string };
 type AccessoryCategory = { id: string; label: string; options: AccessoryOption[] };
@@ -49,6 +51,15 @@ const accessoryCategories: AccessoryCategory[] = [
 
 export default function ProductAccessorySwitcher() {
   const [activeOption, setActiveOption] = useState<AccessoryOption>(accessoryCategories[0].options[0]);
+
+  useLayoutEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 100,
+    })
+    AOS.refresh()
+  }, [])
 
   return (
 
