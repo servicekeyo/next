@@ -78,7 +78,7 @@ export default function BlogListCSR({ initialPosts, perPage = 6, initialTotalPag
                 '/images/home/index_banner3.jpg'
               }
               loading="lazy"
-              className="w-full rounded-2xl bg-gray-100 object-cover h-[250px] xl:h-[310px]"
+              className="w-full rounded-xl bg-gray-100 object-cover h-[250px] xl:h-[310px]"
             />
             <time dateTime={post.date} className='text-sm text-hub mt30'>
                 {new Date(post.date).toLocaleDateString('en-US', {month: 'short',day: 'numeric',year: 'numeric',})}

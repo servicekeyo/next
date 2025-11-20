@@ -10,7 +10,7 @@ export default function PackagingShipping() {
       </div>
       <div className="container grid grid-cols-1 md:grid-cols-2 gap80" data-aos="fade-in" data-aos-delay="400">
         <div className="step-item !text-left !items-start">
-          <div className="flex items-start gap-6">
+          <div className="flex flex-wrap flex-nowrap items-start gap-6">
             <Factory size={64} weight="duotone" />
             <div className="flex flex-col text-left">
               <h3 className="heading-main3">Packing & Delivery</h3>
@@ -22,7 +22,7 @@ export default function PackagingShipping() {
           </div>
         </div>
         <div className="step-item !text-left !items-start" >
-          <div className="flex items-start gap-6">
+          <div className="flex flex-wrap flex-nowrap items-start gap-6">
             <Package size={64} weight="duotone" />
             <div className="flex flex-col text-left">
               <h3 className="heading-main3">Packaging Details</h3>
