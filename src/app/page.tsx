@@ -1,4 +1,4 @@
-import SEO from '@/components/SEO';
+import { getMetadataFromRankMath } from '@/lib/seoServer';
 import { QuoteButtonPrimary} from '@/components/QuoteButton';
 import Image from "next/image";
 import {Factory,Aperture,Bell,Package,Cube,Flask } from '@/components/Icons';
@@ -12,6 +12,15 @@ import AOSWrapper from '@/components/AOSWrapper';
 export const dynamic = 'force-static'
 export const revalidate = 600
 
+// 服务器端静态生成页面 Metadata
+export async function generateMetadata() {
+  const wpUrl = 'https://admin.keyfirebbq.com/home'
+  return await getMetadataFromRankMath(wpUrl, {
+    title: 'Keyo Customize | Custom BBQ Grill Manufacturer in China',
+    description: 'Leading OEM & ODM BBQ grill manufacturer in China, providing custom charcoal, gas, and electric grills tailored for your brand and market.'
+  })
+}
+
 // 移除服务端 SEO，改用客户端 SEO 组件
 
 export default async function Home() {
@@ -23,11 +32,11 @@ export default async function Home() {
   return (
 
     <div className="min-h-screen">
-      <SEO 
+      {/* <SEO 
         wpUrl="https://admin.keyfirebbq.com/home" 
         fallbackTitle="Keyo Customize | Custom BBQ Grill Manufacturer in China" 
         fallbackDescription="Leading OEM & ODM BBQ grill manufacturer in China, providing custom charcoal, gas, and electric grills tailored for your brand and market."
-      />
+      /> */}
       <AOSWrapper>
       <main className="section-1 bg-foreground">
         <div className="container flex-col md:flex-row items-center flex gap160">

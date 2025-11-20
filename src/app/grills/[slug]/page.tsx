@@ -8,13 +8,13 @@ import YouTubeLite from '@/components/YouTubeLite'
 import TestimonialsCarousel from '@/components/TestimonialsCarousel'
 import GalleryCarousel from '@/components/GalleryCarousel'
 import ProductionProcess from '@/components/ProductionProcess'
-import SEO from '@/components/SEO'
+import { getMetadataFromRankMath } from '@/lib/seoServer'
 
 export const dynamic = 'force-static'
 export const dynamicParams = false
-export const revalidate = 300
+export const revalidate = 600
 
-// 移除服务端 SEO，改用客户端 SEO 组件
+// 服务器端 generateMetadata 获取 RankMath SEO 数据
 
 
 
@@ -27,6 +27,16 @@ function humanTitle(slug: string) {
     .filter(Boolean)
     .map(s => s.charAt(0).toUpperCase() + s.slice(1))
     .join(' ')
+}
+
+// 服务器端静态生成页面 Metadata
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const slug = params.slug
+  const wpUrl = `https://admin.keyfirebbq.com/grills/${slug}`
+  return await getMetadataFromRankMath(wpUrl, {
+    title: 'Custom BBQ Grills - Keyo Customize',
+    description: 'Professional custom BBQ grill manufacturer in China. High-quality charcoal, gas, electric grills and smokers with OEM/ODM services.'
+  })
 }
 
 export default async function GrillCategoryPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -45,11 +55,13 @@ export default async function GrillCategoryPage({ params }: { params: Promise<{ 
 
   return (
     <div className="min-h-screen">
+      {/*
       <SEO 
         wpUrl={`https://admin.keyfirebbq.com/grills/${slug}`} 
         fallbackTitle="Custom BBQ Grills - Keyo Customize" 
         fallbackDescription="Professional custom BBQ grill manufacturer in China. High-quality charcoal, gas, electric grills and smokers with OEM/ODM services."
       />
+      */}
       <section className="section-1 relative isolate " data-aos="fade-in">
         <svg aria-hidden="true" className="absolute inset-x-0 top-0 -z-10 h-70 xl:h-110 w-full mask-[radial-gradient(70rem_70rem_at_center,white,transparent)] stroke-gray-200">
           <defs>

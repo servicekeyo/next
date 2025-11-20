@@ -1,5 +1,5 @@
 import { getbloglist, getPostBySlug } from '@/lib/wordpress'
-import SEO from '@/components/SEO'
+import { getMetadataFromRankMath } from '@/lib/seoServer'
 import ShareButton from '@/components/ShareButton'
 import TableOfContents from '@/components/TableOfContents'
 import FooterContact from '@/components/FooterContact';
@@ -7,13 +7,23 @@ export const dynamic = 'force-static'
 export const dynamicParams = false
 export const revalidate = false
 
+// 服务器端静态生成页面 Metadata
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const slug = params.slug
+  const wpUrl = `https://admin.keyfirebbq.com/blog/${slug}`
+  return await getMetadataFromRankMath(wpUrl, {
+    title: 'Blog Post - BBQ Grill Manufacturing Insights | Keyo Customize',
+    description: 'Read our latest blog post about BBQ grill manufacturing, customization tips, and industry insights from Keyo Customize.'
+  })
+}
+
 
 export async function generateStaticParams() {
   const posts = await getbloglist()
   return posts.map(p => ({ slug: p.slug }))
 }
 
-// 移除服务端 SEO，改用客户端 SEO 组件
+
 
 export default async function PostPage({ params }: { params: { slug: string } }) {
   const { slug } = await params
@@ -101,11 +111,11 @@ export default async function PostPage({ params }: { params: { slug: string } })
   const next = nextPost ? { slug: nextPost.slug as string, title: strip(nextPost?.title?.rendered || '') } : null
   return (
     <div className="min-h-screen">
-      <SEO 
+      {/* <SEO 
         wpUrl={wpUrl}
         fallbackTitle="Blog Post - BBQ Grill Manufacturing Insights | Keyo Customize" 
         fallbackDescription="Read our latest blog post about BBQ grill manufacturing, customization tips, and industry insights from Keyo Customize."
-      />
+      /> */}
       <section className="section-1 relative isolate">
           <svg
             aria-hidden="true"

@@ -1,18 +1,33 @@
-'use client';
+// (removed "use client" to enable server-side generateMetadata)
+
 
 import FooterContact from '@/components/FooterContact';
 import Image from 'next/image';
-import SEO from '@/components/SEO';
+import { getMetadataFromRankMath } from '@/lib/seoServer';
 
-export default function custom_packaging() {
+export const dynamic = 'force-static'
+export const revalidate = 600
+
+// 服务器端静态生成页面 Metadata
+export async function generateMetadata() {
+  const wpUrl = 'https://admin.keyfirebbq.com/custom_packaging'
+  return await getMetadataFromRankMath(wpUrl, {
+    title: 'Custom Packaging Services - BBQ Grill Packaging Solutions | Keyo Customize',
+    description: 'Professional custom packaging services for BBQ grills. Branded packaging solutions with your logo, design, and specifications. OEM/ODM packaging available.'
+  })
+}
+
+export default function CustomPackagingPage() {
 
   return (
     <div className="min-h-screen">
+      {/*
       <SEO 
         wpUrl="https://admin.keyfirebbq.com/custom_packaging"
         fallbackTitle="Custom Packaging Services - BBQ Grill Packaging Solutions | Keyo Customize"
         fallbackDescription="Professional custom packaging services for BBQ grills. Branded packaging solutions with your logo, design, and specifications. OEM/ODM packaging available."
       />
+      */}
       {/* Hero Section */}
       
       <section className="section-1 relative isolate -z-10">
