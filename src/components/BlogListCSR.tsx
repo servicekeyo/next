@@ -60,9 +60,8 @@ export default function BlogListCSR({ initialPosts, perPage = 6, initialTotalPag
     <div className="container relative" data-aos="fade-up" suppressHydrationWarning>
       <div className="grid gap30 md:grid-cols-2 lg:grid-cols-3">
         {posts.map((post: any, index) => (
-          <div className="flex flex-col mb-5 xl:mb-10 hover:shadow-xl rounded-xl hover:scale-[1.02] transition-all duration-500 ease-out p-6 group cursor-pointer" >
+          <div key={post.id} className="flex flex-col mb-5 xl:mb-10 hover:shadow-xl rounded-xl hover:scale-[1.02] transition-all duration-500 ease-out p-6 group cursor-pointer">
           <article 
-            key={post.id} 
             data-aos="fade-up" data-aos-delay={`${index * 100}`}
           >
             <img
