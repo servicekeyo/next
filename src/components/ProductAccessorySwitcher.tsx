@@ -65,9 +65,12 @@ export default function ProductAccessorySwitcher() {
 
     <section className="section-1 bg-foreground">
       <div className='herotitle-w' data-aos="fade-in">
-        <h2 className='heading-main2 text-center'>Customize every detail</h2>
+        <h2 className='heading-main2 text-center'>Every Component Customizable for Your Brand</h2>
         <p className="heading-sub mt20 text-hub text-center">
-          Swap lids, side tables, legs, or finishes — create your own perfect match.
+          True <strong>custom BBQ grill manufacturing</strong> means every visible component reflects 
+  your brand identity. Mix and match lids, side tables, leg designs, and surface treatments 
+  to create distinctive products that stand out on retail shelves. Our modular approach lets 
+  you configure unique grill combinations without expensive tooling for each variation.
         </p>
       </div>
       <div className="container flex-col md:flex-row flex items-center gap80">

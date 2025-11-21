@@ -81,7 +81,7 @@ export default function GrillTabsClient({ categories, itemsByCat }: Props) {
       </div>
       {activeCat ? (
         <div className="flex justify-center">
-          <a href={activeCat?.slug ? `/grills/${activeCat.slug}` : `/grills/`} className="btn-secondary">View More {activeCat?.name ?? activeCat?.slug ?? 'Category'}</a>
+          <a href={activeCat?.slug ? `/grills/${activeCat.slug}` : `/grills/`} className="btn-secondary">View All {activeCat?.name ?? activeCat?.slug ?? 'Category'}</a>
         </div>
       ) : null}
     </div>

@@ -15,32 +15,32 @@ export default function Header() {
       {/* 主导航 */}
       <div className="container mx-auto">
         <div className="flex items-center h-[60px] lg:h-[80px] justify-between">
-          <a href="/"><Image src="/images/LOGO1.png" alt="Keyo Customize" width={120} height={32} /></a>
+          <a href="/"><Image src="/images/LOGO1.png" alt="Keyfire custom BBQ grill manufacturer logo" title="Keyfire BBQ Manufacturing" width={120} height={32} /></a>
  
           <nav className="hidden items-center gap-10 md:flex">
             <a href="/" >Home</a>
             <div className="relative group">
               <a className="flex items-center gap-1 ">
-                Prodcuts
+                Products
                 <svg className="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </a>
               <div className="absolute top-full left-0 pt-2 w-48 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                 <div className="bg-white shadow-lg rounded-md border border-gray-200 py-2">
-                  <a href="/grills/charcoal-grill" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
+                  <a href="/grills/charcoal-grill"  title="Custom charcoal BBQ grill manufacturing" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
                     Charcoal Grill
                   </a>
-                  <a href="/grills/gas-grill" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
+                  <a href="/grills/gas-grill"  title="OEM gas BBQ grill manufacturer" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
                     Gas Grill
                   </a>
-                   <a href="/grills/electrical-grill" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
+                   <a href="/grills/electrical-grill" title="Electric BBQ grill ODM service" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
                     Electrical Grill
                   </a>
-                   <a href="/grills/kettle-grill" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
+                   <a href="/grills/kettle-grill" title="Custom kettle grill manufacturing" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
                     Kettle Grill
                   </a>
-                   <a href="/grills/smoker" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
+                   <a href="/grills/smoker" title="Smoker grill OEM manufacturer" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
                     Smoker
                   </a>
                 </div>

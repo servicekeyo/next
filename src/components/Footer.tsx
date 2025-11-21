@@ -12,8 +12,12 @@ export default function Footer() {
         
         <div className="container flex flex-col lg:flex-row gap160">
           <div className="lg:w-3/12 flex flex-col gap30">
-            <a href="/"><Image src="/images/LOGO1.png" alt="Keyo Customize" width={175} height={40} /></a>
-            <p className="heading-sub">KEYO has been committed to producing high-quality BBQ grills, fireplaces, and accessories, offering one-stop OEM and ODM solutions from R&D and customization to manufacturing, quality control, packaging, and logistics.</p>
+            <a href="/"><Image src="/images/LOGO1.png" alt="Keyfire custom BBQ grill manufacturer logo"
+     title="Keyfire BBQ Manufacturing" width={175} height={40} /></a>
+            <p className="heading-sub">Keyfire is a professional <strong>BBQ grill manufacturer</strong> in Foshan, China, specializing 
+  in <strong>custom OEM and ODM services</strong> for gas grills, charcoal grills, electric grills, 
+  and smokers. From initial design through manufacturing, quality control, and global logistics - 
+  we're your complete manufacturing partner for building successful BBQ brands.</p>
           </div>
           <div className="lg:w-9/12 grid md:grid-cols-4 gap80">
             <div className="flex flex-col gap30">

@@ -1,6 +1,7 @@
 'use client'; // 必须在顶部
 import {
   Scroll,
+  Palette,
   CalendarCheck,
   Factory,
   Handshake,
@@ -26,6 +27,7 @@ import {
 } from 'phosphor-react';
 export {
   Scroll,
+  Palette,
   CalendarCheck,
   Factory,
   Handshake,
