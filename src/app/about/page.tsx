@@ -1,27 +1,37 @@
 
 
 
-'use client';
-
-import { useState } from 'react';
 import FooterContact from '@/components/FooterContact';
 import Image from 'next/image';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Autoplay, Thumbs, FreeMode } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/thumbs';
-import 'swiper/css/free-mode';
-import SEO from '@/components/SEO';
 import AOSPageWrapper from '@/components/AOSPageWrapper';
+import SwiperCarousel, { SwiperImage } from '@/components/SwiperCarousel';
+import { getMetadataFromRankMath } from '@/lib/seoServer';
+
+// 生成静态 metadata
+export async function generateMetadata() {
+  const wpUrl = 'https://admin.keyfirebbq.com/about';
+  
+  try {
+    // 从 RankMath 获取 SEO 数据
+    const metadata = await getMetadataFromRankMath(wpUrl, {
+      title: 'About Us - Keyo Customize | BBQ Grill Manufacturer China',
+      description: 'Learn about Keyo Customize, a leading BBQ grill manufacturer in China with years of experience in custom grill design and production.'
+    });
+    
+    return metadata;
+  } catch (error) {
+    console.error('Error generating metadata:', error);
+    // 返回默认 metadata
+    return {
+      title: 'About Us - Keyo Customize | BBQ Grill Manufacturer China',
+      description: 'Learn about Keyo Customize, a leading BBQ grill manufacturer in China with years of experience in custom grill design and production.',
+    };
+  }
+}
 
 export default function AboutPage() {
-  const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
-  const [thumbsSwiper2, setThumbsSwiper2] = useState<any>(null);
-
-  // 第一个轮播图片数据（Why Choose Us部分）
-  const mainImages = [
+  // Why Choose Us section images
+  const whyChooseUsImages: SwiperImage[] = [
     { src: '/images/about/indx_one1.jpg', alt: 'Factory overview' },
     { src: '/images/about/indx_one2.jpg', alt: 'Manufacturing process' },
     { src: '/images/about/indx_one3.jpg', alt: 'Quality control' },
@@ -31,8 +41,8 @@ export default function AboutPage() {
     { src: '/images/about/indx_one7.jpg', alt: 'Production facility' }
   ];
 
-  // 第二个轮播图片数据（Reliable Supply部分）
-  const logisticsImages = [
+  // Reliable Supply section images  
+  const reliableSupplyImages: SwiperImage[] = [
     { src: '/images/about/indx_one8.jpg', alt: 'Logistics center' },
     { src: '/images/about/indx_one9.jpg', alt: 'Shipping containers' },
     { src: '/images/about/indx_one10.jpg', alt: 'Delivery trucks' },
@@ -41,12 +51,8 @@ export default function AboutPage() {
 
   return (
     <AOSPageWrapper>
-    <div className="min-h-screen">
-      <SEO 
-        wpUrl="https://admin.keyfirebbq.com/about"
-        fallbackTitle="About Us - Keyo Customize | BBQ Grill Manufacturer China"
-        fallbackDescription="Learn about Keyo Customize, a leading BBQ grill manufacturer in China with years of experience in custom grill design and production."
-      />
+      <div className="min-h-screen" suppressHydrationWarning>
+      
       {/* Hero Section */}
       <section className="section-1 relative isolate -z-10">
         <svg
@@ -57,15 +63,15 @@ export default function AboutPage() {
             <pattern
               x="50%"
               y={-1}
-              id="1f932ae7-37de-4c0a-a8b0-a6e3b4d44b84"
+              id="1f932ae7-37de-4c0a-a6e3b4d44b84"
               width={200}
               height={200}
               patternUnits="userSpaceOnUse"
             >
-              <path d="M.5 200V.5H200" fill="none" />
+              <path d=".5 200V.5H200" fill="none" />
             </pattern>
           </defs>
-          <rect fill="url(#1f932ae7-37de-4c0a-a8b0-a6e3b4d44b84)" width="100%" height="100%" strokeWidth={0} />
+          <rect fill="url(#1f932ae7-37de-4c0a-a6e3b4d44b84)" width="100%" height="100%" strokeWidth={0} />
         </svg>
         <div className='herotitle-w' data-aos="fade-in">
           <h1 className="heading-main">About Keyfire</h1>
@@ -73,71 +79,17 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* About Content with SwiperCarousel */}
       <div className="section-3">
         <div className='container flex flex-col gap160'>
-          {/* 第一个轮播区域 - Why Choose Us */}
           <div className='container flex flex-col lg:flex-row gap160' data-aos="fade-up" data-aos-duration="800">
             <div className="lg:w-1/2" data-aos="fade-right" data-aos-delay="200">
               <div className="space-y-4">
-                {/* 主轮播 */}
-                <Swiper
-                  style={{
-                    '--swiper-navigation-color': '#fff',
-                    '--swiper-pagination-color': '#fff',
-                  } as any}
-                  spaceBetween={10}
-                  navigation={{
-                    nextEl: '.swiper-button-next-logistics',
-                    prevEl: '.swiper-button-prev-logistics',
-                  }}
-                  modules={[ Thumbs, Autoplay, FreeMode]}
-                  effect={'fade'}
-                  fadeEffect={{ crossFade: true }}
-                  thumbs={{ swiper: thumbsSwiper }}
-                  autoplay={{
-                    delay: 4000,
-                    pauseOnMouseEnter: true,
-                    disableOnInteraction: false,
-                  }}
-                  pagination={{
-                    clickable: true,
-                    dynamicBullets: true,
-                  }}
+                <SwiperCarousel 
+                  images={whyChooseUsImages}
+                  fadeEffect={true}
                   className="rounded-xl shadow-md w-full max-w-[720px] mx-auto"
-                >
-                  {mainImages.map((image, index) => (
-                    <SwiperSlide key={index}>
-                      <img
-                        src={image.src}
-                        alt={image.alt}
-                        className="w-full h-auto object-cover rounded-xl"
-                      />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-                
-                {/* 缩略图轮播 */}
-                <Swiper
-                  onSwiper={setThumbsSwiper}
-                  spaceBetween={10}
-                  slidesPerView={5}
-                  freeMode={true}
-                  watchSlidesProgress={true}
-                  modules={[FreeMode, Thumbs]}
-                  className="thumbs-swiper h-24 w-full max-w-[720px] mx-auto [&_.swiper-slide]:opacity-50 [&_.swiper-slide]:transition-opacity [&_.swiper-slide-thumb-active]:opacity-100"
-                >
-                  {mainImages.map((image, index) => (
-                    <SwiperSlide key={index}>
-                      <div className="cursor-pointer opacity-70 hover:opacity-100 transition-opacity duration-300 rounded-lg overflow-hidden h-full">
-                        <img
-                          src={image.src}
-                          alt={image.alt}
-                          className="w-full h-auto object-cover"
-                        />
-                      </div>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
+                />
               </div>
             </div>
             <div className='lg:w-1/2 flex flex-col gap30 justify-center' data-aos="fade-left" data-aos-delay="400">
@@ -211,61 +163,11 @@ export default function AboutPage() {
           <div className='container flex flex-col lg:flex-row gap160'>
             <div className="lg:w-1/2" data-aos="fade-right" data-aos-delay="200">
               <div className="space-y-4">
-                {/* 第二个主轮播 */}
-                <Swiper
-                  modules={[ Pagination, Autoplay, Thumbs]}
-                  spaceBetween={20}
-                  effect={'fade'}
-                  fadeEffect={{ crossFade: true }}
-                  thumbs={{ swiper: thumbsSwiper2 }}
-                  autoplay={{
-                    delay: 4000,
-                    pauseOnMouseEnter: true,
-                    disableOnInteraction: false,
-                  }}
-                  pagination={{
-                    clickable: true,
-                    dynamicBullets: true,
-                  }}
-                  navigation={{
-                    nextEl: '.swiper-button-next-logistics2',
-                    prevEl: '.swiper-button-prev-logistics2',
-                  }}
+                <SwiperCarousel 
+                  images={reliableSupplyImages}
+                  fadeEffect={true}
                   className="rounded-xl shadow-md w-full max-w-[720px] mx-auto"
-                >
-                  {logisticsImages.map((image, index) => (
-                    <SwiperSlide key={index}>
-                      <img 
-                        src={image.src} 
-                        alt={image.alt} 
-                        className="w-full h-auto object-cover rounded-xl" 
-                      />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-                
-                {/* 第二个缩略图轮播 */}
-                <Swiper
-                  onSwiper={setThumbsSwiper2}
-                  spaceBetween={10}
-                  slidesPerView={5}
-                  freeMode={true}
-                  watchSlidesProgress={true}
-                  modules={[FreeMode, Thumbs]}
-                  className="thumbs-swiper h-24 w-full max-w-[720px] mx-auto [&_.swiper-slide]:opacity-50 [&_.swiper-slide]:transition-opacity [&_.swiper-slide-thumb-active]:opacity-100"
-                >
-                  {logisticsImages.map((image, index) => (
-                    <SwiperSlide key={index}>
-                      <div className="cursor-pointer opacity-70 hover:opacity-100 transition-opacity duration-300 rounded-lg overflow-hidden h-full">
-                        <img
-                          src={image.src}
-                          alt={image.alt}
-                          className="w-full h-auto object-cover"
-                        />
-                      </div>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
+                />
               </div>
             </div>
             <div className='lg:w-1/2 flex flex-col gap30 justify-center' data-aos="fade-left" data-aos-delay="200">
@@ -275,8 +177,12 @@ export default function AboutPage() {
               </p>
             </div>
           </div>
-
-          {/* Compliance Section */}
+        </div>
+      </div>
+      
+      {/* Compliance Section - Static content */}
+      <div className='section-3'>
+        <div className='container flex flex-col gap160'>
           <div className='container flex flex-col gap80'>
             <div className='herotitle-w' data-aos="fade-in">
               <h1 className="heading-main2">Keyfire has established a robust compliance system</h1>

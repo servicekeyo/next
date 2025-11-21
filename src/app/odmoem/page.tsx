@@ -1,20 +1,31 @@
-'use client';
-
 import FooterContact from '@/components/FooterContact';
 import Image from 'next/image';
 import YouTubeLite from '@/components/YouTubeLite';
-import SEO from '@/components/SEO';
+import { getMetadataFromRankMath } from '@/lib/seoServer';
 import AOSPageWrapper from '@/components/AOSPageWrapper';
+
+export const dynamic = 'force-static'
+export const revalidate = 600
+
+export async function generateMetadata() {
+  const wpUrl = 'https://admin.keyfirebbq.com/odmoem'
+  return await getMetadataFromRankMath(wpUrl, {
+    title: 'OEM/ODM Custom Grills – From Idea To Product In 6 Steps | Keyo Customize',
+    description: 'Whether it starts with a sketch, a photo, or simply an idea, our team turns your vision into a real, manufacturable product through a clear six-step process.'
+  })
+}
 
 export default function ODMOEMPage() {
   return (
     <AOSPageWrapper>
     <div className="min-h-screen">
+      {/*
       <SEO 
         wpUrl="https://admin.keyfirebbq.com/odmoem"
         fallbackTitle="From Idea To Product In Just 6 Steps - BBQ Grill Logistics | Keyo Customize"
         fallbackDescription="Whether it starts with a sketch, a photo, or simply an idea, our team turns your vision into a real, manufacturable product. A clear process, step by step — making customization simple and efficient."
       />
+      */}
       {/* Hero Section */}
       
       <section className="section-1 relative isolate -z-10">

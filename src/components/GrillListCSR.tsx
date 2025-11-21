@@ -50,11 +50,14 @@ export default function GrillListCSR({ initialPosts, perPage = 6, initialTotalPa
   }, [pageFromUrl, perPage, initialPosts])
 
   useLayoutEffect(() => {
-    AOS.init({
-      duration: 800,
-      once: true,
-      offset: 100,
-    })
+    // 确保只在客户端初始化AOS
+    if (typeof window !== 'undefined') {
+      AOS.init({
+        duration: 800,
+        once: true,
+        offset: 100
+      })
+    }
   }, [])
 
   return (

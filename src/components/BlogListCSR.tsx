@@ -48,12 +48,15 @@ export default function BlogListCSR({ initialPosts, perPage = 6, initialTotalPag
   }, [pageFromUrl, perPage, initialPosts])
 
   useLayoutEffect(() => {
-    AOS.init({
-      duration: 800,
-      once: true,
-      offset: 100,
-    })
-    AOS.refresh()
+    // 确保只在客户端初始化AOS
+    if (typeof window !== 'undefined') {
+      AOS.init({
+        duration: 800,
+        once: true,
+        offset: 100
+      })
+      AOS.refresh()
+    }
   }, [])
 
   return (
@@ -62,7 +65,7 @@ export default function BlogListCSR({ initialPosts, perPage = 6, initialTotalPag
         {posts.map((post: any, index) => (
           <div key={post.id} className="flex flex-col mb-5 xl:mb-10 hover:shadow-xl rounded-xl hover:scale-[1.02] transition-all duration-500 ease-out p-6 group cursor-pointer">
           <article 
-            data-aos="fade-up" data-aos-delay={`${index * 100}`}
+            data-aos="fade-up" data-aos-delay={`${index * 100}`} suppressHydrationWarning
           >
             <img
               alt={

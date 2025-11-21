@@ -1,13 +1,21 @@
-'use client';
-
-import { useState, useEffect, useLayoutEffect } from 'react';
 import { Suspense } from 'react';
 import { getbloglist } from '@/lib/wordpress'
 import PaginationNav from '@/components/PaginationNav'
 import BlogListCSR from '@/components/BlogListCSR'
-import SEO from '@/components/SEO'
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import AOSPageWrapper from '@/components/AOSPageWrapper';
+import { getMetadataFromRankMath } from '@/lib/seoServer';
+import FooterContact from '@/components/FooterContact';
+
+export const dynamic = 'force-static'
+export const revalidate = 600
+
+export async function generateMetadata() {
+  const wpUrl = 'https://admin.keyfirebbq.com/blog'
+  return await getMetadataFromRankMath(wpUrl, {
+    title: 'Blog - BBQ Grill Manufacturing Tips & Industry News | Keyo Customize',
+    description: 'Read our latest blog posts about BBQ grill manufacturing, customization tips, industry trends, and business insights from Keyo Customize.'
+  })
+}
 
 // Wrapper component for Suspense
 function BlogContent({ initialPosts, initialTotalPages }: { initialPosts: any[]; initialTotalPages: number }) {
@@ -28,60 +36,31 @@ function BlogContent({ initialPosts, initialTotalPages }: { initialPosts: any[];
     </>
   );
 }
-export default function Blog() {
+
+export default async function Blog() {
   const perPage = 6
-  // 静态生成首屏：构建期抓取全部文章并在前端切片
-  const [initialPosts, setInitialPosts] = useState<any[]>([]);
-  const [initialTotalPages, setInitialTotalPages] = useState(1);
-  const [loading, setLoading] = useState(true);
-
-  // 初始化AOS动画
-  useLayoutEffect(() => {
-    AOS.init({
-      duration: 800,
-      once: true,
-      offset: 100,
-      delay: 0,
-      easing: 'ease-out-cubic',
-      mirror: false,
-      anchorPlacement: 'top-bottom'
-    });
-  }, []);
-
-  useEffect(() => {
-    async function fetchPosts() {
-      console.log('[Blog Page] 开始获取文章数据...')
-      try {
-        const posts = await getbloglist();
-        console.log('[Blog Page] 获取到的文章数据:', posts)
-        if (Array.isArray(posts) && posts.length > 0) {
-          const slicedPosts = posts.slice(0, perPage);
-          console.log('[Blog Page] 切片后的文章:', slicedPosts)
-          setInitialPosts(slicedPosts);
-          setInitialTotalPages(Math.ceil(posts.length / perPage));
-        } else {
-          console.log('[Blog Page] 没有获取到文章数据或数据格式错误')
-          setInitialPosts([]);
-          setInitialTotalPages(1);
-        }
-      } catch (error) {
-        console.error('[Blog Page] 获取文章数据失败:', error)
-        setInitialPosts([]);
-        setInitialTotalPages(1);
-      } finally {
-        setLoading(false);
-      }
+  let initialPosts = [];
+  let initialTotalPages = 1;
+  try {
+    const posts = await getbloglist();
+    if (Array.isArray(posts) && posts.length > 0) {
+      initialPosts = posts.slice(0, perPage);
+      initialTotalPages = Math.ceil(posts.length / perPage);
     }
-    fetchPosts();
-  }, []);
+  } catch (error) {
+    console.error('[Blog Page] 获取文章数据失败:', error)
+  }
 
   return (
-    <div className="min-h-screen">
+    <AOSPageWrapper>
+      <div className="min-h-screen" suppressHydrationWarning>
+      {/*
       <SEO 
         wpUrl="https://admin.keyfirebbq.com/blog"
         fallbackTitle="Blog - BBQ Grill Manufacturing Tips & Industry News | Keyo Customize"
         fallbackDescription="Read our latest blog posts about BBQ grill manufacturing, customization tips, industry trends, and business insights from Keyo Customize."
       />
+      */}
       <section className="section-1 relative isolate -z-10">
           <svg
             aria-hidden="true"
@@ -122,18 +101,12 @@ export default function Blog() {
       </section>
 
       <section className="section-3 2xl:mt-[-30px]" data-aos="fade-up" data-aos-duration="800">
-        {loading ? (
-          <div className="flex justify-center mt-10">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-            <span className="ml-2">Loading blog posts...</span>
-          </div>
-        ) : (
-          <Suspense fallback={<div className="flex justify-center mt-10">Loading blog content...</div>}>
-            <BlogContent initialPosts={initialPosts} initialTotalPages={initialTotalPages} />
-          </Suspense>
-        )}
+        <Suspense fallback={<div className="flex justify-center mt-10">Loading blog content...</div>}>
+          <BlogContent initialPosts={initialPosts} initialTotalPages={initialTotalPages} />
+        </Suspense>
       </section>
-
+      <FooterContact />
     </div>
+    </AOSPageWrapper>
   );
 }
