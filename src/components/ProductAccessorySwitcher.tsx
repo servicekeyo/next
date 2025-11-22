@@ -78,6 +78,8 @@ export default function ProductAccessorySwitcher() {
         <div className="lg:w-2/3" data-aos="zoom-in">
           <img
             src={activeOption.img}
+            alt={activeOption.img_alt}
+            title={activeOption.img_title}
             className="w-full h-auto max-h-[700px] object-contain rounded-xl transition-all duration-500"
           />
         </div>
@@ -99,7 +101,7 @@ export default function ProductAccessorySwitcher() {
                       ${activeOption.id === opt.id ? 'border-primary shadow-lg' : 'border-gray-300 hover:shadow-md'}
                     `}
                   >
-                    <img src={opt.class_img} className=" object-cover" />
+                    <img src={opt.class_img} alt={opt.class_img_alt} title={opt.class_img_title} className=" object-cover" />
                   </button>
                 ))}
               </div>
