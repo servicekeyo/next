@@ -30,8 +30,8 @@ function humanTitle(slug: string) {
 }
 
 // 服务器端静态生成页面 Metadata
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const slug = params.slug
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
   const wpUrl = `https://admin.keyfirebbq.com/grills/${slug}`
   return await getMetadataFromRankMath(wpUrl, {
     title: 'Custom BBQ Grills - Keyo Customize',

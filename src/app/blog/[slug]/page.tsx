@@ -8,13 +8,29 @@ export const dynamicParams = false
 export const revalidate = false
 
 // 服务器端静态生成页面 Metadata
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const slug = params.slug
-  const wpUrl = `https://admin.keyfirebbq.com/blog/${slug}`
-  return await getMetadataFromRankMath(wpUrl, {
-    title: 'Blog Post - BBQ Grill Manufacturing Insights | Keyo Customize',
-    description: 'Read our latest blog post about BBQ grill manufacturing, customization tips, and industry insights from Keyo Customize.'
-  })
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  
+  try {
+    // 首先获取文章数据以获取正确的URL
+    const post = await getPostBySlug(slug)
+    // 使用post.link作为wpUrl，如果不存在则使用构建的URL
+    const wpUrl = typeof post?.link === 'string' && post.link 
+      ? post.link 
+      : `https://admin.keyfirebbq.com/${slug}`
+    
+    return await getMetadataFromRankMath(wpUrl, {
+      title: 'Blog Post - BBQ Grill Manufacturing Insights | Keyo Customize',
+      description: 'Read our latest blog post about BBQ grill manufacturing, customization tips, and industry insights from Keyo Customize.'
+    })
+  } catch (error) {
+    // 如果出错，使用基本的fallback
+    return {
+      title: 'Blog Post - BBQ Grill Manufacturing Insights | Keyo Customize',
+      description: 'Read our latest blog post about BBQ grill manufacturing, customization tips, and industry insights from Keyo Customize.',
+      alternates: { canonical: `https://admin.keyfirebbq.com/${slug}` },
+    }
+  }
 }
 
 
@@ -27,7 +43,7 @@ export async function generateStaticParams() {
 
 export default async function PostPage({ params }: { params: { slug: string } }) {
   const { slug } = await params
- // console.log('[DEBUG] slug =', slug)
+  // console.log('[DEBUG] slug =', slug)
 
   const post = await getPostBySlug(slug)
   //console.log('[DEBUG] post =', post)
@@ -49,7 +65,7 @@ export default async function PostPage({ params }: { params: { slug: string } })
   const html = post?.content?.rendered || post?.excerpt?.rendered || '<p>Article content is unavailable.</p>'
 
   // WordPress permalink: prefer post.link if available to fetch RankMath SEO data accurately
-  const wpUrl = typeof post?.link === 'string' && post.link ? post.link : `https://admin.keyfirebbq.com/blog/${slug}`
+  const wpUrl = typeof post?.link === 'string' && post.link ? post.link : `https://admin.keyfirebbq.com/${slug}`
   const slugify = (text: string) => {
     return (text || '')
       .toLowerCase()

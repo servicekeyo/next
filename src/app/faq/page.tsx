@@ -17,7 +17,6 @@ export async function generateMetadata() {
     
     return metadata;
   } catch (error) {
-    console.error('Error generating metadata:', error);
     // 返回默认 metadata
     return {
       title: 'FAQ - Frequently Asked Questions | Keyo Customize',
