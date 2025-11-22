@@ -67,7 +67,7 @@ export default function Footer() {
       </section>
       {/* 底部版权与链接 */}
         <div className="text-center mt-[-30] md:mt-[-60] mx-auto py-5 text-foreground/70">
-          © {year} Keyo Customize. All rights reserved.
+          © {year} Keyfire Customize. All rights reserved.
         </div>
 
     </footer>

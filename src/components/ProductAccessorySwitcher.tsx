@@ -90,7 +90,7 @@ export default function ProductAccessorySwitcher() {
           {accessoryCategories.map((cat) => (
             <div key={cat.id} className="space-y-3" data-aos="fade-up">
               <div className="flex items-center justify-between">
-                <h4 className="text font-semibold">{cat.label}</h4>
+                <h3 className="text font-semibold">{cat.label}</h3>
               </div>
               <div className="grid grid-cols-4 gap-4">
                 {cat.options.map((opt) => (
