@@ -47,6 +47,15 @@ export async function getMetadataFromRankMath(
   // 提取JSON-LD schema数据
   const jsonLd = extractJsonLd(head)
 
+  // 构建图像数组，确保URL不为null
+  const buildImages = (imageUrls: (string | null)[]): { url: string; alt: string }[] | undefined => {
+    const validImages = imageUrls.filter((url): url is string => url !== null && url.trim() !== '')
+    return validImages.length > 0 ? validImages.map(url => ({
+      url,
+      alt: title || fallback.title
+    })) : undefined
+  }
+
   const meta: Metadata = {
     title,
     description,
@@ -56,10 +65,7 @@ export async function getMetadataFromRankMath(
       description: description || twitterDescription || fallback.description,
       url: canonical,
       type: ogType as any,
-      images: ogImage || twitterImage ? [{ 
-        url: ogImage || twitterImage,
-        alt: title || fallback.title 
-      }] : undefined,
+      images: buildImages([ogImage, twitterImage]),
     },
     twitter: {
       card: (twitterCard as any) || 'summary_large_image',
