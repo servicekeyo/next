@@ -7,7 +7,7 @@ export const dynamic = 'force-static'
 export const revalidate = 600
 
 export async function generateMetadata() {
-  const wpUrl = 'https://admin.keyfirebbq.com/packaging_shipping'
+  const wpUrl = 'https://admin.keyfirebbq.com/packaging-shipping'
   return await getMetadataFromRankMath(wpUrl, {
     title: 'Packaging & Shipping Services - BBQ Grill Logistics | Keyo Customize',
     description: 'Professional packaging and shipping services for BBQ grills. Safe, secure, and timely delivery of your custom grill orders worldwide.'

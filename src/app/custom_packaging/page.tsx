@@ -10,7 +10,7 @@ export const revalidate = 600
 
 // 服务器端静态生成页面 Metadata
 export async function generateMetadata() {
-  const wpUrl = 'https://admin.keyfirebbq.com/custom_packaging'
+  const wpUrl = 'https://admin.keyfirebbq.com/custom-packaging'
   return await getMetadataFromRankMath(wpUrl, {
     title: 'Custom Packaging Services - BBQ Grill Packaging Solutions | Keyo Customize',
     description: 'Professional custom packaging services for BBQ grills. Branded packaging solutions with your logo, design, and specifications. OEM/ODM packaging available.'
