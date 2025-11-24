@@ -3,7 +3,6 @@
 
 import FooterContact from '@/components/FooterContact';
 import Image from 'next/image';
-import AOSPageWrapper from '@/components/AOSPageWrapper';
 import SwiperCarousel, { SwiperImage } from '@/components/SwiperCarousel';
 import { getMetadataFromRankMath } from '@/lib/seoServer';
 
@@ -50,7 +49,6 @@ export default function AboutPage() {
   ];
 
   return (
-    <AOSPageWrapper>
       <div className="min-h-screen" suppressHydrationWarning>
       
       {/* Hero Section */}
@@ -216,6 +214,5 @@ export default function AboutPage() {
 
       <FooterContact />
     </div>
-    </AOSPageWrapper>
   );
 }

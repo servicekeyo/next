@@ -2,7 +2,6 @@ import { Suspense } from 'react';
 import { getbloglist } from '@/lib/wordpress'
 import PaginationNav from '@/components/PaginationNav'
 import BlogListCSR from '@/components/BlogListCSR'
-import AOSPageWrapper from '@/components/AOSPageWrapper';
 import { getMetadataFromRankMath } from '@/lib/seoServer';
 import FooterContact from '@/components/FooterContact';
 
@@ -52,8 +51,7 @@ export default async function Blog() {
   }
 
   return (
-    <AOSPageWrapper>
-      <div className="min-h-screen" suppressHydrationWarning>
+    <div className="min-h-screen" suppressHydrationWarning>
       {/*
       <SEO 
         wpUrl="https://admin.keyfirebbq.com/blog"
@@ -107,6 +105,5 @@ export default async function Blog() {
       </section>
       <FooterContact />
     </div>
-    </AOSPageWrapper>
   );
 }

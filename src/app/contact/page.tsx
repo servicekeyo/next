@@ -1,6 +1,6 @@
 import ContactForm from "@/components/ContactForm";
 import { getMetadataFromRankMath } from '@/lib/seoServer';
-import AOSPageWrapper from '@/components/AOSPageWrapper';
+
 
 export const dynamic = 'force-static'
 export const revalidate = 600
@@ -13,9 +13,8 @@ export async function generateMetadata() {
   })
 }
 
-export default function Contact() {
+export default async function Contact() {
   return (
-    <AOSPageWrapper>
     <div className="relative section-1">
       {/*
       <SEO 
@@ -64,23 +63,23 @@ export default function Contact() {
                 />
               </div>
             </div>
-            <h2 className="heading-main" data-aos="fade-up" data-aos-delay="200">
-              Get in touch
-            </h2>
+            <h1 className="heading-main" data-aos="fade-up" data-aos-delay="200">
+              Contact Keyfire BBQ Grill Manufacturer
+            </h1>
             <p className="text mt20 text-hub" data-aos="fade-up" data-aos-delay="400">
               Thanks for your inquiry! Please complete the brief form and we’ll get back to you.
             </p>
             <div className="mt50 flex flex-col gap30" data-aos="fade-up" data-aos-delay="600">
               <div className="space-y-1">
-                <h3 className="text font-bold">Send Us a Email</h3>
+                <h2 className="text font-bold">Email Us for BBQ Grill Quotes</h2>
                 <p className="text text-hub"><a href="mailto:ky01@keyobbq.com" target="_blank">ky01@keyobbq.com</a></p>
               </div>
               <div className="space-y-1">
-                <h3 className="text font-bold">Phone/Whatsapp/Wechat</h3>
-                <p className="text text-hub"><a href="tel:+8613612569082" target="_blank">+8613612569082</a></p>
+                <h2 className="text font-bold">Call or Message Us - 24/7 BBQ Grill Inquiry Support</h2>
+                <p className="text text-hub"><a href="tel:+8613612569082" target="_blank">+86 136 1256 9082</a></p>
               </div>
               <div className="space-y-1">
-                <h3 className="text font-bold">Address</h3>
+                <h2 className="text font-bold">Visit Our BBQ Grill Factory in Foshan, China</h2>
                 <p className="text text-hub">NO.2 Shencun Industrial Zone,Beisha, Lishui Town, Nanhai District, Foshan City, Guangdong, China</p>
               </div>
             </div>
@@ -91,7 +90,6 @@ export default function Contact() {
         </div>
       </div>
     </div>
-    </AOSPageWrapper>
   )
 }
 

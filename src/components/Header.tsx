@@ -15,7 +15,7 @@ export default function Header() {
       {/* 主导航 */}
       <div className="container mx-auto">
         <div className="flex items-center h-[60px] lg:h-[80px] justify-between">
-          <a href="/"><Image src="/images/LOGO1.png" alt="Keyfire custom BBQ grill manufacturer logo" title="Keyfire BBQ Manufacturing" width={120} height={32} /></a>
+          <a href="/"><Image src="/images/LOGO1.png" alt="Keyfire custom BBQ grill manufacturer logo" title="Keyfire BBQ Manufacturing" width={120} height={32} loading="eager" /></a>
  
           <nav className="hidden items-center gap-10 md:flex">
             <a href="/" >Home</a>
@@ -124,7 +124,7 @@ export default function Header() {
           }`}>
             {/* 抽屉头部 */}
             <div className="flex items-center justify-between p-6 border-b border-gray-200">
-              <Image src="/images/LOGO1.png" alt="Keyo Customize" width={120} height={32} />
+              <Image src="/images/LOGO1.png" alt="Keyo Customize" width={120} height={32} loading="eager" />
               <button
                 onClick={() => {
                   setOpen(false);

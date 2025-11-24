@@ -61,8 +61,14 @@ export default function PackagingShippingPage() {
             <rect fill="url(#1f932ae7-37de-4c0a-a8b0-a6e3b4d44b84)" width="100%" height="100%" strokeWidth={0} />
           </svg>
         <div className='w-4/5 xl:w-3/5 mx-auto text-center' data-aos="fade-up" data-aos-duration="800">
-          <h1 className="heading-main" data-aos="fade-up" data-aos-delay="200">Packaging & Shipping</h1>
-          <p className="heading-sub mt30 text-hub" data-aos="fade-up" data-aos-delay="400">Our packaging and shipping process is designed to ensure every charcoal grill arrives safely, meets your quality expectations, and complies with international export standards. From automated packing lines to final container loading, each step follows strict quality control procedures to support your business and protect your brand reputation.</p>
+          <h1 className="heading-main" data-aos="fade-up" data-aos-delay="200">BBQ Grill Packaging & Shipping Process</h1>
+          <p className="heading-sub mt30 text-hub" data-aos="fade-up" data-aos-delay="400">Delivering <strong>custom BBQ grills</strong> safely across the globe requires meticulous 
+  packaging and logistics expertise. Our professional <strong>BBQ grill packaging and shipping</strong> 
+  process protects your investment from factory floor to customer doorstep. Every 
+  <strong>charcoal grill</strong>, <strong>gas grill</strong>, and <strong>smoker</strong> 
+  undergoes automated packing line operations, rigorous AQL quality inspections, functional 
+  testing, and expert container loading - all designed to ensure your products arrive in 
+  perfect condition, meeting international export standards and safeguarding your brand reputation.</p>
         </div>
       </section>
 
@@ -71,22 +77,32 @@ export default function PackagingShippingPage() {
 
           {/* Step 1 */}
           <div className="flex flex-col-reverse md:flex-row gap160">
-            <div className="md:w-3/5" data-aos="fade-right">
+            <div className="md:w-1/2" data-aos="fade-right">
               <YouTubeLite
                 embedUrl="https://www.youtube.com/embed/fFjgEXOu0v0?list=PLyLZfD9mW35KgvIHkVhRef1shmiFPn2cg&index=7"
-                title="Custom Color Box Packaging"
+                title="BBQ Grill Packing Process Video"
                 poster="https://img.youtube.com/vi/fFjgEXOu0v0/hqdefault.jpg"
               />
             </div>
-            <div className="md:w-2/5 flex flex-col justify-center" data-aos="fade-left">
+            <div className="md:w-1/2 flex flex-col justify-center" data-aos="fade-left">
               <span className="heading-sub text-primary font-bold">Step1</span>
-              <h2 className="heading-main3 my-3">Packing Line Operations</h2>
-              <p className="heading-sub text-hub ">Our automated packing line is optimized for charcoal grills and outdoor cooking equipment.</p>
+              <h2 className="heading-main3 my-3">BBQ Grill Packing Line Operations</h2>
+              <p className="heading-sub text-hub ">
+                Our state-of-the-art automated packing line is specifically engineered for 
+  <strong>BBQ grills</strong> and outdoor cooking equipment. Designed to handle the unique 
+  requirements of <strong>charcoal grills</strong>, <strong>gas grills</strong>, and heavy 
+  steel components, our packaging process ensures every product is retail-ready and 
+  export-safe.
+              </p>
               <ul className='mt30 text list-inside list-disc'>
-                <li>Components sorting & protection</li>
-                <li>Foam/EPE cushioning</li>
-                <li>Retail color box assembly</li>
-                <li>Export carton sealing & palletizing</li>
+                <li><strong>Components sorting & protection</strong> - Grill grates, burners, and accessories 
+  individually wrapped to prevent scratching</li>
+                <li><strong>Foam/EPE cushioning</strong> - Multi-layer protection for fragile parts like 
+  glass lids and temperature gauges</li>
+                <li><strong>Retail color box assembly</strong> - Custom branded packaging that showcases 
+  your BBQ grill on store shelves</li>
+                <li><strong>Export carton sealing & palletizing</strong> - Heavy-duty corrugated boxes 
+  optimized for international shipping and container loading</li>
               </ul>
             </div>
           </div>
@@ -95,19 +111,30 @@ export default function PackagingShippingPage() {
           <div className="flex flex-col md:flex-row justify-between gap160">
             <div className="md:w-1/2 flex flex-col justify-center" data-aos="fade-right">
               <span className="heading-sub text-primary font-bold">Step2</span>
-              <h2 className="heading-main3 my-3">Product Inspection (AQL Standard)</h2>
-              <p className="heading-sub text-hub ">Each batch goes through strict sampling inspection before export.</p>
+              <h2 className="heading-main3 my-3">BBQ Grill Quality Inspection (AQL Standard)</h2>
+              <p className="heading-sub text-hub ">
+                Quality is non-negotiable when manufacturing <strong>custom BBQ grills</strong> for 
+  international markets. Every production batch undergoes strict AQL (Acceptable Quality Limit) 
+  sampling inspection conducted by certified QC inspectors before export approval. This 
+  industry-standard protocol protects your brand reputation and ensures consistent quality 
+  across every shipment of <strong>gas grills</strong>, <strong>charcoal grills</strong>, 
+  and <strong>smokers</strong>.
+              </p>
               <ul className='mt30 text list-inside list-disc'>
-                <li>Surface finish check</li>
-                <li>Welding and structure testing</li>
-                <li>Accessories completeness</li>
-                <li>Label & barcode verification</li>
+                <li><strong>Surface finish check</strong> - Inspecting powder coating, stainless steel 
+  polishing, and paint quality for premium appearance</li>
+                <li><strong>Welding and structure testing</strong> - Verifying structural integrity, 
+  weld strength, and frame stability for safe operation</li>
+                <li><strong>Accessories completeness</strong> - Confirming all grill grates, burners, 
+  thermometers, and hardware are included per specifications</li>
+                <li><strong>Label & barcode verification</strong> - Ensuring correct branding, safety 
+  labels, and traceability codes for retail compliance</li>
               </ul>
             </div>
             <div className="md:w-1/2" data-aos="fade-left">
               <YouTubeLite
                 embedUrl="https://www.youtube.com/embed/XkweGqjslzA"
-                title="KEYO Product inspection procedure"
+                title="BBQ Grill AQL Inspection Video"
                 poster="https://img.youtube.com/vi/XkweGqjslzA/hqdefault.jpg"
               />
             </div>
@@ -118,18 +145,28 @@ export default function PackagingShippingPage() {
             <div className="md:w-1/2" data-aos="fade-right">
               <YouTubeLite
                 embedUrl="https://www.youtube.com/embed/UvtQQjRReEk"
-                title="Easy installation guide for our Trolley Charcoal BBQ Grill"
+                title="BBQ Grill Assembly Testing Video"
                 poster="https://img.youtube.com/vi/UvtQQjRReEk/hqdefault.jpg"
               />
             </div>
             <div className="md:w-1/2 flex flex-col justify-center" data-aos="fade-left">
               <span className="heading-sub text-primary font-bold">Step3</span>
-              <h2 className="heading-main3 my-3">Assembly & Functional Testing</h2>
-              <p className="heading-sub text-hub ">We perform installation and performance testing to ensure a smooth user experience.</p>
+              <h2 className="heading-main3 my-3">BBQ Grill Assembly & Functional Testing</h2>
+              <p className="heading-sub text-hub ">
+                Before any <strong>BBQ grill</strong> leaves our factory, it must pass hands-on assembly 
+  and functional testing. Our QC team builds random samples from each production batch to 
+  verify installation clarity, part compatibility, and real-world performance. This critical 
+  step ensures your customers receive <strong>custom BBQ grills</strong> that are easy to 
+  assemble and perform flawlessly from the first cookout.  
+              </p>
               <ul className='mt30 text list-inside list-disc'>
-                <li>Complete assembly fitting</li>
-                <li>Structural stability testing</li>
-                <li>Heat/airflow structure verification</li>
+                <li><strong>Complete assembly fitting</strong> - Testing all connections, fasteners, and 
+  component compatibility following included instructions</li>
+                <li><strong>Structural stability testing</strong> - Verifying cart stability, leg strength, 
+  and overall durability under normal use conditions</li>
+                <li><strong>Heat/airflow structure verification</strong> - For <strong>gas grills</strong>: 
+  testing burner ignition and heat distribution; For <strong>charcoal grills</strong>: 
+  confirming ventilation controls and airflow efficiency</li>
               </ul>
             </div>
           </div>
@@ -138,16 +175,27 @@ export default function PackagingShippingPage() {
           <div className="flex flex-col md:flex-row justify-between gap160">
             <div className="md:w-1/2 flex flex-col justify-center" data-aos="fade-right">
               <span className="heading-sub text-primary font-bold">Step4</span>
-              <h2 className="heading-main3 my-3">Container Loading & Shipping</h2>
-              <p className="heading-sub text-hub ">We use professional loading techniques to ensure safe global delivery.</p>
+              <h2 className="heading-main3 my-3">BBQ Grill Container Loading & Global Shipping</h2>
+              <p className="heading-sub text-hub ">
+                Shipping <strong>BBQ grills</strong> internationally requires expertise in container optimization 
+  and cargo protection. Our logistics team has shipped thousands of containers to 50+ countries, 
+  mastering the art of maximizing space while protecting your <strong>custom BBQ grills</strong> 
+  during long ocean voyages and multiple handling points. From Foshan to your warehouse, we 
+  ensure safe arrival.
+              </p>
               <ul className='mt30 text list-inside list-disc'>
-                <li>Optimized container layout</li>
-                <li>Anti-shift stacking protection</li>
-                <li>Moisture-proof treatment for sea freight</li>
+                <li><strong>Optimized container layout</strong> - 3D loading plans that maximize cubic 
+  capacity, fitting more <strong>charcoal grills</strong> and <strong>gas grills</strong> 
+  per 20ft/40ft container to reduce your shipping costs</li>
+                <li><strong>Anti-shift stacking protection</strong> - Strategic placement with blocking, 
+  bracing, and securing methods that prevent movement during transport</li>
+                <li><strong>Moisture-proof treatment for sea freight</strong> - Desiccant packs, moisture 
+  barrier wraps, and ventilation considerations to protect against humidity damage during 
+  long ocean crossings</li>
               </ul>
             </div>
             <div className="md:w-1/2" data-aos="fade-left">
-              <Image src="/images/packaging/zhuanggui.jpg" className='rounded-xl box-shadow-xl' alt="Container Loading" width={720} height={500} />
+              <Image src="/images/packaging/zhuanggui.jpg" className='rounded-xl box-shadow-xl' alt="Professional BBQ grill container loading - optimized stacking and moisture protection for international shipping" title="BBQ Grill Container Loading Process" width={720} height={500} />
             </div>
           </div>
 

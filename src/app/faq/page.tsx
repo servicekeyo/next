@@ -1,5 +1,5 @@
 import FooterContact from '@/components/FooterContact';
-import AOSPageWrapper from '@/components/AOSPageWrapper';
+
 import { getMetadataFromRankMath } from '@/lib/seoServer';
 import { getPageBySlug } from '@/lib/wordpress';
 import React from 'react';
@@ -45,7 +45,6 @@ export default async function FAQPage() {
   }
   
   return (
-    <AOSPageWrapper>
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="section-1 relative isolate -z-10">
@@ -457,6 +456,5 @@ export default async function FAQPage() {
       </section>
       <FooterContact />
     </div>
-    </AOSPageWrapper>
   );
 }

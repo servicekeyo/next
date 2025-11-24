@@ -1,7 +1,7 @@
 import FooterContact from '@/components/FooterContact';
 import Image from 'next/image';
 import { getMetadataFromRankMath } from '@/lib/seoServer';
-import AOSPageWrapper from '@/components/AOSPageWrapper';
+
 
 export const dynamic = 'force-static'
 export const revalidate = 600
@@ -16,7 +16,6 @@ export async function generateMetadata() {
 
 export default function ODMOEMPage() {
   return (
-    <AOSPageWrapper>
     <div className="min-h-screen">
 
       {/* Hero Section */}
@@ -205,6 +204,5 @@ export default function ODMOEMPage() {
       </section>
       <FooterContact />
     </div>
-    </AOSPageWrapper>
-  )
+  );
 }

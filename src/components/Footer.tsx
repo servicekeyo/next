@@ -12,7 +12,7 @@ export default function Footer() {
         
         <div className="container flex flex-col lg:flex-row gap160">
           <div className="lg:w-3/12 flex flex-col gap30">
-            <a href="/"><Image src="/images/LOGO1.png" alt="Keyfire custom BBQ grill manufacturer logo"
+            <a href="/"><Image src="/images/LOGO1.png" alt="Keyfire custom BBQ grill manufacturer logo" loading="eager"
      title="Keyfire BBQ Manufacturing" width={175} height={40} /></a>
             <p className="heading-sub">Keyfire is a professional <strong>BBQ grill manufacturer</strong> in Foshan, China, specializing 
   in <strong>custom OEM and ODM services</strong> for gas grills, charcoal grills, electric grills, 

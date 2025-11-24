@@ -53,7 +53,7 @@ export default function ContactForm() {
         }}
       >
         <div className="sm:space-y-5 space-y-8">
-          <h2 className="heading-main3">Contact Form</h2>
+          <h2 className="heading-main3">Request Your Custom BBQ Grill Quote</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt30">
             <input
               type="text"
