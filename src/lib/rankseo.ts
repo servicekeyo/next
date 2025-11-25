@@ -18,7 +18,10 @@ export async function fetchRankHead(wpUrl: string): Promise<string | null> {
   if (!wpUrl) return null
   try {
     const endpoint = `${RANKMATH_ENDPOINT_BASE}${encodeURIComponent(wpUrl)}`
-    const res = await fetch(endpoint, { cache: 'force-cache' })
+    const res = await fetch(endpoint, { 
+      cache: 'no-store',
+      next: { revalidate: 60 } // 60秒后重新验证缓存
+    })
     if (!res.ok) return null
     const data = await res.json().catch(() => null)
     const head = data?.head as string | undefined
