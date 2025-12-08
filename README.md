@@ -34,3 +34,26 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## 🚀 Auto-Deployment
+
+This project is configured with **automatic deployment** to Vercel:
+
+- **GitHub Repository**: [servicekeyo/next](https://github.com/servicekeyo/next)
+- **Vercel Account**: [keyos-projects-11460bca](https://vercel.com/keyos-projects-11460bca)
+- **Auto-Deploy**: Every push to GitHub automatically triggers Vercel deployment
+
+### Deployment Branches:
+- `main` branch → Production deployment
+- `dev/*` branches → Preview deployments
+
+### Manual Deployment:
+1. Push code to GitHub: `git push origin main`
+2. Vercel automatically builds and deploys
+3. Get your live URL instantly!
+
+### Local Testing:
+```bash
+npm run build
+npm start
+```
