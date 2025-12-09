@@ -93,8 +93,10 @@ export default async function Blog() {
             <rect fill="url(#1f932ae7-37de-4c0a-a8b0-a6e3b4d44b84)" width="100%" height="100%" strokeWidth={0} />
           </svg>
         <div className='herotitle-w text-center' data-aos="fade-up" data-aos-duration="800">
-          <h1 className="heading-main" data-aos="fade-up" data-aos-delay="200">Custom BBQ Solutions</h1>
-          <p className="heading-sub mt30 text-hub" data-aos="fade-up" data-aos-delay="400">From material selection to full-scale manufacturing, we share knowledge that helps you choose the right BBQ supplier and achieve high-quality custom grill production for your market.</p>
+          <h1 className="heading-main" data-aos="fade-up" data-aos-delay="200">BBQ Grill Manufacturing Insights &amp; Custom OEM Solutions</h1>
+          <p className="heading-sub mt30 text-hub" data-aos="fade-up" data-aos-delay="400">
+            Here we share practical notes from our BBQ grill factory in Foshan, China. Topics cover design, materials, compliance and OEM/ODM production so that brands, importers and retailers can make better decisions for their custom gas, charcoal, electric and kettle grill programs.
+          </p>
         </div>
       </section>
 

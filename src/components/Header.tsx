@@ -34,8 +34,8 @@ export default function Header() {
                   <a href="/grills/gas-grill"  title="OEM gas BBQ grill manufacturer" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
                     Gas Grill
                   </a>
-                   <a href="/grills/electrical-grill" title="Electric BBQ grill ODM service" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
-                    Electrical Grill
+                   <a href="/grills/electric-grill" title="Electric BBQ grill ODM service" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
+                    Electric Grill
                   </a>
                    <a href="/grills/kettle-grill" title="Custom kettle grill manufacturing" className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
                     Kettle Grill
@@ -170,11 +170,11 @@ export default function Header() {
                     </a>
 
                     <a 
-                      href="/grills/electrical-grill" 
+                      href="/grills/electric-grill" 
                       className="block text-base text-gray-600 hover:text-primary transition-colors"
                       onClick={() => setOpen(false)}
                     >
-                      Electrical Grill
+                      Electric Grill
                     </a>
 
                     <a 

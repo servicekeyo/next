@@ -194,7 +194,7 @@ export default async function Home() {
           <div className='flex flex-col gap30' data-aos="fade-up" data-aos-delay="0">
             <h3 className="heading-main3">What is your minimum order quantity for custom BBQ grills?</h3>
             <p>
-              For standard OEM BBQ grills with your logo and packaging, our usual MOQ starts from 50 units per model. New designs that need fresh tooling are normally more cost-effective from 100–200 units and above, depending on how complex the structure is. If you want to test a new market or channel, we can look at a smaller pilot order, with a higher unit price and a limited set of options.
+              For standard OEM BBQ grills with your logo and packaging, our usual MOQ starts from 500 units per model. New designs that need fresh tooling are normally more cost-effective from 100–200 units and above, depending on how complex the structure is. If you want to test a new market or channel, we can look at a smaller pilot order, with a higher unit price and a limited set of options.
             </p>
           </div>
           <div className='flex flex-col gap30' data-aos="fade-up" data-aos-delay="100">
@@ -212,7 +212,7 @@ export default async function Home() {
           <div className='flex flex-col gap30' data-aos="fade-up" data-aos-delay="300">
             <h3 className="heading-main3">How long does the custom BBQ grill development process take?</h3>
             <p>
-              For a completely new model, you should plan roughly 60–90 days from project start to goods ready for shipment. As a reference, 1–2 weeks are used for design and drawing confirmation, 2–3 weeks for prototype and sample, time on your side for review, and around 3–5 weeks for mass production after everything is approved. Shipping time depends on destination port and route. Repeat orders are faster because design and tooling are already prepared.
+              For a completely new model, you should plan roughly 60 days from project start to goods ready for shipment. As a reference, 7 days are used for design and drawing confirmation, 2–3 weeks for prototype and sample, time on your side for review, and around 3–5 weeks for mass production after everything is approved. Shipping time depends on destination port and route. Repeat orders are faster because design and tooling are already prepared.
             </p>
           </div>
           <div className='flex flex-col gap30' data-aos="fade-up" data-aos-delay="400">

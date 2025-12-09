@@ -25,7 +25,7 @@ export default function Footer() {
               <ul className="space-y-4 footer-text text-foreground/70">
                 <li><a href="/wholesale/charcoal-grill">Charcoal Grill</a></li>
                 <li><a href="/wholesale/gas-grill">Gas Grill</a></li>
-                <li><a href="/wholesale/electrical-grill">Electrical Gril</a></li>
+                <li><a href="/wholesale/electrical-grill">Electric Grill</a></li>
                 <li><a href="/wholesale/kettle-grill">Kettle Grill</a></li>
                 <li><a href="/wholesale/smoker">Smoker</a></li>
               </ul>
