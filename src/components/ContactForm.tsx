@@ -100,7 +100,7 @@ export default function ContactForm() {
           </div>
           <textarea
             name="message"
-            placeholder="Enter inquiry details such as material, size, quantity, etc.*"
+            placeholder="Please share details such as product type (gas/charcoal/electric), material, size, target price, quantity and destination port.*"
             rows={6}
             required
             title="Please enter your inquiry details"

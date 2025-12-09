@@ -64,18 +64,18 @@ export default async function Contact() {
               </div>
             </div>
             <h1 className="heading-main" data-aos="fade-up" data-aos-delay="200">
-              Contact Keyfire BBQ Grill Manufacturer
+              Contact Us
             </h1>
-            <p className="text mt20 text-hub" data-aos="fade-up" data-aos-delay="400">
-              Thanks for your inquiry! Please complete the brief form and we’ll get back to you.
+            <p className="heading-hub mt20 text-hub" data-aos="fade-up" data-aos-delay="400">
+              Thank you for your interest in Keyfire. Please complete the short form with your project details and our sales team will reply with a quotation and suggestions, usually within one working day.
             </p>
             <div className="mt50 flex flex-col gap30" data-aos="fade-up" data-aos-delay="600">
               <div className="space-y-1">
-                <h2 className="text font-bold">Email Us for BBQ Grill Quotes</h2>
+                <h2 className="text font-bold">Email Our Sales Team for BBQ Grill Quotes</h2>
                 <p className="text text-hub"><a href="mailto:ky01@keyobbq.com" target="_blank">ky01@keyobbq.com</a></p>
               </div>
               <div className="space-y-1">
-                <h2 className="text font-bold">Call or Message Us - 24/7 BBQ Grill Inquiry Support</h2>
+                <h2 className="text font-bold">Call or Message Us for OEM &amp; ODM Inquiries</h2>
                 <p className="text text-hub"><a href="tel:+8613612569082" target="_blank">+86 136 1256 9082</a></p>
               </div>
               <div className="space-y-1">

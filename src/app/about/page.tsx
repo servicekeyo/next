@@ -31,21 +31,21 @@ export async function generateMetadata() {
 export default function AboutPage() {
   // Why Choose Us section images
   const whyChooseUsImages: SwiperImage[] = [
-    { src: '/images/about/indx_one1.jpg', alt: 'Factory overview' },
-    { src: '/images/about/indx_one2.jpg', alt: 'Manufacturing process' },
-    { src: '/images/about/indx_one3.jpg', alt: 'Quality control' },
-    { src: '/images/about/indx_one4.jpg', alt: 'Product showcase' },
-    { src: '/images/about/indx_one5.jpg', alt: 'Team collaboration' },
-    { src: '/images/about/indx_one6.jpg', alt: 'Production facility' },
-    { src: '/images/about/indx_one7.jpg', alt: 'Production facility' }
+    { src: '/images/about/indx_one1.jpg', alt: 'Keyfire BBQ grill factory overview in Foshan, China' },
+    { src: '/images/about/indx_one2.jpg', alt: 'Gas and charcoal BBQ grill production line at Keyfire factory' },
+    { src: '/images/about/indx_one3.jpg', alt: 'Quality control team inspecting finished BBQ grills' },
+    { src: '/images/about/indx_one4.jpg', alt: 'Showroom of gas, charcoal and electric BBQ grills at Keyfire' },
+    { src: '/images/about/indx_one5.jpg', alt: 'Engineering and sales teams collaborating on custom BBQ grill projects' },
+    { src: '/images/about/indx_one6.jpg', alt: 'Stamping and welding workshop for BBQ grill components' },
+    { src: '/images/about/indx_one7.jpg', alt: 'Powder-coating and assembly area at Keyfire BBQ grill factory' }
   ];
 
   // Reliable Supply section images  
   const reliableSupplyImages: SwiperImage[] = [
-    { src: '/images/about/indx_one8.jpg', alt: 'Logistics center' },
-    { src: '/images/about/indx_one9.jpg', alt: 'Shipping containers' },
-    { src: '/images/about/indx_one10.jpg', alt: 'Delivery trucks' },
-    { src: '/images/about/indx_one11.jpg', alt: 'Warehouse operations' }
+    { src: '/images/about/indx_one8.jpg', alt: 'Keyfire logistics center and finished BBQ grill storage' },
+    { src: '/images/about/indx_one9.jpg', alt: 'BBQ grill containers loading area at Foshan factory' },
+    { src: '/images/about/indx_one10.jpg', alt: 'Trucks ready for dispatch of BBQ grill shipments' },
+    { src: '/images/about/indx_one11.jpg', alt: 'Warehouse operations for export BBQ grills and accessories' }
   ];
 
   return (
@@ -72,8 +72,10 @@ export default function AboutPage() {
           <rect fill="url(#1f932ae7-37de-4c0a-a6e3b4d44b84)" width="100%" height="100%" strokeWidth={0} />
         </svg>
         <div className='herotitle-w' data-aos="fade-in">
-          <h1 className="heading-main">About Keyfire</h1>
-          <p className="heading-sub mt30 text-hub">Whether it starts with a sketch, a photo, or simply an idea, our team turns your vision into a real, manufacturable product. A clear process, step by step — making customization simple and efficient.</p>
+          <h1 className="heading-main">About Keyfire BBQ</h1>
+          <p className="heading-sub mt30 text-hub">
+            Keyfire BBQ is a dedicated BBQ grill manufacturer based in Foshan, China. For more than 20 years we have focused on OEM and ODM charcoal grills, gas grills, electric grills, kettle grills and smokers for international brands and importers. From early sketches to mass production, we turn ideas into reliable, market-ready products through a clear and practical development process.
+          </p>
         </div>
       </section>
 
@@ -91,9 +93,9 @@ export default function AboutPage() {
               </div>
             </div>
             <div className='lg:w-1/2 flex flex-col gap30 justify-center' data-aos="fade-left" data-aos-delay="400">
-              <h2 className="heading-main2" data-aos="fade-left" data-aos-delay="600">Why Choose Us</h2>
+              <h2 className="heading-main2" data-aos="fade-left" data-aos-delay="600">Why Work With Keyfire BBQ</h2>
               <p className='text text-hub' data-aos="fade-left" data-aos-delay="800">
-                At Keyfire, we deliver One-Stop OEM & ODM solution—from R&D and customization to manufacturing, quality control, packaging, and logistics. Our expert team ensures a smooth journey, enabling businesses to turn their BBQ grill concepts into market-ready products successfully.
+                Keyfire offers a one-stop OEM and ODM solution for BBQ grills. Our team handles product design support, engineering, tooling, manufacturing, quality control, packaging design and export logistics under one roof. With 2.4 million units annual capacity and large warehouse space, we support long-term programs for brands, importers, retail chains and e-commerce sellers who need a stable BBQ grill factory partner in China.
               </p>
               <dl className="grid grid-cols-2 gap-8 sm:grid-cols-2 md:grid-cols-3 mt50" data-aos="fade-up" data-aos-delay="1000">
                 <div className="flex flex-col gap-y-3 border-l border-gray-900/10 pl-6 dark:border-white/10">
@@ -115,42 +117,41 @@ export default function AboutPage() {
           {/* Professional Team Section */}
           <div className="flex flex-col gap80" data-aos="fade-up" data-aos-duration="800">
             <div className="max-w-4xl" data-aos="fade-up" data-aos-delay="200">
-              <h2 className="heading-main2" data-aos="fade-up" data-aos-delay="400">Professional Team</h2>
+              <h2 className="heading-main2" data-aos="fade-up" data-aos-delay="400">Professional Team Behind Your BBQ Grill Projects</h2>
               <p className="heading-sub mt20 text-hub" data-aos="fade-up" data-aos-delay="600">
-                20+ Years Of Manufacturing experience
-                Keyfire has over 20 years of experience serving 2,000+ customers across 100+ countries, delivering reliable, high-quality production solution
+                Keyfire has more than 20 years of manufacturing experience, serving over 2,000 customers in 100+ countries. Our team understands how to balance design, cost, certification and delivery time so that your charcoal, gas and electric grills arrive on schedule and perform as expected in the field.
               </p>
             </div>
             
             <div className='grid grid-cols-1 lg:grid-cols-2 gap80'>
               <div className="text flex flex-col gap30">
-                <p><strong>400 Skilled Workers</strong> – Ensuring stable, high-volume production capacity.</p>
-                <p><strong>20 Account Managers</strong> – Dedicated support for seamless global communication.</p>
-                <p><strong>10 Professional R&D</strong> – Creative solutions for product and packaging customization.</p>
-                <p><strong>12 Quality Control Specialists</strong> – Strict inspections guaranteeing reliable performance.</p>
+                <p><strong>400 Skilled Workers</strong> – Support stable, high-volume BBQ grill production across peak seasons.</p>
+                <p><strong>20 Account Managers</strong> – Handle daily communication, samples, orders and shipment follow-up for global customers.</p>
+                <p><strong>10 R&amp;D Engineers</strong> – Focus on structure, safety and packaging customization for different markets.</p>
+                <p><strong>12 Quality Control Specialists</strong> – Inspect incoming materials, in-line production and finished BBQ grills before loading.</p>
                 <p>
-                  we offer marketing support with catalogs and manuals.Our design team ensures your brand stands out with professional visuals that help grow your presence in the market.
+                  In addition to manufacturing, we offer marketing support with catalogs, manuals and basic visual assets. Our design team helps your brand present BBQ grills clearly on packaging, websites and online listings.
                 </p>
               </div>
               <div className="xl:pt-16 lg:row-span-2">
                 <div className=" grid grid-cols-2 gap-4 sm:grid-cols-4 lg:mx-0 lg:grid-cols-2 xl:gap-8">
                   <div className="">
-                    <Image alt="" src="/images/home/a7.jpg" className="block object-cover rounded-md" width={400} height={210}/>
+                    <Image alt="Keyfire BBQ grill factory welding and assembly workshop" src="/images/home/a7.jpg" className="block object-cover rounded-md" width={400} height={210}/>
                   </div>
                   <div className="xl:-mt-24 ">
-                    <Image alt="" src="/images/home/a2.jpg" className="block object-cover rounded-md" width={400} height={210}/>
+                    <Image alt="Stamping and forming lines for BBQ grill components at Keyfire" src="/images/home/a2.jpg" className="block object-cover rounded-md" width={400} height={210}/>
                   </div>
                   <div className="">
-                    <Image alt="" src="/images/home/a1.jpg" className="block object-cover rounded-md" width={400} height={210}/>
+                    <Image alt="Finished gas and charcoal BBQ grills ready for inspection" src="/images/home/a1.jpg" className="block object-cover rounded-md" width={400} height={210}/>
                   </div>
                   <div className="xl:-mt-24 ">
-                    <Image alt="" src="/images/home/a8.jpg" className="block object-cover rounded-md" width={400} height={210}/>
+                    <Image alt="Outdoor BBQ grill display area at Keyfire Foshan factory" src="/images/home/a8.jpg" className="block object-cover rounded-md" width={400} height={210}/>
                   </div>
                   <div className="hidden xl:block">
                     
                   </div>
                   <div className="xl:-mt-24 ">
-                    <Image alt="" src="/images/home/a10.jpg" className="block object-cover rounded-md" width={400} height={210}/>
+                    <Image alt="Packing and palletizing area for export BBQ grill orders" src="/images/home/a10.jpg" className="block object-cover rounded-md" width={400} height={210}/>
                   </div>
                 </div>
               </div>
@@ -171,7 +172,7 @@ export default function AboutPage() {
             <div className='lg:w-1/2 flex flex-col gap30 justify-center' data-aos="fade-left" data-aos-delay="200">
               <h2 className="heading-main2">Reliable Supply, Efficient Delivery</h2>
               <p className='text text-hub'>
-                With 3,000 containers of annual capacity, KEYO ensures reliable and efficient fulfillment of bulk orders.Orders are shipped within 30–40 days after payment, helping you keep your products on the market without delay.
+                With logistics and warehousing in the same industrial zone as our production, Keyfire can ship around 3,000 containers of BBQ grills and related outdoor products each year. For regular orders, the usual lead time is about 30–40 days after deposit, depending on season and model mix. This helps you keep shelves filled and online listings in stock during peak BBQ seasons.
               </p>
             </div>
           </div>
@@ -189,23 +190,23 @@ export default function AboutPage() {
             </div>
             <div className="container flex flex-col items-center justify-center gap30">
               <div className='grid grid-cols-3 md:grid-cols-6 gap-5 items-center' data-aos="fade-in">
-                <Image alt="" src="/images/logo/walmart.jpg" width={300} height={200}/>
-                <Image alt="" src="/images/logo/higg.jpg" width={300} height={200}/>
-                <Image alt="" src="/images/logo/bsci.jpg" width={300} height={200}/>
-                <Image alt="" src="/images/logo/sedex.jpg" width={300} height={200}/>
-                <Image alt="" src="/images/logo/bepi.jpg" width={300} height={200}/>
-                <Image alt="" src="/images/logo/eco.jpg" width={300} height={200}/>
+                <Image alt="Walmart FCCA factory audit report for Keyfire BBQ grill manufacturer" src="/images/logo/walmart.jpg" width={300} height={200}/>
+                <Image alt="Higg Index audit for Keyfire BBQ grill factory sustainability performance" src="/images/logo/higg.jpg" width={300} height={200}/>
+                <Image alt="BSCI social compliance audit for Keyfire BBQ grill manufacturer" src="/images/logo/bsci.jpg" width={300} height={200}/>
+                <Image alt="Sedex membership for responsible BBQ grill supply chain" src="/images/logo/sedex.jpg" width={300} height={200}/>
+                <Image alt="BEPI environmental performance program for Keyfire factory" src="/images/logo/bepi.jpg" width={300} height={200}/>
+                <Image alt="Ecovadis rating for Keyfire BBQ grill manufacturer" src="/images/logo/eco.jpg" width={300} height={200}/>
               </div>
               <div className='grid grid-cols-6 md:grid-cols-9 gap-5 items-center' data-aos="fade-in" data-aos-delay="100">
-                <Image alt="" src="/images/logo/ce.jpg" width={200} height={200}/>
-                <Image alt="" src="/images/logo/reach.jpg" width={200} height={200}/>
-                <Image alt="" src="/images/logo/ccrf.jpg" width={200} height={200}/>
-                <Image alt="" src="/images/logo/intertek.jpg" width={200} height={200}/>
-                <Image alt="" src="/images/logo/rohs.jpg" width={200} height={200}/>
-                <Image alt="" src="/images/logo/lfgb.jpg" width={200} height={200}/>
-                <Image alt="" src="/images/logo/ukca.jpg" width={200} height={200}/>
-                <Image alt="" src="/images/logo/iso.jpg" width={200} height={200}/>
-                <Image alt="" src="/images/logo/iso9001.jpg" width={200} height={200}/>
+                <Image alt="CE certification support for gas and electric BBQ grills" src="/images/logo/ce.jpg" width={200} height={200}/>
+                <Image alt="REACH compliant materials for BBQ grill parts in EU markets" src="/images/logo/reach.jpg" width={200} height={200}/>
+                <Image alt="CCRF testing for BBQ grill products" src="/images/logo/ccrf.jpg" width={200} height={200}/>
+                <Image alt="Intertek tested BBQ grills for safety and performance" src="/images/logo/intertek.jpg" width={200} height={200}/>
+                <Image alt="RoHS compliant electric BBQ grill components" src="/images/logo/rohs.jpg" width={200} height={200}/>
+                <Image alt="LFGB food-contact certification for BBQ grill cooking surfaces" src="/images/logo/lfgb.jpg" width={200} height={200}/>
+                <Image alt="UKCA marking support for BBQ grills sold in the UK" src="/images/logo/ukca.jpg" width={200} height={200}/>
+                <Image alt="ISO 14000 environmental management certification for Keyfire factory" src="/images/logo/iso.jpg" width={200} height={200}/>
+                <Image alt="ISO 9001 quality management certification for Keyfire BBQ grill manufacturer" src="/images/logo/iso9001.jpg" width={200} height={200}/>
               </div>
             </div>
           </div>

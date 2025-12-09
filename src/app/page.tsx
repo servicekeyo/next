@@ -37,18 +37,11 @@ export default async function Home() {
         <div className="container flex-col md:flex-row items-center flex gap160">
           <div className="sm:w-[570px] md:w-1/2" data-aos="fade-right">
             <h1 className="heading-main">Your Trusted Custom BBQ Grill Manufacturer in China</h1>
-            <div className="heading-sub mt30 text-hub">
-              <p>
-              Partner with a trusted <strong>custom BBQ grill manufacturer</strong> in China. 
-  We specialize in <strong>OEM and ODM services</strong> for gas grills, charcoal grills, 
-  and electric grills - all tailored to your brand positioning and target market. 
-  With 15+ years of manufacturing experience and CE certifications, we've helped over 
-  500 brands launch their custom grill products across 50+ countries.
+            <p className="heading-sub mt30 text-hub">
+              Partner with Keyfire, a custom BBQ grill manufacturer and factory based in Foshan, China. We focus on OEM and ODM production for gas grills, charcoal grills and electric grills, all tailored to your price level, sales channels and local safety standards. With more than 15 years of manufacturing and export experience, plus CE and related certifications, we have supported over 500 brands, importers and retailers to build their own BBQ grill ranges in 50+ countries.
             </p>
             
-            </div>
-            
-            <div className="flex flex-col lg:flex-row  gap-5 mt50">
+            <div className="flex flex-col lg:flex-row  gap-5 mt30">
               <QuoteButtonPrimary className="group">
                 <span className="flex items-center gap-2 group-hover:translate-x-1 transition-transform duration-300">
                   <Bell size={20} className="group-hover:rotate-12 transition-transform duration-300"/>
@@ -58,14 +51,14 @@ export default async function Home() {
               <a href="/about" className="btn-secondary group">
                 <span className="flex items-center gap-2 group-hover:translate-x-1 transition-transform duration-300">
                   <Aperture size={20} className="group-hover:rotate-12 transition-transform duration-300"/>
-                  earn About Our Factory
+                  Learn About Our Factory
                 </span>
               </a>
             </div>
             
           </div>
           <div className="sm:w-1/2 flex justify-end" data-aos="fade-left">
-            <Image src="/images/home/index_banner3.jpg" alt="Custom BBQ grill manufacturing factory - Keyfire China OEM ODM service" title="Professional BBQ Grill Manufacturer" width={720} height={400} className="rounded-lg xl:rounded-tl-[100px] hover:scale-105 transition-transform duration-500 ease-out" loading="eager" priority/>
+            <Image src="/images/home/index_banner3.jpg" alt="Keyfire custom BBQ grill factory in Foshan, China providing OEM and ODM services" title="Custom BBQ Grill Manufacturer in China – Keyfire" width={720} height={400} className="rounded-lg xl:rounded-tl-[100px] hover:scale-105 transition-transform duration-500 ease-out" loading="eager" priority/>
           </div>
         </div>
       </main>
@@ -75,11 +68,7 @@ export default async function Home() {
         <div className='herotitle-w' data-aos="fade-in">
           <h2 className="heading-main2">Custom BBQ Grill Manufacturing Solutions</h2>
           <p className="heading-sub mt20 text-hub">
-            Your brand deserves BBQ grills that stand out. As a specialized <strong>BBQ grill manufacturer</strong>, 
-  we offer complete <strong>custom manufacturing</strong> for charcoal, gas, electric, kettle grills, 
-  and smokers. Whether you need <strong>OEM manufacturing</strong> based on your designs or full 
-  <strong>ODM development</strong> from concept to production, our Foshan factory handles every detail - 
-  from material selection and branding integration to quality control and global shipping.
+            Every market has different expectations on price, style and performance. As a specialized BBQ grill manufacturer in China, Keyfire offers full custom manufacturing for charcoal grills, gas grills, electric grills, kettle grills and smokers. You can choose pure OEM production based on your own drawings, or work with us on ODM development from initial brief to mass production. Our Foshan BBQ grill factory controls material sourcing, tooling, branding details, packaging and final inspection, then arranges export to your warehouse or appointed forwarder.
           </p>
         </div>
         <div data-aos="fade-up"><GrillTabs /></div>
@@ -89,10 +78,7 @@ export default async function Home() {
         <div className='herotitle-w' data-aos="fade-in">
           <h2 className="heading-main2">Custom BBQ Grill Development Process</h2>
           <p className="heading-sub mt20 text-hub">
-            From your initial concept to finished <strong>custom BBQ grills</strong> ready for market, 
-  our proven development process ensures transparency at every stage. Whether you're launching 
-  a new brand or expanding your product line, our <strong>OEM and ODM manufacturing</strong> 
-  process turns your vision into reality - with adjustments welcomed throughout the journey.
+            From your first idea to finished custom BBQ grills packed on pallets, we follow a clear development process so you always know what is happening. This flow works for both new brands and established BBQ programs and helps keep design, costing and timing under control.
           </p>
         </div>
 
@@ -147,22 +133,17 @@ export default async function Home() {
 
       <section className="section-1">
         <div className='container flex-col md:flex-row items-center flex gap160'>
-          <div className='w-full md:w-3/5' data-aos="zoom-in">
+          <div className='w-full md:w-1/2' data-aos="zoom-in">
             <YouTubeLite
               embedUrl="https://www.youtube.com/embed/qCE2ZXcQSY0"
               title="China BBQ Grill Manufacturer and Supplier-Keyfire automatic production line"
               poster="https://img.youtube.com/vi/NS7Ndh6BNpk/hqdefault.jpg"
             />
           </div>
-          <div className='md:w-2/5 flex flex-col' data-aos="fade-left" data-aos-delay="100">
+          <div className='md:w-1/2 flex flex-col' data-aos="fade-left" data-aos-delay="100">
               <h2 className="heading-main2">Manufacturing Excellence for Your BBQ Brand</h2>
               <p className="heading-sub mt20 text-hub">
-                Building a successful BBQ brand requires more than good designs - it demands manufacturing 
-  expertise that consistently delivers quality. As a specialized <strong>BBQ grill manufacturer</strong>, 
-  we've invested in advanced equipment, skilled craftsmen, and proven processes that turn your 
-  brand vision into products customers love. Our <strong>custom manufacturing capabilities</strong> 
-  include stainless steel fabrication, precision welding, powder coating, and comprehensive 
-  quality control - all under one roof at our Foshan facility.
+                A successful BBQ range needs more than a nice brochure. It depends on a factory that understands outdoor products, seasonal demand and strict quality control. Keyfire is a dedicated BBQ grill manufacturer with laser cutting, stamping, automatic welding, powder-coating lines and trained assembly teams in Foshan. Our custom manufacturing capabilities cover stainless steel and coated steel fabrication, precise welding, surface treatment, final packing and function testing, helping brands, importers and retail chains reduce complaints and build repeat business.
               </p>
               <div className='mt30'><a href="/about" className="btn-secondary">Learn More</a></div>
           </div>
@@ -174,11 +155,9 @@ export default async function Home() {
       <section className='section-1 relative isolate'>
         <div className='herotitle-w' data-aos="fade-in">
             <h2 className="heading-main2">Certifications & Quality Standards for Global Markets</h2>
-            <p className="heading-sub mt30 text-hub">FCCA, Higg Index, BSCI, SEDEX, BEPI, Ecovadis - validating ethical manufacturing and 
-    environmental responsibility.</p>
-            <p className="heading-sub text-hub">CE, REACH, ROHS, LFGB, UKCA, ISO 9001, ISO 14000, Intertek - ensuring your 
-    <strong>custom BBQ grills</strong> meet international safety and quality standards for 
-    key export markets.
+            <p className="heading-sub mt30 text-hub">Our factory has passed FCCA, Higg Index, BSCI, SEDEX, BEPI and Ecovadis audits, giving you a socially compliant and environmentally responsible BBQ grill supplier that meets the requirements of major retailers and international brands.</p>
+            <p className="heading-sub text-hub">
+              For product-level compliance, we can support CE, REACH, RoHS, LFGB, UKCA, ISO 9001, ISO 14000 and Intertek testing. This helps your custom BBQ grills enter key export markets such as Europe, the UK and the Middle East with the right documentation in place.
             </p>
         </div>
         <div className="container flex flex-col items-center justify-center gap30">
@@ -208,56 +187,45 @@ export default async function Home() {
         <div className='herotitle-w' data-aos="fade-in">
           <h2 className='heading-main2'>Frequently Asked Questions</h2>
           <p className="heading-sub mt30 text-hub">
-            Common questions from brands and distributors about our <strong>custom BBQ grill manufacturing</strong>, 
-  <strong>OEM/ODM services</strong>, and ordering process. Can't find your answer? Contact our team directly.
+            Here are some of the questions we often receive from brands, importers and distributors about our custom BBQ grill manufacturing, OEM/ODM services and ordering process. If you need more details, our sales team can walk you through each step.
           </p>
         </div>
         <div className="container grid grid-cols-1 md:grid-cols-2  gap80">
           <div className='flex flex-col gap30' data-aos="fade-up" data-aos-delay="0">
             <h3 className="heading-main3">What is your minimum order quantity for custom BBQ grills?</h3>
-            <p>For standard <strong>OEM BBQ grill manufacturing</strong> with your branding, our MOQ starts 
-    at 50 units per model. Completely new designs requiring custom tooling typically need 100-200 
-    units to make production economical. If you're testing a market with smaller volumes, we can 
-    discuss sample order options starting from 20 units, though per-unit costs will be higher.</p>
+            <p>
+              For standard OEM BBQ grills with your logo and packaging, our usual MOQ starts from 50 units per model. New designs that need fresh tooling are normally more cost-effective from 100–200 units and above, depending on how complex the structure is. If you want to test a new market or channel, we can look at a smaller pilot order, with a higher unit price and a limited set of options.
+            </p>
           </div>
           <div className='flex flex-col gap30' data-aos="fade-up" data-aos-delay="100">
             <h3 className="heading-main3">Do you offer both OEM and ODM services for BBQ grills?</h3>
-            <p>Yes, we provide complete flexibility. <strong>OEM manufacturing</strong> means you provide 
-    designs and specifications - we manufacture exactly what you've engineered. <strong>ODM service</strong> 
-    means you share your requirements and target market, and our team designs the <strong>custom BBQ grill</strong> 
-    for you. Most clients fall somewhere in between, collaborating with our engineers to optimize 
-    designs for manufacturability and market fit.</p>
+            <p>
+              Yes. With OEM, you provide drawings, specifications and branding files and we follow your design closely. With ODM, you share your target market, price level and feature list, and our engineers propose a custom BBQ grill solution for your brand. Many customers start from one of our existing platforms and then adjust materials, features and appearance together with our team.
+            </p>
           </div>
           <div className='flex flex-col gap30' data-aos="fade-up" data-aos-delay="200">
             <h3 className="heading-main3">What types of BBQ grills can you manufacture?</h3>
-            <p>Our <strong>BBQ grill factory</strong> produces the complete range: gas grills (propane and 
-    natural gas), charcoal grills (including kamado styles), electric grills, kettle grills, 
-    smokers (offset and vertical), and specialty designs like barrel grills. We handle everything 
-    from compact portable models to large commercial units. If you have a unique design concept, 
-    our engineering team can evaluate feasibility.</p>
+            <p>
+              Our BBQ grill factory covers gas grills (LPG and natural gas), charcoal grills, kettle grills, smokers (offset and vertical), electric grills and related outdoor cooking products such as fire pits and pizza ovens. We produce compact portable units for e-commerce as well as larger models for supermarkets and DIY chains. If you have a special idea, our engineers can check feasibility and suggest changes where needed.
+            </p>
           </div>
           <div className='flex flex-col gap30' data-aos="fade-up" data-aos-delay="300">
             <h3 className="heading-main3">How long does the custom BBQ grill development process take?</h3>
-            <p>For first-time orders, expect 60-90 days total: design and engineering (1-2 weeks), prototype 
-    manufacturing (2-3 weeks), your review and approval (timeline varies), mass production (3-5 weeks), 
-    and shipping (1-4 weeks depending on destination). Repeat orders are faster since design work 
-    is complete - typically 4-6 weeks from order to shipment.</p>
+            <p>
+              For a completely new model, you should plan roughly 60–90 days from project start to goods ready for shipment. As a reference, 1–2 weeks are used for design and drawing confirmation, 2–3 weeks for prototype and sample, time on your side for review, and around 3–5 weeks for mass production after everything is approved. Shipping time depends on destination port and route. Repeat orders are faster because design and tooling are already prepared.
+            </p>
           </div>
           <div className='flex flex-col gap30' data-aos="fade-up" data-aos-delay="400">
-            <h3 className="heading-main3">Can I customize the branding, colors, and components?</h3>
-            <p>Absolutely - that's what <strong>custom BBQ grill manufacturing</strong> means. You can customize 
-    logo placement (laser engraving or metal badges), powder coat colors to match your brand, 
-    swap components like lids and side tables, choose materials and finishes, and design custom 
-    packaging. We work with your brand guidelines to ensure the final product perfectly represents 
-    your positioning.</p>
+            <h3 className="heading-main3">Can I customize the branding, colors and components?</h3>
+            <p>
+              Yes. Branding is one of the main reasons customers choose a custom BBQ grill factory instead of buying stock items. You can define logo position and method, powder-coat colors, lid style, side tables, wheels, thermometers, handle shapes and other details. We also help with artwork for manuals, color boxes and master cartons when needed, so your range looks consistent from packaging to the grill itself.
+            </p>
           </div>
           <div className='flex flex-col gap30' data-aos="fade-up" data-aos-delay="500">
             <h3 className="heading-main3">What certifications do your BBQ grills include?</h3>
-            <p>All our <strong>BBQ grills</strong> can be certified to meet requirements for your target markets. 
-    Standard certifications include CE marking (European markets), REACH compliance, RoHS (for 
-    electric components), and LFGB (food safety). Our factory also holds ISO 9001, BSCI, and SEDEX 
-    certifications. Additional certifications like UL (USA) or CSA (Canada) can be arranged with 
-    slightly longer timelines.</p>
+            <p>
+              We design and build BBQ grills according to the rules of your target markets. Common requirements include CE for Europe, REACH and RoHS for materials and electronic parts, and LFGB for food-contact components. Our factory also holds ISO 9001 and social audits such as BSCI and SEDEX. If you need UL, CSA or other local approvals, we can work with testing labs and plan this into the project timing.
+            </p>
           </div>
         </div>
         <div className='mt50 text-center'><a href="/faq" className="btn-secondary">Learn More</a></div>
@@ -267,10 +235,7 @@ export default async function Home() {
         <div className='herotitle-w'>
           <h2 className='heading-main2'>BBQ Grill Manufacturing Insights & Industry Knowledge</h2>
           <p className="heading-sub mt30 text-hub">
-            Expert insights from our <strong>BBQ grill manufacturing</strong> team. Learn about material 
-  selection, design trends, compliance requirements, and what makes quality <strong>custom BBQ grills</strong> 
-  that your customers will love. We share real manufacturing knowledge to help you make informed 
-  decisions for your brand.
+            Short notes and articles from our BBQ grill manufacturing team to support your product planning. Topics include materials, design trends, safety and certification updates and practical details that affect cost and lead time. The goal is to give brands, importers and designers a clearer view of what is happening inside a real BBQ grill factory in China.
           </p>
         </div>
 

@@ -67,10 +67,7 @@ export default function ProductAccessorySwitcher() {
       <div className='herotitle-w' data-aos="fade-in">
         <h2 className='heading-main2 text-center'>Every Component Customizable for Your Brand</h2>
         <p className="heading-sub mt20 text-hub text-center">
-          True <strong>custom BBQ grill manufacturing</strong> means every visible component reflects 
-  your brand identity. Mix and match lids, side tables, leg designs, and surface treatments 
-  to create distinctive products that stand out on retail shelves. Our modular approach lets 
-  you configure unique grill combinations without expensive tooling for each variation.
+          Real custom BBQ grill manufacturing means every visible part of the product can be adjusted to match your brand. You can combine different lids, side tables, leg designs and surface treatments to create product families for various channels, from entry-level promotion items to premium models. Our modular thinking helps you refresh designs and test new ideas while keeping tooling investment under control.
         </p>
       </div>
       <div className="container flex-col md:flex-row flex items-center gap80">
