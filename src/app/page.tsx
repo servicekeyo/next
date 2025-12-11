@@ -128,7 +128,6 @@ export default async function Home() {
             </div>
           </div>
           <div className='mt-15 xl:mt-30 text-center'><a href="/odmoem" className="btn-secondary">Explore Customization</a></div>
-          
       </section>
 
       <section className="section-1">
@@ -244,7 +243,7 @@ export default async function Home() {
         <div className='mt50 text-center'><a href="/blog" className="btn-secondary">Learn More</a></div>
       </section>
 
-       <FooterContact />
+      <FooterContact />
       </AOSWrapper>
     </div>
 

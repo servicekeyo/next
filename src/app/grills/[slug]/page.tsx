@@ -79,7 +79,7 @@ export default async function GrillCategoryPage({ params }: { params: Promise<{ 
         </svg>
         <div className='herotitle-w text-center' suppressHydrationWarning data-aos="fade-up" data-aos-duration="800">
           <h1 className="heading-main" data-aos="fade-up" data-aos-delay="200">{hero_title}</h1>
-          <p className="heading-sub mt30 text-hub" data-aos="fade-up" data-aos-delay="300">{page?.acf?.hero?.p || ''}</p>
+          <div className="heading-sub mt30 text-hub" data-aos="fade-up" data-aos-delay="300" dangerouslySetInnerHTML={{ __html: page?.acf?.hero?.p || '' }} />
           <div className="mt50" data-aos="fade-up" data-aos-delay="400"><QuoteButtonPrimary>Get a Free Quote</QuoteButtonPrimary></div>
         </div>
       </section>

@@ -1,6 +1,7 @@
 "use client"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Autoplay, Pagination } from "swiper/modules"
+import Image from "next/image"
 import "swiper/css"
 import "swiper/css/pagination"
 
@@ -27,9 +28,17 @@ export default function GalleryCarousel({ images }: { images: ImageItem[] }) {
       {imgs.map((item, i) => (
         <SwiperSlide key={i}>
           <div className="group relative overflow-hidden rounded-xl shadow hover:shadow-xl transition" >
-            <img src={item.url} alt={item.alt || 'Reference Grill'} className="w-full h-full object-contain group-hover:scale-110 transition-transform" />
+            <div className="relative w-full h-64 md:h-80">
+              <Image 
+                src={item.url} 
+                alt={item.alt || 'Reference Grill'} 
+                fill
+                className="object-contain group-hover:scale-110 transition-transform"
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              />
+            </div>
             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition">
-              <p className="text text-white font-medium">We can customize this style</p>
+              <p className="text text-white font-medium px-5 text-center">{item.alt}</p>
             </div>
           </div>
         </SwiperSlide>
