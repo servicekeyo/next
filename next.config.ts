@@ -23,7 +23,30 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/wp-content/uploads/**",
       },
+      {
+        protocol: "https",
+        hostname: "keyfirebbq.com",
+        port: "",
+        pathname: "/**",
+      },
     ],
+  },
+  // SEO配置
+  async rewrites() {
+    return [
+      {
+        source: '/sitemap.xml',
+        destination: '/api/sitemap',
+      },
+      {
+        source: '/sitemap_post.xml',
+        destination: '/api/sitemap/post',
+      },
+      {
+        source: '/sitemap_page.xml',
+        destination: '/api/sitemap/page',
+      },
+    ]
   },
 };
 
