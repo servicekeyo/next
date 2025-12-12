@@ -31,8 +31,8 @@ export async function GET() {
         } else if (page.slug === 'grills') {
           // grills页面不存在，跳过
           return null
-        } else if (page.slug.includes('grill')) {
-          // 烤架分类页面
+        } else if (page.slug.includes('grill') || page.slug === 'smoker') {
+          // 烤架分类页面（包括smoker）
           const categorySlug = page.slug.replace(/^grills[-_]/, '').replace(/^grill[-_]/, '')
           url = `${SITE_URL}/grills/${categorySlug}`
         } else {
@@ -70,7 +70,7 @@ export async function GET() {
       let priority = '0.6'
       if (page.slug === 'home') priority = '1.0'
       else if (page.slug === 'about' || page.slug === 'contact') priority = '0.8'
-      else if (page.slug.includes('grill')) priority = '0.9'
+      else if (page.slug.includes('grill') || page.slug === 'smoker') priority = '0.9'
       
       return `  <url>
     <loc>${page.url}</loc>
