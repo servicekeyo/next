@@ -121,11 +121,11 @@ export default async function GrillCategoryPage({ params }: { params: Promise<{ 
           {(() => {
             const ref = Array.isArray(page?.acf?.market_reference) ? page.acf.market_reference : []
             const imgs = ref.length > 0
-              ? ref.map((it: any) => ({ url: it?.url, alt: it?.alt })).filter((x: any) => x.url)
+              ? ref.map((it: any) => ({ url: it?.url, alt: it?.alt, title: it?.title || it?.alt || 'Reference Grill' })).filter((x: any) => x.url)
               : [
-                  { url: '/images/about/indx_one1.jpg', alt: 'Reference' },
-                  { url: '/images/about/indx_one2.jpg', alt: 'Reference' },
-                  { url: '/images/about/indx_one3.jpg', alt: 'Reference' },
+                  { url: '/images/about/indx_one1.jpg', alt: 'Reference', title: 'Premium Gas Grill' },
+                  { url: '/images/about/indx_one2.jpg', alt: 'Reference', title: 'Professional BBQ Station' },
+                  { url: '/images/about/indx_one3.jpg', alt: 'Reference', title: 'Custom Fire Pit Design' },
                 ]
             return <GalleryCarousel images={imgs} />
           })()}

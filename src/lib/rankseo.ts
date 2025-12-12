@@ -37,3 +37,27 @@ export function extractJsonLd(head: string): string | null {
   const raw = m?.[1]?.trim()
   return raw || null
 }
+
+export function hasNoIndex(head: string | null): boolean {
+  if (!head) return false
+  
+  // 检查meta robots标签
+  const robotsMatch = head.match(/<meta[^>]*name=["']robots["'][^>]*content=["']([^"']*)["'][^>]*>/i)
+  if (robotsMatch) {
+    const content = robotsMatch[1].toLowerCase()
+    return content.includes('noindex')
+  }
+  
+  // 检查X-Robots-Tag header
+  const xRobotsMatch = head.match(/x-robots-tag:[^<]*noindex/i)
+  if (xRobotsMatch) return true
+  
+  return false
+}
+
+export function extractCanonicalUrl(head: string | null): string | null {
+  if (!head) return null
+  
+  const canonicalMatch = head.match(/<link[^>]*rel=["']canonical["'][^>]*href=["']([^"']*)["'][^>]*>/i)
+  return canonicalMatch?.[1] || null
+}

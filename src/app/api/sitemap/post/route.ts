@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { fetchRankHead, hasNoIndex } from '@/lib/rankseo'
 
 const WORDPRESS_API_URL = 'https://admin.keyfirebbq.com/wp-json/wp/v2'
 const SITE_URL = 'https://keyfirebbq.com'
@@ -20,20 +21,46 @@ export async function GET() {
       throw new Error('Invalid posts response')
     }
 
+    // 过滤并处理文章，过滤掉noindex文章
+    const validPosts = await Promise.all(
+      posts.map(async (post: any) => {
+        const url = post.link || post.slug ? `${SITE_URL}/blog/${post.slug}` : null
+        if (!url) return null
+        
+        // 检查RankMath SEO设置
+        try {
+          const wpUrl = post.link || `https://admin.keyfirebbq.com/?p=${post.id}`
+          const headData = await fetchRankHead(wpUrl)
+          
+          // 如果有noindex设置，跳过该文章
+          if (hasNoIndex(headData)) {
+            return null
+          }
+        } catch (error) {
+          // 如果无法获取SEO数据，保留文章
+          console.warn(`Failed to fetch SEO data for post ${post.slug}:`, error)
+        }
+        
+        return {
+          url,
+          lastmod: post.modified_gmt || post.date_gmt || new Date().toISOString(),
+          slug: post.slug
+        }
+      })
+    )
+
+    // 过滤掉null值
+    const filteredPosts = validPosts.filter(Boolean)
+
     // 生成posts sitemap
-    const sitemapEntries = posts.map((post: any) => {
-      const url = post.link || post.slug ? `${SITE_URL}/blog/${post.slug}` : null
-      if (!url) return null
-      
-      const lastmod = post.modified_gmt || post.date_gmt || new Date().toISOString()
-      
+    const sitemapEntries = filteredPosts.map((post: any) => {
       return `  <url>
-    <loc>${url}</loc>
-    <lastmod>${new Date(lastmod).toISOString()}</lastmod>
+    <loc>${post.url}</loc>
+    <lastmod>${new Date(post.lastmod).toISOString()}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>`
-    }).filter(Boolean).join('\n')
+    }).join('\n')
 
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
