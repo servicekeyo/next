@@ -83,7 +83,7 @@ export default function GrillListCSR({ initialPosts, perPage = 6, initialTotalPa
                   <img src={back} alt={title} className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 ) : null}
               </div>
-              <div className="p-4 group-hover:bg-gray-50 transition-colors duration-300">
+              <div className="p-4 transition-colors duration-300">
                 <div className="text text-center font-medium group-hover:text-hover transition-colors duration-300">{title}</div>
               </div>
             </a>

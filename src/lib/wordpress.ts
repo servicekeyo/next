@@ -120,7 +120,7 @@ export async function getGrills(page: number = 1, perPage: number = 6): Promise<
 export async function getGrillsByCategory(categoryId: number, perPage: number = 100): Promise<any[]> {
   if (!categoryId || typeof categoryId !== 'number') return []
   try {
-    const res = await fetch(`${WORDPRESS_API_URL}/grill?per_page=${perPage}&grill_category=${categoryId}&_embed`, { next: { revalidate: 300, tags: [`grills-cat-${categoryId}`] } })
+    const res = await fetch(`${WORDPRESS_API_URL}/grill?per_page=${perPage}&grill_category=${categoryId}&_embed&orderby=date&order=asc`, { next: { revalidate: 300, tags: [`grills-cat-${categoryId}`] } })
     if (!res.ok) return []
     const data = await res.json()
     return Array.isArray(data) ? data : []

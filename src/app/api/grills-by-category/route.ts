@@ -17,7 +17,7 @@ export async function GET(req: Request) {
     if (!cat) return NextResponse.json({ items: [], error: 'category not found' }, { status: 404 })
 
     const offset = (page - 1) * perPage
-    const url = `${WORDPRESS_API_URL}/grill?_embed&per_page=${perPage}&offset=${offset}&orderby=date&order=desc&status=publish&grill_category=${cat.id}`
+    const url = `${WORDPRESS_API_URL}/grill?_embed&per_page=${perPage}&offset=${offset}&orderby=date&order=asc&status=publish&grill_category=${cat.id}`
     const itemsRes = await fetch(url, { cache: 'no-store' })
     if (!itemsRes.ok) return NextResponse.json({ items: [], error: 'items fetch failed' }, { status: 500 })
     const data = await itemsRes.json()
