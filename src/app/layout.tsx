@@ -39,11 +39,13 @@ export default function RootLayout({
             <main className="flex-1">{children}</main>
             <Footer />
             
+            {/* Start of Tawk.to Script */}
             <script
               dangerouslySetInnerHTML={{
-                __html: `(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="aVA5xQ76xdG5Kc0OvgTTa";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();`
+                __html: `var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();(function(){var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];s1.async=true;s1.src='https://embed.tawk.to/693ccfc50981ca197f7a8e23/1jcaon7nc';s1.charset='UTF-8';s1.setAttribute('crossorigin','*');s0.parentNode.insertBefore(s1,s0);})();`
               }}
             />
+            {/* End of Tawk.to Script */}
             
             <ScrollToTop />
           </AosProvider>
