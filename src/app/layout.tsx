@@ -45,8 +45,6 @@ export default function RootLayout({
             }} />
             <script async src="//tfile.xiaoman.cn/okki/analyze.js?id=4140-25626-"></script>
             
-            <ScrollToTop />
-            
           </AosProvider>
         </QuoteProvider>
       </body>
