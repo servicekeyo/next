@@ -39,15 +39,14 @@ export default function RootLayout({
             <main className="flex-1">{children}</main>
             <Footer />
             
-            {/* Start of Tawk.to Script */}
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();(function(){var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];s1.async=true;s1.src='https://embed.tawk.to/693ccfc50981ca197f7a8e23/1jcaon7nc';s1.charset='UTF-8';s1.setAttribute('crossorigin','*');s0.parentNode.insertBefore(s1,s0);})();`
-              }}
-            />
-            {/* End of Tawk.to Script */}
+            {/* Okki Analytics */}
+            <script dangerouslySetInnerHTML={{
+              __html: `window.okkiConfigs = window.okkiConfigs || []; function okkiAdd() { okkiConfigs.push(arguments); }; okkiAdd("analytics", { siteId: "4140-25626", gId: "" });`
+            }} />
+            <script async src="//tfile.xiaoman.cn/okki/analyze.js?id=4140-25626-"></script>
             
             <ScrollToTop />
+            
           </AosProvider>
         </QuoteProvider>
       </body>
