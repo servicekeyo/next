@@ -26,7 +26,7 @@ export default function ScrollToTop() {
   return (
     <button
       onClick={scrollToTop}
-      className="fixed bottom-6 right-6 z-[60] flex flex-col items-center justify-center gap-1 px-3 py-2 bg-primary text-white rounded-lg shadow-lg hover:bg-primary/90 hover:shadow-xl transition-all duration-300 hover:scale-105"
+      className="fixed bottom-6 right-6 z-50 flex flex-col items-center justify-center gap-1 px-3 py-2 bg-primary text-white rounded-lg shadow-lg hover:bg-primary/90 hover:shadow-xl transition-all duration-300 hover:scale-105"
       aria-label="回到顶部"
       title="回到顶部"
     >
