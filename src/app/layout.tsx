@@ -41,10 +41,15 @@ export default function RootLayout({
             
             {/* Okki Analytics */}
             <script dangerouslySetInnerHTML={{
-              __html: `window.okkiConfigs = window.okkiConfigs || []; function okkiAdd() { okkiConfigs.push(arguments); }; okkiAdd("analytics", { siteId: "4140-25626", gId: "" });`
+              __html: `
+                window.okkiConfigs = window.okkiConfigs || [];
+                function okkiAdd() { okkiConfigs.push(arguments); }
+                okkiAdd("analytics", { siteId: "4140-25626", gId: "" });
+                console.log("Okki Analytics initialized with siteId: 4140-25626");
+              `
             }} />
             <script async src="//tfile.xiaoman.cn/okki/analyze.js?id=4140-25626-"></script>
-            
+            <ScrollToTop />
           </AosProvider>
         </QuoteProvider>
       </body>
